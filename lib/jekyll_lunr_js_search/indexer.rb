@@ -12,6 +12,7 @@ module Jekyll
 
         lunr_config = {
           'excludes' => [],
+          'skip_generate' => false,
           'strip_index_html' => false,
           'min_length' => 3,
           'stopwords' => 'stopwords.txt',
@@ -48,11 +49,17 @@ module Jekyll
         # stop word exclusion configuration
         @min_length = lunr_config['min_length']
         @stopwords_file = lunr_config['stopwords']
+        @skip_generate = lunr_config['skip_generate']
       end
 
       # Index all pages except pages matching any value in config['lunr_excludes'] or with date['exclude_from_search']
       # The main content from each page is extracted and saved to disk as json
       def generate(site)
+        if @skip_generate == true
+          Jekyll.logger.info "Lunr:", 'Skip generating index'
+          return
+        end
+
         Jekyll.logger.info "Lunr:", 'Creating search index...'
 
         @site = site
