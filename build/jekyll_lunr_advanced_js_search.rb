@@ -17,16 +17,12 @@ module Jekyll
                     'js_dir' => 'js'
                 }.merge!(config['lunr_search'] || {})
                 @lunr_config['fields'] = fields
-                puts @config.inspect
                 @js_dir = @lunr_config['js_dir']
                 gem_lunr = File.join(File.dirname(__FILE__), "lunr.min.js")
-                puts gem_lunr
                 @lunr_path = File.exist?(gem_lunr) ? gem_lunr : File.join(@js_dir, File.basename(gem_lunr))
-                puts @lunr_path
                 raise "Could not find #{@lunr_path}" if !File.exist?(@lunr_path)
                 
                 lunr_src = open(@lunr_path).read
-                puts lunr_src.inspect
                 ctx = ExecJS.compile(lunr_src)
                 @lunr_version = ctx.eval('lunr.version')
                 @docs = {}
@@ -44,7 +40,7 @@ module Jekyll
                 index = []
                 
                 index_js = open(@lunr_path).read
-                index_js << 'var idx = lunr(function() {this.pipeline.remove(lunr.stemmer);this.searchPipeline.remove(lunr.stemmer);this.pipeline.remove(lunr.stopWordFilter);this.searchPipeline.remove(lunr.stopWordFilter);this.tokenizer.separator = /[\s,.;:/?!()]+/;'
+                index_js << 'var idx = lunr(function() {this.tokenizer.separator = /[\s,.;:/?!()]+/;'
                 @lunr_config['fields'].each_pair do |name, boost|
                     index_js << "this.field('#{name}', {'boost': #{boost}});"
                 end
@@ -101,9 +97,7 @@ module Jekyll
                 index_js << '});'
                 FileUtils.mkdir_p(File.join(site.dest, @js_dir))
                 filename = File.join(@js_dir, 'index.js')
-                puts 'testing...'
                 ctx = ExecJS.compile(index_js)
-                puts ctx.inspect
                 index = ctx.eval('JSON.stringify(idx)')
                 total = "var docs = #{@docs.to_json}\nvar index = #{index.to_json}"
                 filepath = File.join(site.dest, filename)
