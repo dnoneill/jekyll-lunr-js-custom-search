@@ -110,7 +110,7 @@ module Jekyll
                 site_js = File.join(site.dest, @js_dir)
                 # If we're using the gem, add the lunr and search JS files to the _site
                 if File.expand_path(site_js) != File.dirname(@lunr_path)
-                    extras = Dir.glob(File.join(File.dirname(@lunr_path), "*.min.js"))
+                    extras = Dir.glob(File.join(File.dirname(@lunr_path), "*.js"))
                     FileUtils.cp(extras, site_js)
                     extras.map! { |min| File.join(@js_dir, File.basename(min)) }
                     Jekyll.logger.debug "Lunr:", "Added JavaScript to #{@js_dir}"
