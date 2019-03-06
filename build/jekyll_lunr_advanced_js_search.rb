@@ -40,7 +40,7 @@ module Jekyll
                 index = []
                 
                 index_js = open(@lunr_path).read
-                index_js << 'var idx = lunr(function() {this.tokenizer.separator = /[\s,.;:/?!()]+/;'
+                index_js << 'var idx = lunr(function() {this.pipeline.remove(lunr.stemmer);this.searchPipeline.remove(lunr.stemmer);this.pipeline.remove(lunr.stopWordFilter);this.searchPipeline.remove(lunr.stopWordFilter);this.tokenizer.separator = /[\s,.;:/?!()]+/;'
                 @lunr_config['fields'].each_pair do |name, boost|
                     index_js << "this.field('#{name}', {'boost': #{boost}});"
                 end
