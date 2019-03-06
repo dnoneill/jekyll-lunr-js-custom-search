@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description   = 'Use lunr.js to provide advanced search, using JavaScript in your browser, for your Jekyll static website.'
   s.authors       = ['Ben Smith', "Niqui O'Neill"]
   s.files         = Dir.glob("lib/**/*.rb") + Dir.glob("build/*.min.js")
-  s.homepage      = 'https://github.com/slashdotdash/jekyll-lunr-advanced-js-search'
+  s.homepage      = 'https://github.com/dnoneill/jekyll-lunr-js-search'
   s.require_paths = ['lib']
 
   s.add_runtime_dependency 'nokogiri', '~> 1.7'
