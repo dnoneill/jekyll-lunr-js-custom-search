@@ -99,6 +99,7 @@ module Jekyll
                 end
                 index_js << '});'
                 FileUtils.mkdir_p(File.join(site.dest, @js_dir))
+                FileUtils.mkdir_p(File.join(site.dest, @css_dir))
                 filename = File.join(@js_dir, 'index.js')
                 
                 ctx = ExecJS.compile(index_js)
@@ -124,8 +125,8 @@ module Jekyll
                     end
                     extrascss = Dir.glob(File.join(File.dirname(@lunr_path), "*.css"))
                     if extrascss.length > 0
-                        puts FileUtils.cp(extrascss, site_css)
-                        extrascss.map! { |min| File.join(@js_dir, File.basename(min)) }
+                        FileUtils.cp(extrascss, site_css)
+                        extrascss.map! { |min| File.join(@css_dir, File.basename(min)) }
                         Jekyll.logger.debug "Lunr:", "Added CSS to #{@css_dir}"
                         added_files.push(*extrascss)
                     end
