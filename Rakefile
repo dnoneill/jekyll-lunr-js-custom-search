@@ -13,8 +13,8 @@ task :build => [
   :bower_update,
   :create_build_dir,
   :copy_jekyll_plugin,
-  :concat_js,
-  :minify_js]
+  :concat_js
+  ]
 
 task :bower_update do
   abort "Please ensure bower is installed: npm install -g bower" unless system('bower install')
@@ -51,7 +51,7 @@ task :concat_js do
   FileUtils.cp('bower_components/lunr/lunr.js', 'build/lunr.js')
 end
 
-task :minify_js do
- out = JSMin.minify(File.open('build/advanced-search.js', 'r').read)
- File.open('build/advanced-search.min.js', 'w') {|f| f.write(out) }
-end
+#task :minify_js do
+# out = JSMin.minify(File.open('build/advanced-search.js', 'r').read)
+# File.open('build/advanced-search.min.js', 'w') {|f| f.write(out) }
+#end
