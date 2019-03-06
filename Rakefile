@@ -25,7 +25,7 @@ task :create_build_dir do
 end
 
 task :copy_jekyll_plugin do
-  lunr_version = File.read("bower_components/lunr.js/VERSION").strip
+  lunr_version = File.read("bower_components/lunr/VERSION").strip
   open("build/jekyll_lunr_advanced_js_search.rb", "w") do |concat|
     Dir.glob("lib/jekyll_lunr_advanced_js_search/*.rb") do |file|
       ruby = File.read(file).sub(/LUNR_VERSION = .*$/, "LUNR_VERSION = \"#{lunr_version}\"")
@@ -37,7 +37,7 @@ end
 task :concat_js do
   files = [
     'bower_components/jquery/dist/jquery.js',
-    'bower_components/lunr.js/lunr.min.js',
+    'bower_components/lunr/lunr.js',
     'js/jquery.lunr.advanced.search.js'
   ]
 
@@ -48,7 +48,7 @@ task :concat_js do
   end
 
   # Lunr is stored separately so we can use it for index generation
-  FileUtils.cp('bower_components/lunr.js/lunr.min.js', 'build/lunr.min.js')
+  FileUtils.cp('bower_components/lunr/lunr.js', 'build/lunr.js')
 end
 
 task :minify_js do
