@@ -55,6 +55,7 @@ end
 
 task :concat_css do
   files = [
+    'bower_components/paginationjs/dist/pagination.css',
     'css/advanced-search.css'
   ]
 
