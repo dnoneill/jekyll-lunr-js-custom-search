@@ -1,5 +1,0 @@
-require 'jekyll_lunr_js_search/version'
-require 'jekyll_lunr_js_search/indexer'
-require 'jekyll_lunr_js_search/page_renderer'
-require 'jekyll_lunr_js_search/search_entry'
-require 'jekyll_lunr_js_search/search_index_file'

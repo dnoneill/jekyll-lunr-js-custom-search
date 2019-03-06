@@ -1,15 +1,17 @@
 {
-  "name": "jekyll-lunr-js-search",
+  "name": "jekyll-lunr-advanced-js-search",
   "version": "0.0.1",
-  "homepage": "https://github.com/slashdotdash/jekyll-lunr-js-search",
+  "homepage": "https://github.com/doneill/jekyll-lunr-js-search",
   "authors": [
-    "Ben Smith <ben@10consulting.com>"
+    "Ben Smith <ben@10consulting.com>",
+    "Niqui O'Neill"
   ],
-  "description": "Jekyll + lunr.js = Static websites with powerful full-text search using JavaScript.",
+  "description": "Advanced search plugin for collections in Jekyll",
   "keywords": [
     "jekyll",
     "lunr",
-    "search"
+    "search",
+    "advancedsearch"
   ],
   "license": "MIT",
   "ignore": [
@@ -19,10 +21,7 @@
     "build"
   ],
   "dependencies": {
-    "date.format": "~1.2.3",
     "jquery": "~2.2.4",
-    "lunr.js": "~0.7.2",
-    "mustache": "~2.3.0",
-    "uri.js": "~1.18.4"
+    "lunr.js": "~0.7.2"
   }
 }
