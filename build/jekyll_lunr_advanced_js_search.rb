@@ -108,13 +108,13 @@ module Jekyll
                 added_files = [filename]
                 
                 site_js = File.join(site.dest, @js_dir)
-                Jekyll.logger.debug "Lunr:", "#{site_js} : #{File.dirname(@lunr_path)}"
+                Jekyll.logger.info "Lunr:", "#{site_js} #{File.dirname(@lunr_path)}"
                 if File.expand_path(site_js) != File.dirname(@lunr_path)
                     extras = Dir.glob(File.join(File.dirname(@lunr_path), "*.min.js"))
-                    Jekyll.logger.debug "Lunr:", "extras path #{extras}, #{site_js}"
+                    Jekyll.logger.info "Lunr:", "extras path #{extras}, #{site_js}"
                     FileUtils.cp(extras, site_js)
                     extras.map! { |min| File.join(@js_dir, File.basename(min)) }
-                    Jekyll.logger.debug "Lunr:", "Added JavaScript to #{@js_dir}"
+                    Jekyll.logger.info "Lunr:", "Added JavaScript to #{@js_dir}"
                     added_files.push(*extras)
                 end
                 
