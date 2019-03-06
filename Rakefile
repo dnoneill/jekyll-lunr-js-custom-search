@@ -13,7 +13,8 @@ task :build => [
   :bower_update,
   :create_build_dir,
   :copy_jekyll_plugin,
-  :concat_js
+  :concat_js,
+  :concat_css
   ]
 
 task :bower_update do
@@ -38,6 +39,7 @@ task :concat_js do
   files = [
     'bower_components/jquery/dist/jquery.js',
     'bower_components/lunr/lunr.js',
+    'bower_components/paginationjs/dist/pagination.min.js',
     'js/jquery.lunr.advanced.search.js'
   ]
 
@@ -49,6 +51,19 @@ task :concat_js do
 
   # Lunr is stored separately so we can use it for index generation
   FileUtils.cp('bower_components/lunr/lunr.js', 'build/lunr.js')
+end
+
+task :concat_css do
+  files = [
+    'bower_components/paginationjs/dist/pagination.css',
+    'css/advanced-search.css'
+  ]
+
+  File.open('build/advanced-search.css', 'w') do |file|
+    file.write(files.inject('') { |data, file|
+      data << File.read(file)
+    })
+  end
 end
 
 #task :minify_js do

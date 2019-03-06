@@ -15,10 +15,12 @@ module Jekyll
                 @config = config['lunr_settings']
                 fields = Hash[@config['fields'].collect { |field| [field['searchfield'], field['boost']] }]
                 @lunr_config = {
-                    'js_dir' => 'js'
+                    'js_dir' => 'js',
+                    'css_dir' => 'css'
                 }.merge!(config['lunr_search'] || {})
                 @lunr_config['fields'] = fields
                 @js_dir = @lunr_config['js_dir']
+                @css_dir = @lunr_config['css_dir']
                 gem_lunr = File.join(File.dirname(__FILE__), "../../build/lunr.js")
                 @lunr_path = File.exist?(gem_lunr) ? gem_lunr : File.join(@js_dir, File.basename(gem_lunr))
                 raise "Could not find #{@lunr_path}" if !File.exist?(@lunr_path)
@@ -109,13 +111,24 @@ module Jekyll
                 added_files = [filename]
                 
                 site_js = File.join(site.dest, @js_dir)
+                site_css = File.join(site.dest, @css_dir)
+                
                 # If we're using the gem, add the lunr and search JS files to the _site
                 if File.expand_path(site_js) != File.dirname(@lunr_path)
                     extras = Dir.glob(File.join(File.dirname(@lunr_path), "*.js"))
-                    FileUtils.cp(extras, site_js)
-                    extras.map! { |min| File.join(@js_dir, File.basename(min)) }
-                    Jekyll.logger.debug "Lunr:", "Added JavaScript to #{@js_dir}"
-                    added_files.push(*extras)
+                    if extras.length > 0
+                        FileUtils.cp(extras, site_js)
+                        extras.map! { |min| File.join(@js_dir, File.basename(min)) }
+                        Jekyll.logger.debug "Lunr:", "Added JavaScript to #{@js_dir}"
+                        added_files.push(*extras)
+                    end
+                    extrascss = Dir.glob(File.join(File.dirname(@lunr_path), "*.css"))
+                    if extrascss.length > 0
+                        puts FileUtils.cp(extrascss, site_css)
+                        extrascss.map! { |min| File.join(@js_dir, File.basename(min)) }
+                        Jekyll.logger.debug "Lunr:", "Added CSS to #{@css_dir}"
+                        added_files.push(*extrascss)
+                    end
                 end
                 
                 # Keep the written files from being cleaned by Jekyll
