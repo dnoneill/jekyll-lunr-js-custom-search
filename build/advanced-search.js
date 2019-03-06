@@ -13371,7 +13371,7 @@ function remove_facet(facet){
   window.location = full_url;
 }
 
-function simpleTemplating(data, values, baseurl, lunr_settings) {
+function simpleTemplating(data, values, settings) {
 var html = '';
 var dispfields = lunr_settings['displayfields']
   $.each(data, function(index, key){
@@ -13406,8 +13406,8 @@ var dispfields = lunr_settings['displayfields']
 return html;
 }
 
-function loadsearchtemplate(view_facets, base_url, lunr_settings){
-    lunr_settings = JSON.parse(lunr_settings)
+function loadsearchtemplate(settings){
+	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
     var query = window.location.search.substring(1);
     if (query != ''){
@@ -13461,8 +13461,7 @@ function loadsearchtemplate(view_facets, base_url, lunr_settings){
       var current_page = localStorage['currentpage']
       var is_reload = localStorage['currenturl'] == window.location.href
       localStorage.setItem('currenturl', window.location.href)
-
-      var search_items = [].concat.apply([], Object.values(pairs).concat(Object.values(facets)))
+      var search_items = [].concat(Object.values(pairs))
       var search_values = search_items.length != 0 ? search_items.join(" : ") : "All Results"
 
       $("title").html(`Search results for ${search_values}`)
@@ -13539,9 +13538,13 @@ function loadsearchtemplate(view_facets, base_url, lunr_settings){
             </a>`
           }
         }
-
-        $("#facets").html(facet_html)
-        $('#pagination').pagination({
+        var facets_ident = settings && settings['facets'] ? settings['facets'] : "#facets";
+        var pagination_ident = settings && settings['pagination'] ? settings['pagination'] : "#pagination";
+        var results_ident = settings && settings['results'] ? settings['results'] : "#resultslist";
+		if ($(facets_ident)) {
+        	$(facets_ident).html(facet_html)
+        }
+        $(pagination_ident).pagination({
         dataSource: Object.keys(values),
         pageSize: 10,
         showGoInput: true,
@@ -13552,15 +13555,17 @@ function loadsearchtemplate(view_facets, base_url, lunr_settings){
             var to = pagination.pageSize * pagination.pageNumber
             to = to > pagination.totalNumber ? pagination.totalNumber : to
             var search_info = `${from}-${to} of ${results} results`
-            var html = simpleTemplating(data, docs, base_url, lunr_settings);
+            var html = simpleTemplating(data, docs);
             $("#number_results").html(search_info);
-            $(".resultslist").html(html);
-            $(".all_results").css('display', '').css('padding', '5px;').css('border', '1px solid #ccc');
+            $(results_ident).html(html);
+            if($(results_ident).parent().length > 0) {
+            	$(results_ident).parent().css('display', '');
+            }
           }
         })
 
         if (is_reload == true){
-            $('#pagination').pagination('go', current_page)
+            $(pagination_ident).pagination('go', current_page)
         }
         $("#sort_by select option[value='" + sort_type + "']").prop('selected', true);
         localStorage.setItem('sort_type', sort_type)
@@ -13590,5 +13595,3 @@ function showmore(identifier){
       $("#button_"+identifier).html("<b>Show All</b>")
   }
 }
-
-

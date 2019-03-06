@@ -11,6 +11,7 @@ module Jekyll
         class Indexer < Jekyll::Generator
             def initialize(config = {})
                 super(config)
+                @jekyllconfig = config
                 @config = config['lunr_settings']
                 fields = Hash[@config['fields'].collect { |field| [field['searchfield'], field['boost']] }]
                 @lunr_config = {
@@ -101,7 +102,7 @@ module Jekyll
                 ctx = ExecJS.compile(index_js)
                 
                 index = ctx.eval('JSON.stringify(idx)')
-                total = "var docs = #{@docs.to_json}\nvar index = #{index.to_json}"
+                total = "var docs = #{@docs.to_json}\nvar index = #{index.to_json}\nvar view_facets = #{@jekyllconfig['view_facets'].to_json}\nvar baseurl = #{@jekyllconfig['baseurl'].to_json}\nvar lunr_settings = #{@config.to_json}"
                 filepath = File.join(site.dest, filename)
                 File.open(filepath, "w") { |f| f.write(total) }
                 Jekyll.logger.info "Lunr:", "Index ready (lunr.js v#{@lunr_version})"
