@@ -57,6 +57,7 @@ end
 task :concat_css do
   files = [
     'bower_components/paginationjs/dist/pagination.css',
+    'bower_components/fontawesome/css/all.min.css',
     'css/advanced-search.css'
   ]
 
