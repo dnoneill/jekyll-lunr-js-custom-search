@@ -42,7 +42,7 @@ task :concat_js do
     'bower_components/paginationjs/dist/pagination.min.js',
     'bower_components/lodash/dist/lodash.min.js',
     'bower_components/fontawesome/js/all.min.js',
-    'js/jquery.lunr.advanced.search.js'
+    'js/lunr.advanced.search.js'
   ]
 
   File.open('build/advanced-search.js', 'w') do |file|
