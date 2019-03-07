@@ -180,7 +180,7 @@ function loadsearchtemplate(settings){
       var current_page = localStorage['currentpage']
       var is_reload = localStorage['currenturl'] == window.location.href
       localStorage.setItem('currenturl', window.location.href)
-      var search_items = [].concat(Object.values(pairs))
+      var search_items = [].concat.apply([], Object.values(pairs))
       var search_values = search_items.length != 0 ? search_items.join(" : ") : "All Results"
 
       $("title").html(`Search results for ${search_values}`)

@@ -14,8 +14,7 @@ task :build => [
   :create_build_dir,
   :copy_jekyll_plugin,
   :concat_js,
-  :concat_css,
-  :minify_js
+  :concat_css
   ]
 
 task :bower_update do
@@ -68,7 +67,7 @@ task :concat_css do
   end
 end
 
-task :minify_js do
- out = JSMin.minify(File.open('build/advanced-search.js', 'r').read)
- File.open('build/advanced-search.min.js', 'w') {|f| f.write(out) }
-end
+#task :minify_js do
+# out = JSMin.minify(File.open('build/advanced-search.js', 'r').read)
+# File.open('build/advanced-search.min.js', 'w') {|f| f.write(out) }
+#end
