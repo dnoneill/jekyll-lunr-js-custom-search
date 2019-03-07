@@ -6597,33 +6597,34 @@ var html = '';
 var dispfields = lunr_settings['displayfields']
   $.each(data, function(index, key){
 
-    html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][lunr_settings['headerfield']]}</a></h2>
-      <table class="searchResultMetadata">
-      <tbody>`
-    for (var j = 0; j<dispfields.length; j++){
-      var joiner = dispfields[j]['joiner'] ? dispfields[j]['joiner'] : ", "
-      var field_value = Array.isArray(values[key][dispfields[j]['field']])? values[key][dispfields[j]['field']].join(joiner) : values[key][dispfields[j]['field']];
-      var display = 0;
-      if (dispfields[j]['conditional'] && field_value){
-        var display = field_value.indexOf('<mark>')
-        field_value = field_value.split(joiner).filter(element => element.includes("mark>")).join(joiner)
-      } 
-      if (dispfields[j]['truncate'] && field_value) {
-      	first_field_values = field_value.split(joiner).filter(element => element.includes("mark>"))
-      	field_value = _.uniq(first_field_values.concat(field_value.split(joiner))).slice(0, dispfields[j]['truncate'])
-      	field_value = field_value.length >= dispfields[j]['truncate'] ? field_value.join(joiner) + '...' : field_value.join(joiner);
+    html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][lunr_settings['headerfield']]}</a></h2>`
+    if (dispfields && dispfields.length > 0) {
+      html += `<table class="searchResultMetadata"><tbody>`
+      for (var j = 0; j<dispfields.length; j++){
+        var joiner = dispfields[j]['joiner'] ? dispfields[j]['joiner'] : ", "
+        var field_value = Array.isArray(values[key][dispfields[j]['field']])? values[key][dispfields[j]['field']].join(joiner) : values[key][dispfields[j]['field']];
+        var display = 0;
+        if (dispfields[j]['conditional'] && field_value){
+          var display = field_value.indexOf('<mark>')
+          field_value = field_value.split(joiner).filter(element => element.includes("mark>")).join(joiner)
+        } 
+        if (dispfields[j]['truncate'] && field_value) {
+        	first_field_values = field_value.split(joiner).filter(element => element.includes("mark>"))
+        	field_value = _.uniq(first_field_values.concat(field_value.split(joiner))).slice(0, dispfields[j]['truncate'])
+        	field_value = field_value.length >= dispfields[j]['truncate'] ? field_value.join(joiner) + '...' : field_value.join(joiner);
+        }
+        html += `${field_value && display != -1 ? `
+          <tr>
+            <td class="searchResultLeftColumn">${dispfields[j]['label']}:</td>
+            <td class="searchResultRightColumn">
+            ${field_value}
+            </td>
+          </tr>
+        ` : ``}`
       }
-      html += `${field_value && display != -1 ? `
-        <tr>
-          <td class="searchResultLeftColumn">${dispfields[j]['label']}:</td>
-          <td class="searchResultRightColumn">
-          ${field_value}
-          </td>
-        </tr>
-      ` : ``}`
+      html += `</tbody></table>`
     }
-    html += `</tbody>
-        </table><div class="excerpt">
+    html += `<div class="excerpt">
         ${values[key]['content'].indexOf("<mark>") > -1 && values[key].excerpt.indexOf("<mark>") == -1 ? `
         ...${values[key]['content'].slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,101).join(" ")}...` :
         `${values[key]['content'].split(" ").splice(0,101).join(" ")}${values[key]['content'].split(" ").length > 101 ? `...` : `` }</div>`
