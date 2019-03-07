@@ -3719,16 +3719,16 @@ var dispfields = lunr_settings['displayfields']
       var joiner = dispfields[j]['joiner'] ? dispfields[j]['joiner'] : ", "
       var field_value = Array.isArray(values[key][dispfields[j]['field']])? values[key][dispfields[j]['field']].join(joiner) : values[key][dispfields[j]['field']];
       var display = 0;
-      if (dispfields[j]['conditional']){
+      if (dispfields[j]['conditional'] && field_value){
         var display = field_value.indexOf('<mark>')
         field_value = field_value.split(joiner).filter(element => element.includes("mark>")).join(joiner)
       } 
-      if (dispfields[j]['truncate']) {
+      if (dispfields[j]['truncate'] && field_value) {
       	first_field_values = field_value.split(joiner).filter(element => element.includes("mark>"))
-      	field_value = first_field_values.concat(field_value.split(joiner)).slice(0, dispfields[j]['truncate'])
+      	field_value = _.uniq(first_field_values.concat(field_value.split(joiner))).slice(0, dispfields[j]['truncate'])
       	field_value = field_value.length >= dispfields[j]['truncate'] ? field_value.join(joiner) + '...' : field_value.join(joiner);
       }
-      html += `${values[key][dispfields[j]['field']] && display != -1 ? `
+      html += `${field_value && display != -1 ? `
         <tr>
           <td class="searchResultLeftColumn">${dispfields[j]['label']}:</td>
           <td class="searchResultRightColumn">
