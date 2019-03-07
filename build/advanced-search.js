@@ -6613,9 +6613,10 @@ var dispfields = lunr_settings['displayfields']
         	field_value = _.uniq(first_field_values.concat(field_value.split(joiner))).slice(0, dispfields[j]['truncate'])
         	field_value = field_value.length >= dispfields[j]['truncate'] ? field_value.join(joiner) + '...' : field_value.join(joiner);
         }
+        `${field_value ? `` : ``}`
         html += `${field_value && display != -1 ? `
           <tr>
-            <td class="searchResultLeftColumn">${dispfields[j]['label']}:</td>
+          	${dispfields[j]['label'] ? `<td class="searchResultLeftColumn">${dispfields[j]['label']}:</td>` : ``}
             <td class="searchResultRightColumn">
             ${field_value}
             </td>
