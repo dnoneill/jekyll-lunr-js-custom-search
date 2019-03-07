@@ -40,6 +40,7 @@ task :concat_js do
     'bower_components/jquery/dist/jquery.js',
     'bower_components/lunr/lunr.js',
     'bower_components/paginationjs/dist/pagination.min.js',
+    'bower_components/lodash/dist/lodash.min.js',
     'js/jquery.lunr.advanced.search.js'
   ]
 

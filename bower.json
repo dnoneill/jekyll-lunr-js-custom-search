@@ -23,6 +23,7 @@
   "dependencies": {
     "jquery": "~2.2.4",
     "lunr": "~2.3.6",
-    "paginationjs": "~2.1.4"
+    "paginationjs": "~2.1.4",
+    "lodash":"latest"
   }
 }
