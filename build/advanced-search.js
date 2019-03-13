@@ -6653,19 +6653,8 @@ function loadsearchtemplate(settings){
       }
       var vars = query.split('&');
       var pairs = {}
-      var redirect = {'placeOfOrigin':'birthplace', 'query': 'q', 'residenceHeadquarter':'residences', 'workLocation':'worklocations', 'trade': 'facet_trades', 'principalBuildingStyle': 'styles', 'principalBuildingType':'buildingtypes', 'workLocationCity':'cities', 'workLocationCounty':'counties', 'contributor':'author', 'centuriesSearch':''}
-      var needs_redirect = false;
       for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split('=');
-        pair[0] = pair[0].replace('facet.', '').replace('field.', '')
-        if (Object.keys(redirect).indexOf(pair[0]) >= 0){
-          if (pair[0] != 'centuriesSearch'){
-            pair[0] = redirect[pair[0]]
-            needs_redirect = true;
-          } else {
-            pair[1] = ''
-          }
-        }
         if (pair[1].length > 0){
             if (pair[0] in pairs){
               var existing_value = pairs[pair[0]]
@@ -6677,13 +6666,7 @@ function loadsearchtemplate(settings){
             }
         }
       }
-      if (needs_redirect){
-        var queryString = Object.keys(pairs).map((key) => {
-          return encodeURIComponent(key) + '=' + encodeURIComponent(pairs[key])
-        }).join('&');
-        queryString = "?" + queryString + '&sort=' + encodeURIComponent(sort_type)
-        window.location.href = site_url + queryString;
-      }
+      
       values = createSearch(docs, pairs, sort_type, lunr_settings)
       var current_page = localStorage['currentpage']
       var is_reload = localStorage['currenturl'] == window.location.href
