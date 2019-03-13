@@ -51,7 +51,7 @@ module Jekyll
                     doc = {}
                     flat_data = {}
                     item = item_data.to_liquid
-                    if item['recordstatus'] != 'inactive'
+                    if item['recordstatus'] != 'inactive' || ENV['JEKYLL_ENV'] != 'production'
                         @config["fields"].each do |field|
                             field["jekyllfields"].each do |jekyllfield|
                                 widget = field['widget']
