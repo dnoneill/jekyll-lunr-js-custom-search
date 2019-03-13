@@ -51,51 +51,53 @@ module Jekyll
                     doc = {}
                     flat_data = {}
                     item = item_data.to_liquid
-                    @config["fields"].each do |field|
-                        field["jekyllfields"].each do |jekyllfield|
-                            widget = field['widget']
-                            orig_field = item[jekyllfield]
-                            if widget
-                                if widget == 'flatten' && orig_field
-                                    orig_field = orig_field.values.flatten()
-                                end
-                                if widget == 'relational'
-                                    if field['secondaryfield']
-                                        orig_field = site.collections[field['collection']].docs.collect {|collection| collection[jekyllfield] if collection.to_liquid[field['matchfield']] and collection.to_liquid[field['matchfield']].map{ |i| i[field['secondaryfield']] }.include? item['slug'] }
-                                        else
-                                        orig_field = site.collections[field['collection']].docs.collect {|collection| collection[jekyllfield] if collection.to_liquid[field['matchfield']] and collection.to_liquid[field['matchfield']].include? item['slug'] }
+                    if item['recordstatus'] != 'inactive'
+                        @config["fields"].each do |field|
+                            field["jekyllfields"].each do |jekyllfield|
+                                widget = field['widget']
+                                orig_field = item[jekyllfield]
+                                if widget
+                                    if widget == 'flatten' && orig_field
+                                        orig_field = orig_field.values.flatten()
                                     end
-                                end
-                                if widget == 'nested'
-                                    if item[field["parentfield"]]
-                                        if item[field["parentfield"]].class == Array
-                                            orig_field = item[field["parentfield"]].map {| parent | parent[jekyllfield]}
+                                    if widget == 'relational'
+                                        if field['secondaryfield']
+                                            orig_field = site.collections[field['collection']].docs.collect {|collection| collection[jekyllfield] if collection.to_liquid[field['matchfield']] and collection.to_liquid[field['matchfield']].map{ |i| i[field['secondaryfield']] }.include? item['slug'] }
                                             else
-                                            orig_field = item[field["parentfield"]][jekyllfield]
+                                            orig_field = site.collections[field['collection']].docs.collect {|collection| collection[jekyllfield] if collection.to_liquid[field['matchfield']] and collection.to_liquid[field['matchfield']].include? item['slug'] }
                                         end
                                     end
+                                    if widget == 'nested'
+                                        if item[field["parentfield"]]
+                                            if item[field["parentfield"]].class == Array
+                                                orig_field = item[field["parentfield"]].map {| parent | parent[jekyllfield]}
+                                                else
+                                                orig_field = item[field["parentfield"]][jekyllfield]
+                                            end
+                                        end
+                                    end
+                                    if orig_field
+                                        orig_field = orig_field.compact.uniq.flatten()
+                                        orig_field = [].concat(orig_field)
+                                    end
+                                    flat_data[field["searchfield"]] = flat_data[field["searchfield"]] ? flat_data[field["searchfield"]].concat(orig_field) : orig_field
                                 end
-                                if orig_field
-                                    orig_field = orig_field.compact.uniq.flatten()
-                                    orig_field = [].concat(orig_field)
-                                end
-                                flat_data[field["searchfield"]] = flat_data[field["searchfield"]] ? flat_data[field["searchfield"]].concat(orig_field) : orig_field
-                            end
-                            format_field = orig_field.class == Array ?  orig_field.compact.uniq.join(" ") : orig_field
-                            if format_field != nil
-                                if doc[field["searchfield"]] == nil
-                                    doc[field["searchfield"]] = format_field.strip()
-                                    else
-                                    doc[field["searchfield"]] += " " + format_field.strip()
+                                format_field = orig_field.class == Array ?  orig_field.compact.uniq.join(" ") : orig_field
+                                if format_field != nil
+                                    if doc[field["searchfield"]] == nil
+                                        doc[field["searchfield"]] = format_field.strip()
+                                        else
+                                        doc[field["searchfield"]] += " " + format_field.strip()
+                                    end
                                 end
                             end
                         end
+                        index_js << 'this.add(' << ::JSON.generate(doc, quirks_mode: true) << ');'
+                        final_dict = item.to_hash
+                        final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item.content).to_html).text.tr("\n"," ")
+                        @docs[item["slug"]] = final_dict.merge(flat_data)
+                        Jekyll.logger.debug "Lunr:", (item['title'] ? "#{item['title']} (#{item['url']})" : item['url'])
                     end
-                    index_js << 'this.add(' << ::JSON.generate(doc, quirks_mode: true) << ');'
-                    final_dict = item.to_hash
-                    final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item.content).to_html).text.tr("\n"," ")
-                    @docs[item["slug"]] = final_dict.merge(flat_data)
-                    Jekyll.logger.debug "Lunr:", (item['title'] ? "#{item['title']} (#{item['url']})" : item['url'])
                 end
                 index_js << '});'
                 FileUtils.mkdir_p(File.join(site.dest, @js_dir))
