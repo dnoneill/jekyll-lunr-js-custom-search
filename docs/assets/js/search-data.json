@@ -9,7 +9,7 @@
   "1": {
     "id": "1",
     "title": "Explore the data",
-    "content": "People Belva Lockwood Bessie Coleman Alaska P. Davidson Sor Juana Inés de la Cruz Zora Neale Hurston Edmonia Lewis Works Loa to Divine Narcissus Their Eyes Were Watching God Moses, Man of the Mountain Forever Free Hagar",
+    "content": "People Belva Lockwood Bessie Coleman Alaska P. Davidson Sor Juana Inés de la Cruz Zora Neale Hurston Edmonia Lewis Anne Bonny Mary Read Julia de Burgos Silva Kaputikyan Mercedes Negrón Muñoz Works Loa to Divine Narcissus Their Eyes Were Watching God Moses, Man of the Mountain Forever Free Hagar",
     "url": "/jekyll-lunr-advanced-js-search/explore",
     "relUrl": "/explore"
   },
@@ -44,7 +44,7 @@
   "6": {
     "id": "6",
     "title": "Search",
-    "content": "All ethnicities African American Caucasian Mexican Native American Anthropologist Attorney Author Educator FBI special agent Folklorist Nun Pilot Poet Politician Sculptor Search Sort By: Relevance Name",
+    "content": "All ethnicities African American Armenian Caucasian Mexican Native American Puerto Rican Activist Anthropologist Attorney Author Educator Essayist FBI special agent Folklorist Nun Pilot Pirate Poet Politician Sculptor Solider Search Sort By: Relevance Name",
     "url": "/jekyll-lunr-advanced-js-search/search",
     "relUrl": "/search"
   },
