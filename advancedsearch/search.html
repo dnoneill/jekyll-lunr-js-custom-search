@@ -1,0 +1,22 @@
+---
+title: Search
+layout: default
+permalink: /search
+---
+<script src="{{site.baseurl}}/js/index.js"></script>
+<script src="{{site.baseurl}}/js/advanced-search.js"></script>
+<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/advanced-search.css">
+<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/local-search.css">
+
+
+<div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
+{% include search_form.html %}
+{% include results_template.html %}
+
+<script>
+window.addEventListener("load", function(){
+    //var dict = {facets: '#facets2', pagination: '#pagination2', "results": "all_results"}
+    loadsearchtemplate()
+    $('#spinner').hide()
+});
+</script>

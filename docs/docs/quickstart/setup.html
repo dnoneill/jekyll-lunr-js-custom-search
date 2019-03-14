@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>_config.yml setup - Jekyll Advanced Search</title>
+  <link rel="stylesheet" href="/jekyll-advancedsearch/assets/css/just-the-docs.css">
+
+  
+
+  
+  <script type="text/javascript" src="/jekyll-advancedsearch/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="/jekyll-advancedsearch" class="site-title fs-6 lh-tight">Jekyll Advanced Search</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="/jekyll-advancedsearch/explore" class="navigation-list-link">Explore the data</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="/jekyll-advancedsearch/404.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="/jekyll-advancedsearch/search" class="navigation-list-link">Search</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="/jekyll-advancedsearch/quickstart" class="navigation-list-link">Quickstart</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/installation.html" class="navigation-list-link">Install</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/setup.html" class="navigation-list-link active">_config.yml setup</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/searchform.html" class="navigation-list-link">Create a Search Form</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/frontend%20copy.html" class="navigation-list-link">Add results rendering</a>
+                      
+                    </li>
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="/jekyll-advancedsearch/quickstart">Quickstart</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>_config.yml setup</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <ul id="markdown-toc">
+  <li><a href="#collections" id="markdown-toc-collections">Collections</a></li>
+  <li><a href="#fields" id="markdown-toc-fields">Fields</a>    <ul>
+      <li><a href="#widgets-for-complex-fields" id="markdown-toc-widgets-for-complex-fields">Widgets for complex fields</a>        <ul>
+          <li><a href="#nested-widget" id="markdown-toc-nested-widget">Nested widget</a></li>
+          <li><a href="#flatten-widget" id="markdown-toc-flatten-widget">Flatten widget</a></li>
+          <li><a href="#relational-widget" id="markdown-toc-relational-widget">Relational widget</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#headerfield" id="markdown-toc-headerfield">Headerfield</a></li>
+  <li><a href="#display-fields" id="markdown-toc-display-fields">Display fields</a></li>
+  <li><a href="#atozsortfield" id="markdown-toc-atozsortfield">atozsortfield</a></li>
+  <li><a href="#fuzzysearchfields" id="markdown-toc-fuzzysearchfields">fuzzysearchfields</a></li>
+  <li><a href="#full-settings-example" id="markdown-toc-full-settings-example">Full settings example</a></li>
+</ul>
+
+<p>If the collection is not posts you will have define the collection in the <code class="highlighter-rouge">_config.yml</code> file. An example can be seen below. Two collections are being defined. The people collection whose files are in a <code class="highlighter-rouge">_people</code> folder and the works collection which is in the <code class="highlighter-rouge">_works</code> folder. It also defines the permalink for all the items in the folders.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
+    people:
+        output: true
+        permalink: /people/:path
+    works:
+        output: true
+        permalink: /works/:path
+</code></pre></div></div>
+
+<h2 id="collections">Collections</h2>
+<p>Next the lunr settings need to be defined. It requires a good grasp on your data. Firstly the collection defines which collection or collections is going to get indexed. <strong>This must be a list even for a single collection</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  collections: 
+  - people
+</code></pre></div></div>
+
+<h2 id="fields">Fields</h2>
+<p>Fields defines the fields which get indexed. Each field entry has three required fields and two optional fields:</p>
+<ul>
+  <li><strong>searchfield</strong> which is the field used in the search form. It should be one word.</li>
+  <li><strong>boost</strong> which determines how important a match in lunr is. <a href="https://lunrjs.com/guides/searching.html#boosts">More information on boosts</a>).</li>
+  <li><strong>jekyllfields</strong> is also always a list even if a single jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching <code class="highlighter-rouge">name</code> will match the query against the <code class="highlighter-rouge">preferredName</code> and the <code class="highlighter-rouge">variantNames</code>.</li>
+  <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field.</li>
+  <li><strong>widget (optional)</strong> type of cleaner for complex data. It can require more data based upon the type of widget. See section below for information on widgets.</li>
+</ul>
+
+<h3 id="widgets-for-complex-fields">Widgets for complex fields</h3>
+<p>There are additional fields called widgets for more complex data. They are not needed for jekyll fields that are strings or lists or strings.</p>
+
+<h4 id="nested-widget">Nested widget</h4>
+<p>The <strong>nested</strong> widget takes a complex field seen below. It will take any field with nested field below. The example below is the most complex instance that will work with the nested widget. It would also work if wlCity was not in a list. It also requires the field <strong>parentfield</strong>. In the example below the parent field would be “workLocations” and the jekyllfields would be wlCity and/or wlCounty.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workLocations:
+- wlCity: Owego
+  wlCountry: United States
+- wlCity: Washington D.C.
+  wlCountry: United States
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  fields:
+  - boost: 5
+    jekyllfields: [wlCountry, wlCity]
+    parentfield: workLocation
+    searchfield: worklocations
+    widget: nested
+</code></pre></div></div>
+
+<h4 id="flatten-widget">Flatten widget</h4>
+<p>The <strong>flatten</strong> widget takes a complex field like the one seen below. This will get the values in dictionary.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contributions:
+ authors:
+ - Author 1
+ - Author 2
+ updates:
+ - Content Updater 1
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  fields:
+  - boost: 1
+    jekyllfields: [contributions]
+    searchfield: author
+    widget: flatten
+</code></pre></div></div>
+
+<h4 id="relational-widget">Relational widget</h4>
+<p>The final widget is <strong>relational</strong> widget. This piggybacks on traditional database structures. It requires the collection which has the relational data to be defined. It also requires a match field. This is where the collection’s slug will be located. If that is nested a <strong>secondaryfield</strong> is available but not required. The example below shows the snippet of text targeted in a <strong>works</strong> file. The contributorId corresponds to the P000004.md file. The works file has a field named <code class="highlighter-rouge">contributor</code> which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing.</p>
+
+<p>work1.md</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>preferredName: Loa to Divine Narcissus
+variantName:
+- El Divino Narciso
+contributor:
+- contributorId: P000004
+  contributorRole: Author
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  - boost: 10
+    collection: works
+    jekyllfields: [preferredName, variantName]
+    matchfield: contributor
+    searchfield: works
+    secondaryfield: contributorId
+    widget: relational
+</code></pre></div></div>
+
+<h2 id="headerfield">Headerfield</h2>
+<p>The <strong>headerfield</strong> defines what will display for header field in the results. This is a single field.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  headerfield: preferredName
+</code></pre></div></div>
+
+<h2 id="display-fields">Display fields</h2>
+<p>The <strong>displayfields</strong> is a list of fields that will display in a table for results. Like <strong>fields</strong> it allows for multiple fields. The only required field is <strong>field</strong> which defines what field is being displayed.</p>
+
+<p>It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p>
+
+<p><strong>label</strong> is the plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an <code class="highlighter-rouge">s</code> to the label.</p>
+
+<p><strong>joiner</strong> will join multiple results with whatever is the field. By default it is <code class="highlighter-rouge">', '</code>.</p>
+
+<p><strong>conditional</strong> means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number.</p>
+
+<p><strong>truncate</strong> will truncate a list of options at a number of results.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayfields:
+  - field: variantNames
+    joiner: '&lt;br&gt;'
+    label: Variant Name
+    truncate: 3
+  - conditional: true
+    field: works
+    joiner: '; '
+    label: Building
+</code></pre></div></div>
+
+<p>An excerpt field also get automatically generated. To hide the field add the following to the css:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.excerpt {
+  display: none
+}
+</code></pre></div></div>
+
+<h2 id="atozsortfield">atozsortfield</h2>
+<p><strong>atozsortfield</strong> is the field the sort by ‘name’ field sorts on. This will sort the field from atoz.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  atozsortfield: preferredName
+</code></pre></div></div>
+
+<h2 id="fuzzysearchfields">fuzzysearchfields</h2>
+<p><strong>fuzzysearchfields</strong> should be fields that have an input not a dropdown search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the editDistance to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. <strong>This must be a searchfield value from the fields settings</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  fuzzysearchfields: [name]
+</code></pre></div></div>
+
+<h2 id="full-settings-example">Full settings example</h2>
+<p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-advancedsearch/search?q=&amp;name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-advancedsearch/search?q=&amp;name=&amp;ethnicity=</a></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  atozsortfield: preferredName
+  collections: [people]
+  displayfields:
+  - {field: variantNames, label: Variant Name}
+  - {field: occupation, joiner: &lt;br&gt;, label: Occupation, truncate: 2}
+  - {field: born, label: Birth Year}
+  - {conditional: 'True', field: works, joiner: '; ', label: Work}
+  fields:
+  - boost: 1
+    jekyllfields: [slug]
+    searchfield: id
+  - boost: 10
+    facetfield: true
+    jekyllfields: [ethnicity]
+    searchfield: ethnicity
+  - boost: 10
+    jekyllfields: [preferredName, variantNames]
+    searchfield: name
+  - boost: 10
+    facetfield: true
+    jekyllfields: [occupation]
+    searchfield: occupation
+  - boost: 1
+    jekyllfields: [content]
+    searchfield: description
+  - boost: 1
+    jekyllfields: [contributions]
+    searchfield: contributor
+    widget: flatten
+  - boost: 10
+    facetfield: true
+    jekyllfields: [wlCity]
+    parentfield: workLocations
+    searchfield: cities
+    widget: nested
+  - boost: 10
+    facetfield: true
+    jekyllfields: [wlCountry]
+    parentfield: workLocations
+    searchfield: countries
+    widget: nested
+  - boost: 10
+    collection: works
+    jekyllfields: [preferredName, variantName]
+    matchfield: contributor
+    searchfield: works
+    secondaryfield: contributorId
+    widget: relational
+  fuzzysearchfields: [name, birthplace, residences, worklocations, description]
+  headerfield: preferredName
+
+</code></pre></div></div>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  
+
+  <title>Install - Jekyll Advanced Search</title>
+  <link rel="stylesheet" href="/jekyll-advancedsearch/assets/css/just-the-docs.css">
+
+  
+
+  
+  <script type="text/javascript" src="/jekyll-advancedsearch/assets/js/just-the-docs.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <div class="page-wrap">
+    <div class="side-bar">
+      <a href="/jekyll-advancedsearch" class="site-title fs-6 lh-tight">Jekyll Advanced Search</a>
+      <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
+      <div class="navigation main-nav js-main-nav">
+        <nav role="navigation" aria-label="Main navigation">
+  <ul class="navigation-list">
+    
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="/jekyll-advancedsearch/explore" class="navigation-list-link">Explore the data</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="/jekyll-advancedsearch/404.html" class="navigation-list-link"></a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item">
+            
+            <a href="/jekyll-advancedsearch/search" class="navigation-list-link">Search</a>
+            
+          </li>
+        
+      
+    
+      
+        
+          <li class="navigation-list-item active">
+            
+            <a href="/jekyll-advancedsearch/quickstart" class="navigation-list-link">Quickstart</a>
+            
+              
+              <ul class="navigation-list-child-list ">
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                
+                  
+                    <li class="navigation-list-item  active">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/installation.html" class="navigation-list-link active">Install</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/setup.html" class="navigation-list-link">_config.yml setup</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/searchform.html" class="navigation-list-link">Create a Search Form</a>
+                      
+                    </li>
+                  
+                
+                  
+                    <li class="navigation-list-item ">
+                      
+                      <a href="/jekyll-advancedsearch/docs/quickstart/frontend%20copy.html" class="navigation-list-link">Add results rendering</a>
+                      
+                    </li>
+                  
+                
+              </ul>
+            
+          </li>
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+  </ul>
+</nav>
+
+      </div>
+      <footer role="contentinfo" class="site-footer">
+        <p class="text-small text-grey-dk-000 mb-0">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+      </footer>
+    </div>
+    <div class="main-content-wrap js-main-content" tabindex="0">
+      <div class="page-header">
+        <div class="main-content">
+          
+          
+        </div>
+      </div>
+      <div class="main-content">
+        
+          
+            <nav class="breadcrumb-nav">
+              <ol class="breadcrumb-nav-list">
+                
+                  <li class="breadcrumb-nav-list-item"><a href="/jekyll-advancedsearch/quickstart">Quickstart</a></li>
+                
+                <li class="breadcrumb-nav-list-item"><span>Install</span></li>
+              </ol>
+            </nav>
+          
+        
+        <div id="main-content" class="page-content" role="main">
+          <p>Install the plugin
+Choose to install as either a Ruby Gem, or by copying the pre-built plugin file to your Jekyll site.</p>
+
+<h1 id="install-as-ruby-gem">Install as Ruby Gem</h1>
+<ol>
+  <li>Add gem to Gemfile
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> gem "jekyll-lunr-advanced-js-search", :git =&gt; "git://github.com/dnoneill/jekyll-lunr-js-search.git"
+</code></pre></div>    </div>
+  </li>
+  <li>Modify your Jekyll _config.yml file to include the Gem.
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plugins:
+  - jekyll-lunr-js-search
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h1 id="or-install-pre-built-plugin">OR Install pre-built plugin</h1>
+<ol>
+  <li>Place build/jekyll_lunr_advanced_js_search.rb inside the <code class="highlighter-rouge">_plugins</code> folder in the root of your Jekyll site.</li>
+</ol>
+
+<p>The content from all Jekyll posts and pages will be indexed to a js/index.js file ready for lunr.js to consume. This happens each time the site is generated.</p>
+
+<p>A JavaScript plugin is provided in js/lunr.advanced.search.js to handle the configuration of lunr.js and generate the search data.</p>
+
+<p>Dependencies for the JavaScript plugin are as follows.</p>
+
+<ul>
+  <li><a href="http://jquery.com">jQuery</a></li>
+  <li><a href="http://lunrjs.com">lunr.js</a></li>
+  <li><a href="http://pagination.js.org">paginationjs</a></li>
+  <li><a href="http://lodash.com">lodash</a></li>
+  <li><a href="http://fontawesome.com">fontawesome</a> (Optional)</li>
+</ul>
+
+<p>A pre-built version of the JavaScript plugin, along with all of the above dependencies, concatenated is available in the <a href="https://github.com/dnoneill/jekyll-lunr-js-search/blob/master/build/advanced-search.js">build/advanced-search.js</a>.</p>
+
+
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
