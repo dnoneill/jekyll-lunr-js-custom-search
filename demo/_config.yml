@@ -13,10 +13,10 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Jekyll Advanced Search
+title: jekyll-lunr-advanced-js-search
 description: >- # this means to ignore newlines until "baseurl:"
-  This will create a jekyll advanced search interface.
-baseurl: "/jekyll-lunr-advanced-js-search/" # the subpath of your site, e.g. /blog
+  Documentation and demo for jekyll-lunr-advanced-js-search
+baseurl: "/jekyll-lunr-advanced-js-search" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: niqui_o
 github_username:  dnoneill
