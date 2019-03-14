@@ -103,3 +103,7 @@ tbody {
 .wrapper {
 	max-width: none;
 }
+
+#facets a {
+  white-space:normal;
+}
