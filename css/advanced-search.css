@@ -103,3 +103,8 @@ tbody {
 #facets a {
   white-space:normal;
 }
+
+#facets h4 {
+  padding: 12px 0px 5px;
+  margin: 0px;
+}
