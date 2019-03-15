@@ -6567,9 +6567,9 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
   }
 
   if (sort){
-  	var sort_field = sort == 'name' ? lunr_settings['atozsortfield'] : sort;
+  	var sort_field = sort == 'atoz' ? lunr_settings['atozsortfield'] : sort;
     var sorted = _.sortBy(Object.values(all_results), function(item) {
-     return [item[sort_field], item[lunr_settings['atozsortfield']]];
+     return [String(item[sort_field]).normalize('NFD'), String(item[lunr_settings['atozsortfield']]).normalize('NFD')];
     })
     var sorted_dict = {}
     for (var j=0; j<sorted.length; j++){

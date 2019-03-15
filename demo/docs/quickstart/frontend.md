@@ -13,7 +13,7 @@ Add the following to the same page as the search form.
 <div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
 ```
 
-The spinner div is not required but it provides a spinner. There are three required html items that have to be defined in order for the results to render. **facets** by default are in a id field of `facets`. This is not required if you do not want any facets. The results get dumped in the `search_results` and pagination gets dumped in `pagination`. These preset tags can be overridden on initialization. The framework used in this website is below.
+The spinner div is not required but it provides a spinner. There are three required html items that have to be defined in order for the results to render. **facets** by default are in a id field of `facets`. This is not required if you do not want any facets. The results get dumped in the `search_results` and pagination gets dumped in `pagination`. These preset tags can be overridden on initialization. The framework used in this website is below. Additionally, if you want any sort fields besides relevance or name, add another option field. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields, however it can be set as a search field from the config settings.
 
 ```
 <div id="header_info"></div>
@@ -29,6 +29,7 @@ The spinner div is not required but it provides a spinner. There are three requi
         <select id="sortSelect" name="sort" onchange="changeSort(event);">
           <option value="">Relevance</option>
           <option value="atoz">Name</option>
+          <option value="born">Birth Year</option>
         </select>
       </span>
     </div>
