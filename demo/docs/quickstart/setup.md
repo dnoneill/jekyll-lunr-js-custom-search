@@ -147,7 +147,7 @@ An excerpt field also get automatically generated. To hide the field add the fol
 ```
 
 ## atozsortfield
-**atozsortfield** is the field the sort by 'name' field sorts on. This will sort the field from atoz.
+**atozsortfield** is the field the sort by 'name' field sorts on. This will sort the field from atoz. If you want to add more options for sorting this will be the secondary field that will be sorted. For example, in this demo we added a sort by birth year. Élisabeth Sophie Chéron and Sor Juana Inés de la Cruz have the same birth year. To provide some structure they get sorted by birthyear and then their preferredName (the atozsortfield). This should be a single string field, not a list.
 
 ```
 lunr_settings:

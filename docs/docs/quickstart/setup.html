@@ -118,7 +118,7 @@
                   
                     <li class="navigation-list-item ">
                       
-                      <a href="/jekyll-lunr-advanced-js-search/docs/quickstart/frontend%20copy.html" class="navigation-list-link">Add results rendering</a>
+                      <a href="/jekyll-lunr-advanced-js-search/docs/quickstart/frontend.html" class="navigation-list-link">Add results rendering</a>
                       
                     </li>
                   
@@ -318,7 +318,7 @@ contributor:
 </code></pre></div></div>
 
 <h2 id="atozsortfield">atozsortfield</h2>
-<p><strong>atozsortfield</strong> is the field the sort by ‘name’ field sorts on. This will sort the field from atoz.</p>
+<p><strong>atozsortfield</strong> is the field the sort by ‘name’ field sorts on. This will sort the field from atoz. If you want to add more options for sorting this will be the secondary field that will be sorted. For example, in this demo we added a sort by birth year. Élisabeth Sophie Chéron and Sor Juana Inés de la Cruz have the same birth year. To provide some structure they get sorted by birthyear and then their preferredName (the atozsortfield). This should be a single string field, not a list.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   atozsortfield: preferredName

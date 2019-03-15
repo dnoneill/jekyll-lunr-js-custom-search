@@ -6536,7 +6536,6 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
   return []
 }
   var all_results = {}
-  var names = {}
   var highlight_display = {}
   var mapfields =   new Map(lunr_settings['fields'].map(item => !item.widget ? [item.searchfield, item.jekyllfields[0]] : []))
   mapfields.forEach ((v,k) => { highlight_display[k] = v })
@@ -6565,17 +6564,18 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
       }
     }
     all_results[results[i].ref] = dictionary
-    names[values[results[i].ref][lunr_settings['atozsortfield']]] = results[i].ref
   }
 
-  if (sort == 'atoz'){
-    var sort_names = Object.keys(names).sort()
-    var sorted_results = {}
-    for (var i=0; i<sort_names.length; i++){
-      var id = names[sort_names[i]]
-      sorted_results[id] = all_results[id]
+  if (sort){
+  	var sort_field = sort == 'atoz' ? lunr_settings['atozsortfield'] : sort;
+    var sorted = _.sortBy(Object.values(all_results), function(item) {
+     return [String(item[sort_field]).normalize('NFD'), String(item[lunr_settings['atozsortfield']]).normalize('NFD')];
+    })
+    var sorted_dict = {}
+    for (var j=0; j<sorted.length; j++){
+      sorted_dict[sorted[j]['slug']] = sorted[j]
     }
-    all_results = sorted_results
+    all_results = sorted_dict
   }
   return all_results
 }
