@@ -3,6 +3,7 @@ title: Explore the data
 layout: default
 permalink: /explore
 ---
+
 <h1>People</h1>
 
 {% for people in site.people %}

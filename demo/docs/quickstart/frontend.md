@@ -13,7 +13,17 @@ Add the following to the same page as the search form.
 <div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
 ```
 
-The spinner div is not required but it provides a spinner. There are three required html items that have to be defined in order for the results to render. **facets** by default are in a id field of `facets`. This is not required if you do not want any facets. The results get dumped in the `search_results` and pagination gets dumped in `pagination`. These preset tags can be overridden on initialization. The framework used in this website is below. Additionally, if you want any sort fields besides relevance or name, add another option field. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields. It can also be set as a search field from the config settings. For best results make sure the sort field is not a list of options.
+The spinner div is not required but it provides a spinner. 
+
+There are three required html items that have to be defined in order for the results, facets and pagination to render. 
+
+**facets** by default are in a id field of `facets`. This is not required if you do not want any facets. 
+
+The results get dumped in the `search_results` and pagination gets dumped in `pagination`. 
+
+These preset tags can be overridden on initialization. The framework used in this website is below. 
+
+Additionally, if you want any sort fields besides relevance or name, another option field needs to be added. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields. It can also be set as a search field from the config settings. For best results make sure the sort field is not a list.
 
 ```
 <div id="header_info"></div>
@@ -41,8 +51,16 @@ The spinner div is not required but it provides a spinner. There are three requi
 <div style="clear:both"><span></span></div>
 ```
 
-Finally the search needs to be initialized for on page load. Add the following code to the page. Below also shows how to initialize and override default fields for results.
+The final step requires the search to be initialized on page load. Add the following code to the page. The example below also shows how to initialize and override default fields for results.
 
+```
+window.addEventListener("load", function(){
+    loadsearchtemplate()
+    $('#spinner').hide()
+});
+```
+
+With overrides (below)
 ```
 window.addEventListener("load", function(){
     var dict = {facets: '#new_facet_field', pagination: '#paginationid', "results": ".results-class-override"}

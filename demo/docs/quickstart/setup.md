@@ -7,7 +7,7 @@ nav_order: 2
 - TOC
 {:toc}
 
-If the collection is not posts you will have define the collection in the `_config.yml` file. An example can be seen below. Two collections are being defined. The people collection whose files are in a `_people` folder and the works collection which is in the `_works` folder. It also defines the permalink for all the items in the folders.
+If the collection is not `posts` you will have define the collection in the `_config.yml` file. An example can be seen below. Two collections are being defined. The people collection whose files are in a `_people` folder and the works collection which is in the `_works` folder. It also defines the permalink for all the items in the folders.
 
 ```
 collections:
@@ -30,17 +30,20 @@ lunr_settings:
 
 ## Fields 
 Fields defines the fields which get indexed. Each field entry has three required fields and two optional fields: 
-- **searchfield** which is the field used in the search form. It should be one word. 
+- **searchfield** is the field used in the search form. It should be one word. 
 - **boost** which determines how important a match in lunr is. [More information on boosts](https://lunrjs.com/guides/searching.html#boosts)). 
-- **jekyllfields** is also always a list even if a single jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching `name` will match the query against the `preferredName` and the `variantNames`.
-- **facetfield (optional)** has a value of **true** if used. If set as true, it will create a facet in the search interface for the field.
-- **widget (optional)** type of cleaner for complex data. It can require more data based upon the type of widget. See section below for information on widgets.
+- **jekyllfields** is also always a list even if a single jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching `name` will match the query against the `preferredName` and the `variantNames` [see full example](#full-settings-example)
+- **facetfield (optional)** has a value of **true** if used. If set as true, it will create a facet in the search interface for the field. (These are ethnicities, occupation, cities, and counties in the [demo]({{site.baseurl}}/demo?q=&name=&ethnicity=))
+- **widget (optional)** type of cleaner for complex data. It can require more data based upon the type of widget. See [section below](#widgets-for-complex-fields) for information on widgets.
 
 ### Widgets for complex fields
-There are additional fields called widgets for more complex data. They are not needed for jekyll fields that are strings or lists or strings.
+There are additional fields called widgets for more complex data. They are not needed for jekyll fields that are strings or lists of strings.
 
 #### Nested widget
-The **nested** widget takes a complex field seen below. It will take any field with nested field below. The example below is the most complex instance that will work with the nested widget. It would also work if wlCity was not in a list. It also requires the field **parentfield**. In the example below the parent field would be "workLocations" and the jekyllfields would be wlCity and/or wlCounty.
+The **nested** widget takes a complex field like the example below. The example below is the most complex instance that will work with the nested widget. 
+
+It would also work if wlCity was not in a list. It also requires the field **parentfield**. In the example below the parent field would be "workLocations" and the jekyllfields would be wlCity and/or wlCounty.
+
 
 ```
 workLocations:
@@ -48,14 +51,14 @@ workLocations:
   wlCountry: United States
 - wlCity: Washington D.C.
   wlCountry: United States
-```
+``` 
 
 ```
 lunr_settings:
   fields:
   - boost: 5
     jekyllfields: [wlCountry, wlCity]
-    parentfield: workLocation
+    parentfield: workLocations
     searchfield: worklocations
     widget: nested
 ```
@@ -82,9 +85,14 @@ lunr_settings:
 ```
 
 #### Relational widget
-The final widget is **relational** widget. This piggybacks on traditional database structures. It requires the collection which has the relational data to be defined. It also requires a match field. This is where the collection's slug will be located. If that is nested a **secondaryfield** is available but not required. The example below shows the snippet of text targeted in a **works** file. The contributorId corresponds to the P000004.md file. The works file has a field named `contributor` which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing.
+The final widget is **relational** widget. This piggybacks on traditional database structures. 
 
-work1.md
+It requires a **collection** field which defines the collection which has the relational data. 
+
+It also requires a **matchfield**. This is where the collection's slug will be located. 
+
+If that is nested a **secondaryfield** is available but not required. The example below shows the snippet of text targeted in a **works** file. The contributorId corresponds to the P000004.md file. The works file has a field named `contributor` which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing. 
+
 ```
 preferredName: Loa to Divine Narcissus
 variantName:
@@ -115,7 +123,9 @@ lunr_settings:
 ```
 
 ## Display fields
-The **displayfields** is a list of fields that will display in a table for results. Like **fields** it allows for multiple fields. The only required field is **field** which defines what field is being displayed. 
+The **displayfields** is a list of fields that will display in a table for results. Like **fields** it allows for multiple fields. 
+
+The only required field is **field** which defines what field is being displayed. 
 
 It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the **field** value. 
 
@@ -123,9 +133,9 @@ It can be a Jekyll field or if a widget has been used on a search field, the sea
 
 **joiner** will join multiple results with whatever is the field. By default it is `', '`. 
 
-**conditional** means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number.
+**conditional** means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. [Conditional example]({{site.baseurl}}/demo?q=loa)
 
-**truncate** will truncate a list of options at a number of results.
+**truncate** will truncate a list of options at a number of results. [See occupation field for truncate example]({{site.baseurl}}/demo?q=)
 
 ```
 displayfields:
@@ -155,7 +165,7 @@ lunr_settings:
 ```
 
 ## fuzzysearchfields
-**fuzzysearchfields** should be fields that have an input not a dropdown search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the editDistance to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. **This must be a searchfield value from the fields settings**
+**fuzzysearchfields** should be fields that have an input not a dropdown search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the [editDistance](https://lunrjs.com/guides/searching.html#fuzzy-matches) to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. **This must be a searchfield value from the fields settings**.
 
 ```
 lunr_settings:

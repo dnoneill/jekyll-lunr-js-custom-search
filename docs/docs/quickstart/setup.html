@@ -188,7 +188,7 @@
   <li><a href="#full-settings-example" id="markdown-toc-full-settings-example">Full settings example</a></li>
 </ul>
 
-<p>If the collection is not posts you will have define the collection in the <code class="highlighter-rouge">_config.yml</code> file. An example can be seen below. Two collections are being defined. The people collection whose files are in a <code class="highlighter-rouge">_people</code> folder and the works collection which is in the <code class="highlighter-rouge">_works</code> folder. It also defines the permalink for all the items in the folders.</p>
+<p>If the collection is not <code class="highlighter-rouge">posts</code> you will have define the collection in the <code class="highlighter-rouge">_config.yml</code> file. An example can be seen below. Two collections are being defined. The people collection whose files are in a <code class="highlighter-rouge">_people</code> folder and the works collection which is in the <code class="highlighter-rouge">_works</code> folder. It also defines the permalink for all the items in the folders.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
     people:
@@ -210,18 +210,20 @@
 <h2 id="fields">Fields</h2>
 <p>Fields defines the fields which get indexed. Each field entry has three required fields and two optional fields:</p>
 <ul>
-  <li><strong>searchfield</strong> which is the field used in the search form. It should be one word.</li>
+  <li><strong>searchfield</strong> is the field used in the search form. It should be one word.</li>
   <li><strong>boost</strong> which determines how important a match in lunr is. <a href="https://lunrjs.com/guides/searching.html#boosts">More information on boosts</a>).</li>
-  <li><strong>jekyllfields</strong> is also always a list even if a single jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching <code class="highlighter-rouge">name</code> will match the query against the <code class="highlighter-rouge">preferredName</code> and the <code class="highlighter-rouge">variantNames</code>.</li>
-  <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field.</li>
-  <li><strong>widget (optional)</strong> type of cleaner for complex data. It can require more data based upon the type of widget. See section below for information on widgets.</li>
+  <li><strong>jekyllfields</strong> is also always a list even if a single jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching <code class="highlighter-rouge">name</code> will match the query against the <code class="highlighter-rouge">preferredName</code> and the <code class="highlighter-rouge">variantNames</code> <a href="#full-settings-example">see full example</a></li>
+  <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field. (These are ethnicities, occupation, cities, and counties in the <a href="/jekyll-lunr-advanced-js-search/demo?q=&amp;name=&amp;ethnicity=">demo</a>)</li>
+  <li><strong>widget (optional)</strong> type of cleaner for complex data. It can require more data based upon the type of widget. See <a href="#widgets-for-complex-fields">section below</a> for information on widgets.</li>
 </ul>
 
 <h3 id="widgets-for-complex-fields">Widgets for complex fields</h3>
-<p>There are additional fields called widgets for more complex data. They are not needed for jekyll fields that are strings or lists or strings.</p>
+<p>There are additional fields called widgets for more complex data. They are not needed for jekyll fields that are strings or lists of strings.</p>
 
 <h4 id="nested-widget">Nested widget</h4>
-<p>The <strong>nested</strong> widget takes a complex field seen below. It will take any field with nested field below. The example below is the most complex instance that will work with the nested widget. It would also work if wlCity was not in a list. It also requires the field <strong>parentfield</strong>. In the example below the parent field would be “workLocations” and the jekyllfields would be wlCity and/or wlCounty.</p>
+<p>The <strong>nested</strong> widget takes a complex field like the example below. The example below is the most complex instance that will work with the nested widget.</p>
+
+<p>It would also work if wlCity was not in a list. It also requires the field <strong>parentfield</strong>. In the example below the parent field would be “workLocations” and the jekyllfields would be wlCity and/or wlCounty.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workLocations:
 - wlCity: Owego
@@ -234,7 +236,7 @@
   fields:
   - boost: 5
     jekyllfields: [wlCountry, wlCity]
-    parentfield: workLocation
+    parentfield: workLocations
     searchfield: worklocations
     widget: nested
 </code></pre></div></div>
@@ -259,9 +261,14 @@
 </code></pre></div></div>
 
 <h4 id="relational-widget">Relational widget</h4>
-<p>The final widget is <strong>relational</strong> widget. This piggybacks on traditional database structures. It requires the collection which has the relational data to be defined. It also requires a match field. This is where the collection’s slug will be located. If that is nested a <strong>secondaryfield</strong> is available but not required. The example below shows the snippet of text targeted in a <strong>works</strong> file. The contributorId corresponds to the P000004.md file. The works file has a field named <code class="highlighter-rouge">contributor</code> which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing.</p>
+<p>The final widget is <strong>relational</strong> widget. This piggybacks on traditional database structures.</p>
 
-<p>work1.md</p>
+<p>It requires a <strong>collection</strong> field which defines the collection which has the relational data.</p>
+
+<p>It also requires a <strong>matchfield</strong>. This is where the collection’s slug will be located.</p>
+
+<p>If that is nested a <strong>secondaryfield</strong> is available but not required. The example below shows the snippet of text targeted in a <strong>works</strong> file. The contributorId corresponds to the P000004.md file. The works file has a field named <code class="highlighter-rouge">contributor</code> which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing.</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>preferredName: Loa to Divine Narcissus
 variantName:
 - El Divino Narciso
@@ -288,7 +295,9 @@ contributor:
 </code></pre></div></div>
 
 <h2 id="display-fields">Display fields</h2>
-<p>The <strong>displayfields</strong> is a list of fields that will display in a table for results. Like <strong>fields</strong> it allows for multiple fields. The only required field is <strong>field</strong> which defines what field is being displayed.</p>
+<p>The <strong>displayfields</strong> is a list of fields that will display in a table for results. Like <strong>fields</strong> it allows for multiple fields.</p>
+
+<p>The only required field is <strong>field</strong> which defines what field is being displayed.</p>
 
 <p>It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p>
 
@@ -296,9 +305,9 @@ contributor:
 
 <p><strong>joiner</strong> will join multiple results with whatever is the field. By default it is <code class="highlighter-rouge">', '</code>.</p>
 
-<p><strong>conditional</strong> means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number.</p>
+<p><strong>conditional</strong> means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. <a href="/jekyll-lunr-advanced-js-search/demo?q=loa">Conditional example</a></p>
 
-<p><strong>truncate</strong> will truncate a list of options at a number of results.</p>
+<p><strong>truncate</strong> will truncate a list of options at a number of results. <a href="/jekyll-lunr-advanced-js-search/demo?q=">See occupation field for truncate example</a></p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayfields:
   - field: variantNames
@@ -325,7 +334,7 @@ contributor:
 </code></pre></div></div>
 
 <h2 id="fuzzysearchfields">fuzzysearchfields</h2>
-<p><strong>fuzzysearchfields</strong> should be fields that have an input not a dropdown search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the editDistance to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. <strong>This must be a searchfield value from the fields settings</strong></p>
+<p><strong>fuzzysearchfields</strong> should be fields that have an input not a dropdown search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the <a href="https://lunrjs.com/guides/searching.html#fuzzy-matches">editDistance</a> to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. <strong>This must be a searchfield value from the fields settings</strong>.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   fuzzysearchfields: [name]

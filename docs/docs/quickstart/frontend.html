@@ -178,7 +178,17 @@
 &lt;div id="spinner"&gt;&lt;i class="fa fa-spinner fa-spin"&gt;&lt;/i&gt;&lt;/div&gt;
 </code></pre></div></div>
 
-<p>The spinner div is not required but it provides a spinner. There are three required html items that have to be defined in order for the results to render. <strong>facets</strong> by default are in a id field of <code class="highlighter-rouge">facets</code>. This is not required if you do not want any facets. The results get dumped in the <code class="highlighter-rouge">search_results</code> and pagination gets dumped in <code class="highlighter-rouge">pagination</code>. These preset tags can be overridden on initialization. The framework used in this website is below. Additionally, if you want any sort fields besides relevance or name, add another option field. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields. It can also be set as a search field from the config settings. For best results make sure the sort field is not a list of options.</p>
+<p>The spinner div is not required but it provides a spinner.</p>
+
+<p>There are three required html items that have to be defined in order for the results, facets and pagination to render.</p>
+
+<p><strong>facets</strong> by default are in a id field of <code class="highlighter-rouge">facets</code>. This is not required if you do not want any facets.</p>
+
+<p>The results get dumped in the <code class="highlighter-rouge">search_results</code> and pagination gets dumped in <code class="highlighter-rouge">pagination</code>.</p>
+
+<p>These preset tags can be overridden on initialization. The framework used in this website is below.</p>
+
+<p>Additionally, if you want any sort fields besides relevance or name, another option field needs to be added. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields. It can also be set as a search field from the config settings. For best results make sure the sort field is not a list.</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div id="header_info"&gt;&lt;/div&gt;
 &lt;div style="float: left; width: 20%; "&gt;
@@ -205,8 +215,15 @@
 &lt;div style="clear:both"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
 </code></pre></div></div>
 
-<p>Finally the search needs to be initialized for on page load. Add the following code to the page. Below also shows how to initialize and override default fields for results.</p>
+<p>The final step requires the search to be initialized on page load. Add the following code to the page. The example below also shows how to initialize and override default fields for results.</p>
 
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("load", function(){
+    loadsearchtemplate()
+    $('#spinner').hide()
+});
+</code></pre></div></div>
+
+<p>With overrides (below)</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>window.addEventListener("load", function(){
     var dict = {facets: '#new_facet_field', pagination: '#paginationid', "results": ".results-class-override"}
     loadsearchtemplate(dict)
