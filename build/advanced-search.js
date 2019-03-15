@@ -6610,8 +6610,8 @@ var dispfields = lunr_settings['displayfields']
         } 
         if (dispfields[j]['truncate'] && field_value) {
         	first_field_values = field_value.split(joiner).filter(element => element.includes("mark>"))
-        	field_value = _.uniq(first_field_values.concat(field_value.split(joiner))).slice(0, dispfields[j]['truncate'])
-        	field_value = field_value.length > dispfields[j]['truncate'] ? field_value.join(joiner) + '...' : field_value.join(joiner);
+        	field_value = _.uniq(first_field_values.concat(field_value.split(joiner)))
+        	field_value = field_value.length > dispfields[j]['truncate'] ? field_value.join(joiner).slice(0, dispfields[j]['truncate']) + '...' : field_value.join(joiner);
         }
         var label = field_value && field_value.toString().split(joiner).length > 1 ? dispfields[j]['label'] + 's' : dispfields[j]['label'];
         html += `${field_value && display != -1 ? `
