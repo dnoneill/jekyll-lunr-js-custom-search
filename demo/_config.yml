@@ -33,29 +33,57 @@ plugins:
 view_facets: 5
 
   
-lunr_settings: {"collections": ["people"],
-  "fields": [
-        {"searchfield": "id", "boost": 1, "jekyllfields": ["slug"]},
-        {"searchfield": "ethnicity", "boost": 10, "jekyllfields": ["ethnicity"], "facetfield": true},
-        {"searchfield": "name", "boost": 10, "jekyllfields": ["preferredName", "variantNames"]},
-        {"searchfield": "occupation", "boost": 10, "jekyllfields": ["occupation"], "facetfield": true},
-        {"searchfield": "description", "boost": 1, "jekyllfields": ["content"]},
-        {"searchfield": "contributor", "boost": 1, "jekyllfields": ["contributions"], "widget": "flatten"},
-        {"searchfield": "cities", "boost": 10, "parentfield": "workLocations", "jekyllfields": ["wlCity"], "widget": "nested", "facetfield": true},
-        {"searchfield": "countries", "boost": 10, "parentfield": "workLocations", "jekyllfields": ["wlCountry"], "widget": "nested", "facetfield": true},
-        {"searchfield": "works", "boost": 10, "widget": "relational", "collection": "works", "jekyllfields": ["preferredName", "variantName"], "matchfield" : "contributor", "secondaryfield": "contributorId"}
-    ],
-  "headerfield": "preferredName",
-  "displayfields": [
-    {"field" : "variantNames", "label": "Variant Name"}, 
-    {"field": "occupation", "label":"Occupation", "joiner": "; ", "truncate": 2},
-    {"field": "born", "label":"Birth Year"},
-    {"field": "works", "label":"Work", "joiner": "; ", "conditional": "true"}
-  ],
-    "atozsortfield" : 'preferredName',
-    "fuzzysearchfields": ["name", "birthplace", "residences", "worklocations", "description"]
-
-}
+lunr_settings:
+  atozsortfield: preferredName
+  collections: [people]
+  displayfields:
+  - {field: variantNames, label: Variant Name}
+  - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
+  - {field: born, label: Birth Year}
+  - {conditional: 'True', field: works, joiner: '; ', label: Work}
+  fields:
+  - boost: 1
+    jekyllfields: [slug]
+    searchfield: id
+  - boost: 10
+    facetfield: true
+    jekyllfields: [ethnicity]
+    searchfield: ethnicity
+  - boost: 10
+    jekyllfields: [preferredName, variantNames]
+    searchfield: name
+  - boost: 10
+    facetfield: true
+    jekyllfields: [occupation]
+    searchfield: occupation
+  - boost: 1
+    jekyllfields: [content]
+    searchfield: description
+  - boost: 1
+    jekyllfields: [contributions]
+    searchfield: contributor
+    widget: flatten
+  - boost: 10
+    facetfield: true
+    jekyllfields: [wlCity]
+    parentfield: workLocations
+    searchfield: cities
+    widget: nested
+  - boost: 10
+    facetfield: true
+    jekyllfields: [wlCountry]
+    parentfield: workLocations
+    searchfield: countries
+    widget: nested
+  - boost: 10
+    collection: works
+    jekyllfields: [preferredName, variantName]
+    matchfield: contributor
+    searchfield: works
+    secondaryfield: contributorId
+    widget: relational
+  fuzzysearchfields: [name, birthplace, residences, worklocations]
+  headerfield: preferredName
 
 collections:
     people:
@@ -84,11 +112,11 @@ defaults:
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
 # to override the default setting.
-# exclude:
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

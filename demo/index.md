@@ -8,4 +8,4 @@ jekyll-lunr-advanced-js-search is a gem for creating advanced searches of collec
 Sites which are using this gem are: 
 
 | --- | --- |
-| North Carolina Architects and Builders | http://ncarchitects.lib.ncsu.edu |
+| North Carolina Architects and Builders | [http://ncarchitects.lib.ncsu.edu](http://ncarchitects.lib.ncsu.edu/search?q=) |

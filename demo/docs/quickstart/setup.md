@@ -180,7 +180,7 @@ lunr_settings:
   collections: [people]
   displayfields:
   - {field: variantNames, label: Variant Name}
-  - {field: occupation, joiner: <br>, label: Occupation, truncate: 2}
+  - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}
   - {conditional: 'True', field: works, joiner: '; ', label: Work}
   fields:
@@ -224,7 +224,6 @@ lunr_settings:
     searchfield: works
     secondaryfield: contributorId
     widget: relational
-  fuzzysearchfields: [name, birthplace, residences, worklocations, description]
+  fuzzysearchfields: [name, birthplace, residences, worklocations]
   headerfield: preferredName
-
 ```
