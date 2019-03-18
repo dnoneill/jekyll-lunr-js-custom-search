@@ -6683,19 +6683,6 @@ function loadsearchtemplate(settings){
         mapfields.forEach ((v,k) => { facet_fields[k] = v })
         var all_facets = {}
         facet_html = ''
-        var breadcrumbs = "<span id='breadcrumbs'>"
-        breadcrumbs += search_items.length != 0 ? "Results for: " : "All Results"
-        for (var index = 0; index < search_items.length; index++){
-          var encode_facet = encodeURIComponent(search_items[index]).replace("'", "%27")
-          breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${encode_facet}')">
-              ${search_items[index]} <i class="fa fa-times-circle"></i>
-              </button>`
-        }
-        breadcrumbs += search_items.length > 1 ? `<button class="facet_button" type="button" onclick="remove_facet('all')">
-            Clear All <i class="fa fa-times-circle"></i>
-            </button>` : ''
-        breadcrumbs += `</span>`
-        $("#header_info").css("display", "block").html(breadcrumbs)
         for (var key in values){
           for (var searchfield in facet_fields){
             values_field = facet_fields[searchfield]
@@ -6732,7 +6719,7 @@ function loadsearchtemplate(settings){
           facet_html += `<h4>${facet_header.charAt(0).toUpperCase()}${facet_header.slice(1)}</h4>`
           var greater_length = false;
           for (var i = 0; i<sorted_list.length; i++){
-            var link_html =  `<a onclick="location.href='${current_url}${sorted_list[i][0]}';">
+            var link_html =  `<a onclick="location.href='${current_url}${sorted_list[i][0]}';" id="${sorted_list[i][0].toLowerCase().replace(/[^A-Za-z0-9]/g, "")}">
             ${sorted_list[i][0]} (${sorted_list[i][1]})</a><br>`
             if (i == view_facets + 1){
               facet_html += `<div id="${facet_value}_facet" style="display:none;">` + link_html
@@ -6754,6 +6741,22 @@ function loadsearchtemplate(settings){
 		if ($(facets_ident)) {
         	$(facets_ident).html(facet_html)
         }
+        var breadcrumbs = "<span id='breadcrumbs'>"
+        breadcrumbs += search_items.length != 0 ? "Results for: " : "All Results"
+        for (var index = 0; index < search_items.length; index++){
+          var encode_facet = encodeURIComponent(search_items[index]).replace("'", "%27")
+          var facet_id = search_items[index].toLowerCase().replace(/[^A-Za-z0-9]/g, "");
+          $(`#${facet_id}`).attr('onclick', `remove_facet("${encode_facet}")`).css('text-decoration', 'none').css('color', 'black');
+          $(`#${facet_id}`).append(' <i class="fas fa-times"></i>');
+          breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${encode_facet}')">
+              ${search_items[index]} <i class="fa fa-times-circle"></i>
+              </button>`
+        }
+        breadcrumbs += search_items.length > 1 ? `<button class="facet_button" type="button" onclick="remove_facet('all')">
+            Clear All <i class="fa fa-times-circle"></i>
+            </button>` : ''
+        breadcrumbs += `</span>`
+        $("#header_info").css("display", "block").html(breadcrumbs)
         $(pagination_ident).pagination({
         dataSource: Object.keys(values),
         pageSize: 10,
