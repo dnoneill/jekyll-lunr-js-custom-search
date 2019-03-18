@@ -6705,7 +6705,9 @@ function loadsearchtemplate(settings){
         }
         var concat_fields = {}
         for (var key in all_facets){
-          concat_fields[key] = _.countBy(_.compact(all_facets[key]));
+        	if (Object.keys(all_facets[key]).length > 0d) {
+          		concat_fields[key] = _.countBy(_.compact(all_facets[key]));
+          	}
         }
         for (var facet_value in concat_fields){
           var ordered = {}
@@ -6750,15 +6752,19 @@ function loadsearchtemplate(settings){
         var breadcrumbs = "<span id='breadcrumbs'>"
         breadcrumbs += search_items.length != 0 ? "Results for: " : "All Results";
         for (var querytype in pairs){
-          var encode_facet = encodeURIComponent(pairs[querytype]).replace("'", "%27")
-          var facet_id = pairs[querytype].toLowerCase().replace(/[^A-Za-z0-9]/g, "");
-          if (querytype.indexOf('facet') > -1){
-            $(`#${facet_id}`).attr('onclick', `remove_facet("${querytype}=${encode_facet}")`).css('text-decoration', 'none').css('color', 'black');
-            $(`#${facet_id}`).append(' <i class="fas fa-times"></i>');
+          var queries = [].concat(pairs[querytype])
+          for (var query = 0; query < queries.length; query++) {
+            var facet_data = queries[query]
+            var encode_facet = encodeURIComponent(facet_data).replace("'", "%27")
+            var facet_id = facet_data.toLowerCase().replace(/[^A-Za-z0-9]/g, "");
+            if (querytype.indexOf('facet') > -1){
+              $(`#${facet_id}`).attr('onclick', `remove_facet("${querytype}=${encode_facet}")`).css('text-decoration', 'none').css('color', 'black');
+              $(`#${facet_id}`).append(' <i class="fas fa-times"></i>');
+            }
+            breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${querytype}=${encode_facet}')">
+                ${facet_data} <i class="fa fa-times-circle"></i>
+                </button>`
           }
-          breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${querytype}=${encode_facet}')">
-              ${pairs[querytype]} <i class="fa fa-times-circle"></i>
-              </button>`
         }
         breadcrumbs += search_items.length > 1 ? `<button class="facet_button" type="button" onclick="remove_facet('all')">
             Clear All <i class="fa fa-times-circle"></i>
