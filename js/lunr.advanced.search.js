@@ -75,13 +75,13 @@ function createSearch(values, origsearch_dict, sort, lunr_settings){
 }
 
 function remove_facet(facet){
-  var current_url = window.location.href;
+  var current_url = window.location.search;
   if (facet == 'all'){
     full_url = current_url.split("?")[0] + "?q="
   } else {
-    current_url = current_url.replace(/%20/g, '+').replace(/%\d{0,2}/g, '');
-    url_components = current_url.split('?').slice(-1)[0].split('&');
-    facet = facet.replace(/%20/g, '+').replace(/[^0-9a-zA-Z=+]+_/g, '');
+    current_url = current_url.replace(/%20/g, '+').replace(/[^a-zA-Z=+_&]/g, '');
+    url_components = current_url.split('&');
+    facet = facet.replace(/%20/g, '+').replace(/[^a-zA-Z=+_&]/g, '');
     _.remove(url_components, function(n) {
       return n.indexOf(facet) != -1;
     });
