@@ -18,7 +18,7 @@ Choose to install as either a Ruby Gem, or by copying the pre-built plugin file 
 2. Modify your Jekyll _config.yml file to include the Gem.
 ```
 plugins:
-  - jekyll-lunr-js-search
+  - jekyll-lunr-advanced-js-search
 ```
 
 # OR Install pre-built plugin

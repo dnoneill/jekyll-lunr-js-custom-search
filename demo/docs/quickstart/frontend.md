@@ -8,7 +8,7 @@ Add the following to the same page as the search form.
 
 ```
 <script src="{{site.baseurl}}/js/index.js"></script>
-<script src="{{site.baseurl}}/css/advanced-search.js"></script>
+<script src="{{site.baseurl}}/js/advanced-search.js"></script>
 <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/advanced-search.css">
 <div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
 ```
@@ -54,17 +54,21 @@ Additionally, if you want any sort fields besides relevance or name, another opt
 The final step requires the search to be initialized on page load. Add the following code to the page. The example below also shows how to initialize and override default fields for results.
 
 ```
+<script>
 window.addEventListener("load", function(){
     loadsearchtemplate()
     $('#spinner').hide()
 });
+</script>
 ```
 
 With overrides (below)
 ```
+<script>
 window.addEventListener("load", function(){
     var dict = {facets: '#new_facet_field', pagination: '#paginationid', "results": ".results-class-override"}
     loadsearchtemplate(dict)
     $('#spinner').hide()
 });
+</script>
 ```

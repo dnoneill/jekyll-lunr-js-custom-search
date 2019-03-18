@@ -92,6 +92,7 @@ module Jekyll
                                 end
                             end
                         end
+                        doc['id'] = item['slug']
                         index_js << 'this.add(' << ::JSON.generate(doc, quirks_mode: true) << ');'
                         final_dict = item.to_hash
                         final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item.content).to_html).text.tr("\n"," ")
