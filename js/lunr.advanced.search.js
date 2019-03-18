@@ -79,9 +79,13 @@ function remove_facet(facet){
   if (facet == 'all'){
     full_url = current_url.split("?")[0] + "?q="
   } else {
-    current_url = current_url.replace(/%20/g, '+');
-    facet = facet.replace(/%20/g, '+');
-    full_url = current_url.replace(facet, "").replace(decodeURIComponent(facet), "")
+    current_url = current_url.replace(/%20/g, '+').replace(/%\d{0,2}/g, '');
+    url_components = current_url.split('?').slice(-1)[0].split('&');
+    facet = facet.replace(/%20/g, '+').replace(/[^0-9a-zA-Z=+]+_/g, '');
+    _.remove(url_components, function(n) {
+      return n.indexOf(facet) != -1;
+    });
+    full_url = window.location.pathname + "?" + url_components.join("&")
   }
   window.location = full_url;
 }
@@ -188,6 +192,8 @@ function loadsearchtemplate(settings){
               } else {
                 all_facets[searchfield] = [].concat(facet_value)
               }
+            } else if (!all_facets[searchfield]) {
+            	all_facets[searchfield] = []
             }
           }
         }
@@ -236,14 +242,16 @@ function loadsearchtemplate(settings){
         	$(facets_ident).html(facet_html)
         }
         var breadcrumbs = "<span id='breadcrumbs'>"
-        breadcrumbs += search_items.length != 0 ? "Results for: " : "All Results"
-        for (var index = 0; index < search_items.length; index++){
-          var encode_facet = encodeURIComponent(search_items[index]).replace("'", "%27")
-          var facet_id = search_items[index].toLowerCase().replace(/[^A-Za-z0-9]/g, "");
-          $(`#${facet_id}`).attr('onclick', `remove_facet("${encode_facet}")`).css('text-decoration', 'none').css('color', 'black');
-          $(`#${facet_id}`).append(' <i class="fas fa-times"></i>');
-          breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${encode_facet}')">
-              ${search_items[index]} <i class="fa fa-times-circle"></i>
+        breadcrumbs += search_items.length != 0 ? "Results for: " : "All Results";
+        for (var querytype in pairs){
+          var encode_facet = encodeURIComponent(pairs[querytype]).replace("'", "%27")
+          var facet_id = pairs[querytype].toLowerCase().replace(/[^A-Za-z0-9]/g, "");
+          if (querytype.indexOf('facet') > -1){
+            $(`#${facet_id}`).attr('onclick', `remove_facet("${querytype}=${encode_facet}")`).css('text-decoration', 'none').css('color', 'black');
+            $(`#${facet_id}`).append(' <i class="fas fa-times"></i>');
+          }
+          breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${querytype}=${encode_facet}')">
+              ${pairs[querytype]} <i class="fa fa-times-circle"></i>
               </button>`
         }
         breadcrumbs += search_items.length > 1 ? `<button class="facet_button" type="button" onclick="remove_facet('all')">
