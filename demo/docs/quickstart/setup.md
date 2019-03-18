@@ -184,9 +184,6 @@ lunr_settings:
   - {field: born, label: Birth Year}
   - {conditional: 'True', field: works, joiner: '; ', label: Work}
   fields:
-  - boost: 1
-    jekyllfields: [slug]
-    searchfield: id
   - boost: 10
     facetfield: true
     jekyllfields: [ethnicity]
