@@ -80,12 +80,11 @@ function remove_facet(facet){
     full_url = current_url.split("?")[0] + "?q="
   } else {
     current_url = current_url.replace(/%20/g, '+').replace(/[^a-zA-Z=+_&]/g, '');
+    var clean_values = window.location.search.split("?").slice(-1)[0].split("&")
     url_components = current_url.split('&');
     facet = facet.replace(/%20/g, '+').replace(/[^a-zA-Z=+_&]/g, '');
-    _.remove(url_components, function(n) {
-      return n.indexOf(facet) != -1;
-    });
-    full_url = window.location.pathname + "?" + url_components.join("&")
+    clean_values.splice(url_components.indexOf(facet), 1)
+    full_url = window.location.pathname + "?" + clean_values.join("&")
   }
   window.location = full_url;
 }
