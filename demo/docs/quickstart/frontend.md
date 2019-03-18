@@ -6,12 +6,14 @@ nav_order: 4
 ---
 Add the following to the same page as the search form.
 
+{% raw %}
 ```
 <script src="{{site.baseurl}}/js/index.js"></script>
 <script src="{{site.baseurl}}/js/advanced-search.js"></script>
 <link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/advanced-search.css">
 <div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
 ```
+{% endraw %}
 
 The spinner div is not required but it provides a spinner. 
 
