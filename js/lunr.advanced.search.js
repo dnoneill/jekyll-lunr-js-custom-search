@@ -199,7 +199,7 @@ function loadsearchtemplate(settings){
         }
         var concat_fields = {}
         for (var key in all_facets){
-        	if (Object.keys(all_facets[key]).length > 0d) {
+        	if (Object.keys(all_facets[key]).length > 0) {
           		concat_fields[key] = _.countBy(_.compact(all_facets[key]));
           	}
         }
