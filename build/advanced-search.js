@@ -6602,8 +6602,9 @@ function simpleTemplating(data, values, settings) {
   var html = '';
   var disp_settings = lunr_settings['displayfields']
   $.each(data, function(index, key){
-    var header_field = disp_settings.filter(element => element['headerfield'] == true)[0]['field']
-    var dispfields = disp_settings.filter(element => element['headerfield'] != true)
+    var header_field = disp_settings.filter(element => element['headerfield'] == true)[0]['field'];
+    var content_field = disp_settings.filter(element => element['contentfield'] == true);
+    var dispfields = disp_settings.filter(element => element['headerfield'] != true && element['contentfield'] != true);
     html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2>`
     if (dispfields && dispfields.length > 0) {
       html += `<table class="searchResultMetadata"><tbody>`
@@ -6632,10 +6633,11 @@ function simpleTemplating(data, values, settings) {
       }
       html += `</tbody></table>`
     }
+    var content = content_field > 0 ? values[key][content_field[0]['field']] : values[key]['content'];
     html += `<div class="excerpt">
-        ${values[key]['content'].indexOf("<mark>") > -1 && values[key].excerpt.indexOf("<mark>") == -1 ? `
-        ...${values[key]['content'].slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,101).join(" ")}...` :
-        `${values[key]['content'].split(" ").splice(0,101).join(" ")}${values[key]['content'].split(" ").length > 101 ? `...` : `` }</div>`
+        ${content.indexOf("<mark>") > -1 ? `
+        ...${content.slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,101).join(" ")}...` :
+        `${content.split(" ").splice(0,101).join(" ")}${content.split(" ").length > 101 ? `...` : `` }</div>`
         }`
   });
   return html;
