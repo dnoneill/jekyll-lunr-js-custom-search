@@ -94,10 +94,10 @@ function remove_facet(facet){
 
 function simpleTemplating(data, values, settings) {
   var html = '';
-  var dispfields = lunr_settings['displayfields']
+  var disp_settings = lunr_settings['displayfields']
   $.each(data, function(index, key){
-    header_field = dispfields.filter(element => element['headerfield'] == true)[0]['field']
-    dispfields = dispfields.filter(element => element['headerfield'] != true)
+    var header_field = disp_settings.filter(element => element['headerfield'] == true)[0]['field']
+    var dispfields = disp_settings.filter(element => element['headerfield'] != true)
     html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2>`
     if (dispfields && dispfields.length > 0) {
       html += `<table class="searchResultMetadata"><tbody>`
