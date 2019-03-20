@@ -14,7 +14,7 @@ function createSearch(values, origsearch_dict, sort, lunr_settings){
       lunr.tokenizer(search_dict[i]).forEach(function(token) {
         if(lunr_settings['fuzzysearchfields'].includes(i)) {
           query.term(lunr.tokenizer(token), {fields: [i], editDistance: 1, presence: lunr.Query.presence.REQUIRED})
-        } else if (i == "q"){
+        } else if (i == "query" || i == "q"){
           if (token.toString().length > 1){
             query.term(lunr.tokenizer(token), {presence: lunr.Query.presence.REQUIRED, editDistance: 1})
           } else {
@@ -255,7 +255,7 @@ function loadsearchtemplate(settings){
               $(`#${facet_id}`).append(' <i class="fas fa-times"></i>');
             }
             breadcrumbs += `<button class="facet_button" type="button" onclick="remove_facet('${querytype}=${encode_facet}')">
-                ${facet_data} <i class="fa fa-times-circle"></i>
+                ${querytype.replace("facet_", "").charAt(0).toUpperCase()}${querytype.replace("facet_", "").slice(1,)}: ${facet_data} <i class="fa fa-times-circle"></i>
                 </button>`
           }
         }
