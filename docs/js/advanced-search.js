@@ -6589,11 +6589,12 @@ function remove_facet(facet){
     full_url = current_url.split("?")[0] + "?q="
   } else {
     current_url = current_url.replace(/%20/g, '+').replace(/[^a-zA-Z=+_&]/g, '');
-    var clean_values = window.location.search.split("?").slice(-1)[0].split("&")
+    var clean_values = window.location.search.split("?").slice(-1)[0].split("&");
     url_components = current_url.split('&');
     facet = facet.replace(/%20/g, '+').replace(/[^a-zA-Z=+_&]/g, '');
-    clean_values.splice(url_components.indexOf(facet), 1)
-    full_url = window.location.pathname + "?" + clean_values.join("&")
+    clean_values.splice(url_components.indexOf(facet), 1);
+    clean_values = clean_values.length > 0 ? clean_values : ['query='];
+    full_url = window.location.pathname + "?" + clean_values.join("&");
   }
   window.location = full_url;
 }
