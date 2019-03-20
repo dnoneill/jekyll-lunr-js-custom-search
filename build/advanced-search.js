@@ -6546,19 +6546,22 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
       for (var field in matchMeta[matchvalue]){
         var getorigkey = Object.keys(origsearch_dict).find(orig_key => origsearch_dict[orig_key].toString().toLowerCase().includes(matchvalue))
         getorigkey = getorigkey != undefined ? getorigkey : '';
+        nohighlight = lunr_settings['displayfields'].filter(element => element['nohighlight'] == true).map(x => x['field'])
         if (matchvalue.length > 1 && getorigkey.indexOf("facet") == -1) {
           if (Object.keys(highlight_display).indexOf(field) > -1){
             field = highlight_display[field]
           }
-          var join_array = Array.isArray(dictionary[field])? dictionary[field].join("***") : dictionary[field];
-          var start_index = join_array.toLowerCase().indexOf(matchvalue)
-          var end_index = start_index + matchvalue.length
-          var regEx = new RegExp(matchvalue, "i");
-          var match = regEx.exec(dictionary[field]);
-          if (match){
-            var marktext = join_array.replace(match[0], `<mark>${match[0]}</mark>`);
-            marktext = Array.isArray(dictionary[field]) ? marktext.split("***") : marktext;
-            dictionary[field] = marktext;
+          if (!nohighlight.includes(field)) {
+            var join_array = Array.isArray(dictionary[field])? dictionary[field].join("***") : dictionary[field];
+            var start_index = join_array.toLowerCase().indexOf(matchvalue)
+            var end_index = start_index + matchvalue.length
+            var regEx = new RegExp(matchvalue, "i");
+            var match = regEx.exec(dictionary[field]);
+            if (match){
+              var marktext = join_array.replace(match[0], `<mark>${match[0]}</mark>`);
+              marktext = Array.isArray(dictionary[field]) ? marktext.split("***") : marktext;
+              dictionary[field] = marktext;
+            }
           }
         }
       }
@@ -6596,11 +6599,12 @@ function remove_facet(facet){
 }
 
 function simpleTemplating(data, values, settings) {
-var html = '';
-var dispfields = lunr_settings['displayfields']
+  var html = '';
+  var dispfields = lunr_settings['displayfields']
   $.each(data, function(index, key){
-
-    html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][lunr_settings['headerfield']]}</a></h2>`
+    header_field = dispfields.filter(element => element['headerfield'] == true)[0]['field']
+    dispfields = dispfields.filter(element => element['headerfield'] != true)
+    html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2>`
     if (dispfields && dispfields.length > 0) {
       html += `<table class="searchResultMetadata"><tbody>`
       for (var j = 0; j<dispfields.length; j++){
@@ -6633,9 +6637,10 @@ var dispfields = lunr_settings['displayfields']
         ...${values[key]['content'].slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,101).join(" ")}...` :
         `${values[key]['content'].split(" ").splice(0,101).join(" ")}${values[key]['content'].split(" ").length > 101 ? `...` : `` }</div>`
         }`
-    });
-return html;
+  });
+  return html;
 }
+
 function loadsearchtemplate(settings){
 	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
