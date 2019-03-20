@@ -6633,11 +6633,12 @@ function simpleTemplating(data, values, settings) {
       }
       html += `</tbody></table>`
     }
-    var content = content_field > 0 ? values[key][content_field[0]['field']] : values[key]['content'];
+    var content = content_field.length > 0 ? values[key][content_field[0]['field']] : values[key]['content'];
+    var truncate = content_field.length > 0 ? parseInt(content_field[0]['truncate']) : 101;
     html += `<div class="excerpt">
         ${content.indexOf("<mark>") > -1 ? `
-        ...${content.slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,101).join(" ")}...` :
-        `${content.split(" ").splice(0,101).join(" ")}${content.split(" ").length > 101 ? `...` : `` }</div>`
+        ...${content.slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,truncate).join(" ")}...` :
+        `${content.split(" ").splice(0, truncate).join(" ")}${content.split(" ").length > truncate ? `...` : `` }</div>`
         }`
   });
   return html;
