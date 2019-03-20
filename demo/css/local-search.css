@@ -9,3 +9,7 @@
 #result::after {
  background-image: radial-gradient(rgb(0, 69, 152), white)
 }
+
+.main-content {
+ max-width: none;
+}
