@@ -6546,7 +6546,7 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
       for (var field in matchMeta[matchvalue]){
         var getorigkey = Object.keys(origsearch_dict).find(orig_key => origsearch_dict[orig_key].toString().toLowerCase().includes(matchvalue))
         getorigkey = getorigkey != undefined ? getorigkey : '';
-        nohighlight = lunr_settings['displayfields'].filter(element => element['nohighlight'] == true).map(x => x['field'])
+        nohighlight = lunr_settings['displayfields'].filter(element => element['highlight'] == false).map(x => x['field'])
         if (matchvalue.length > 1 && getorigkey.indexOf("facet") == -1) {
           if (Object.keys(highlight_display).indexOf(field) > -1){
             field = highlight_display[field]
