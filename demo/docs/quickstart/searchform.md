@@ -18,7 +18,7 @@ An example of this form can be seen below. This is the code being used in the [d
  
 <form role="search">
 <div class="search-control" style="display:none;">
-    <input type="search" id="person-serarch" name="q"
+    <input type="search" id="person-serarch" name="query"
            placeholder="Keyword Search"
            aria-label="Search people using keyword">
     <input type="search" id="person-search" name="name"

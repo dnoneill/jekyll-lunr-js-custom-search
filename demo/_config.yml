@@ -37,9 +37,11 @@ lunr_settings:
   atozsortfield: preferredName
   collections: [people]
   displayfields:
+  - {field: preferredName, headerfield: true, highlight: false}
   - {field: variantNames, label: Variant Name}
   - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}
+  - {field: ethnicity, label: Ethnicity, plural: Ethnicities}
   - {conditional: 'True', field: works, joiner: '; ', label: Work}
   fields:
   - boost: 10
@@ -80,7 +82,6 @@ lunr_settings:
     secondaryfield: contributorId
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
-  headerfield: preferredName
 
 collections:
     people:

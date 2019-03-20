@@ -181,7 +181,6 @@
       </li>
     </ul>
   </li>
-  <li><a href="#headerfield" id="markdown-toc-headerfield">Headerfield</a></li>
   <li><a href="#display-fields" id="markdown-toc-display-fields">Display fields</a></li>
   <li><a href="#atozsortfield" id="markdown-toc-atozsortfield">atozsortfield</a></li>
   <li><a href="#fuzzysearchfields" id="markdown-toc-fuzzysearchfields">fuzzysearchfields</a></li>
@@ -287,29 +286,28 @@ contributor:
     widget: relational
 </code></pre></div></div>
 
-<h2 id="headerfield">Headerfield</h2>
-<p>The <strong>headerfield</strong> defines what will display for header field in the results. This is a single field.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
-  headerfield: preferredName
-</code></pre></div></div>
-
 <h2 id="display-fields">Display fields</h2>
-<p>The <strong>displayfields</strong> is a list of fields that will display in a table for results. Like <strong>fields</strong> it allows for multiple fields.</p>
+<p>The <strong>displayfields</strong> is a list of fields that will display in the results page. Like <strong>fields</strong> it allows for multiple fields.</p>
 
-<p>The only required field is <strong>field</strong> which defines what field is being displayed.</p>
+<p><strong>headerfield</strong> should only get instatiated once. <strong>IT IS REQUIRED</strong> The value is <strong>true</strong>. The <strong>label</strong> field does not apply.</p>
 
-<p>It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p>
+<p><strong>contentfield</strong> (optional). By default the content field is a 100 words of the ‘content’ section of the Jekyll markdown. This can be overridden by instatiating the <strong>contentfield</strong> as <strong>true</strong>.</p>
 
-<p><strong>label</strong> is the plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an <code class="highlighter-rouge">s</code> to the label.</p>
+<p>The only required field is <strong>field</strong> which defines what field is being displayed. It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p>
+
+<p><strong>label</strong> is the plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an <code class="highlighter-rouge">s</code> to the label. This can be overriden with the <strong>plural</strong> field, in which you can define what the plural version of the label is.</p>
 
 <p><strong>joiner</strong> will join multiple results with whatever is the field. By default it is <code class="highlighter-rouge">', '</code>.</p>
 
 <p><strong>conditional</strong> means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. <a href="/jekyll-lunr-advanced-js-search/demo?q=loa">Conditional example</a></p>
 
-<p><strong>truncate</strong> will truncate a list of options at a number of results. <a href="/jekyll-lunr-advanced-js-search/demo?q=">See occupation field for truncate example</a></p>
+<p><strong>truncate</strong> will truncate a list of options at a number of results. If used for the <strong>contentfield</strong>it will truncate to the number of words. <a href="/jekyll-lunr-advanced-js-search/demo?q=">See occupation field for truncate example</a></p>
 
+<p><strong>highlight</strong> by default matches in results get highlighted. In order to override this section, set highlight to false.</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayfields:
+  - field: preferredName
+    headerfield: true
+    highlight: false
   - field: variantNames
     joiner: '&lt;br&gt;'
     label: Variant Name
@@ -318,6 +316,13 @@ contributor:
     field: works
     joiner: '; '
     label: Building
+  - field: content
+    contentfield: true
+    highlight: false
+    truncate: 20
+  - field: ethnicity
+    plural: Ethnicities
+    label: Ethnicity
 </code></pre></div></div>
 
 <p>An excerpt field also get automatically generated. To hide the field add the following to the css:</p>
@@ -342,13 +347,16 @@ contributor:
 
 <h2 id="full-settings-example">Full settings example</h2>
 <p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-advancedsearch/search?q=&amp;name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-advancedsearch/search?q=&amp;name=&amp;ethnicity=</a></p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   atozsortfield: preferredName
   collections: [people]
   displayfields:
+  - {field: preferredName, headerfield: true, highlight: false}
   - {field: variantNames, label: Variant Name}
   - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}
+  - {field: ethnicity, label: Ethnicity, plural: Ethnicities}
   - {conditional: 'True', field: works, joiner: '; ', label: Work}
   fields:
   - boost: 10
@@ -389,7 +397,6 @@ contributor:
     secondaryfield: contributorId
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
-  headerfield: preferredName
 </code></pre></div></div>
 
 

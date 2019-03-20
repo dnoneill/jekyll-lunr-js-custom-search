@@ -113,32 +113,29 @@ lunr_settings:
     widget: relational
 ```
 
-
-## Headerfield
-The **headerfield** defines what will display for header field in the results. This is a single field.
-
-```
-lunr_settings:
-  headerfield: preferredName
-```
-
 ## Display fields
-The **displayfields** is a list of fields that will display in a table for results. Like **fields** it allows for multiple fields. 
+The **displayfields** is a list of fields that will display in the results page. Like **fields** it allows for multiple fields. 
 
-The only required field is **field** which defines what field is being displayed. 
+**headerfield** should only get instatiated once. **IT IS REQUIRED** The value is **true**. The **label** field does not apply.
 
-It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the **field** value. 
+**contentfield** (optional). By default the content field is a 100 words of the 'content' section of the Jekyll markdown. This can be overridden by instatiating the **contentfield** as **true**.
 
-**label** is the plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an `s` to the label. 
+The only required field is **field** which defines what field is being displayed. It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the **field** value. 
+
+**label** is the plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an `s` to the label. This can be overriden with the **plural** field, in which you can define what the plural version of the label is.
 
 **joiner** will join multiple results with whatever is the field. By default it is `', '`. 
 
 **conditional** means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. [Conditional example]({{site.baseurl}}/demo?q=loa)
 
-**truncate** will truncate a list of options at a number of results. [See occupation field for truncate example]({{site.baseurl}}/demo?q=)
+**truncate** will truncate a list of options at a number of results. If used for the **contentfield**it will truncate to the number of words. [See occupation field for truncate example]({{site.baseurl}}/demo?q=)
 
+**highlight** by default matches in results get highlighted. In order to override this section, set highlight to false.
 ```
 displayfields:
+  - field: preferredName
+    headerfield: true
+    highlight: false
   - field: variantNames
     joiner: '<br>'
     label: Variant Name
@@ -147,6 +144,13 @@ displayfields:
     field: works
     joiner: '; '
     label: Building
+  - field: content
+    contentfield: true
+    highlight: false
+    truncate: 20
+  - field: ethnicity
+    plural: Ethnicities
+    label: Ethnicity
 ```
 
 An excerpt field also get automatically generated. To hide the field add the following to the css:
@@ -174,14 +178,17 @@ lunr_settings:
 
 ## Full settings example
 An example of all these settings can be seen below. An example of it running is here: [https://dnoneill.github.io/jekyll-advancedsearch/search?q=&name=&ethnicity=](https://dnoneill.github.io/jekyll-advancedsearch/search?q=&name=&ethnicity=)
-  ```
+
+```
 lunr_settings:
   atozsortfield: preferredName
   collections: [people]
   displayfields:
+  - {field: preferredName, headerfield: true, highlight: false}
   - {field: variantNames, label: Variant Name}
   - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}
+  - {field: ethnicity, label: Ethnicity, plural: Ethnicities}
   - {conditional: 'True', field: works, joiner: '; ', label: Work}
   fields:
   - boost: 10
@@ -222,5 +229,4 @@ lunr_settings:
     secondaryfield: contributorId
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
-  headerfield: preferredName
 ```
