@@ -115,7 +115,8 @@ function simpleTemplating(data, values, settings) {
         	field_value = _.uniq(first_field_values.concat(field_value.split(joiner)))
         	field_value = field_value.length > dispfields[j]['truncate'] ? field_value.slice(0, dispfields[j]['truncate']).join(joiner) + '...' : field_value.join(joiner);
         }
-        var label = field_value && field_value.toString().split(joiner).length > 1 ? dispfields[j]['label'] + 's' : dispfields[j]['label'];
+        var plural = dispfields[j]['plural'] ? dispfields[j]['plural'] : dispfields[j]['label'] + 's';
+        var label = field_value && field_value.toString().split(joiner).length > 1 ? plural : dispfields[j]['label'];
         html += `${field_value && display != -1 ? `
           <tr>
           	${dispfields[j]['label'] ? `<td class="searchResultLeftColumn">${label}:</td>` : ``}
