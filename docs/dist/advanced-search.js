@@ -6505,7 +6505,7 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
         });
     });
 }();function createSearch(values, origsearch_dict, sort, lunr_settings){
-  var idx = liveidx ? liveidx : lunr.Index.load(index);
+  var idx = lunr.Index.load(index);
   lunr.tokenizer.separator = /[\s,.;:/?!()]+/;
   idx.pipeline.remove(lunr.stemmer)
   idx.pipeline.remove(lunr.stopWordFilter)
