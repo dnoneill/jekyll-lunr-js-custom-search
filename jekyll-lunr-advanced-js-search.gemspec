@@ -19,4 +19,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'rake', '~> 12.0'
   s.add_development_dependency 'jsmin', '~> 1.0.1'
+  s.add_development_dependency 'therubyracer', 'latest'
 end
