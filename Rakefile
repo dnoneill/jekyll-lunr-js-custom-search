@@ -52,6 +52,7 @@ task :concat_js do
   end
 
   # Lunr is stored separately so we can use it for index generation
+  FileUtils.cp('build/advanced-search.js', 'demo/dist/advanced-search.js')
   FileUtils.cp('bower_components/lunr/lunr.js', 'build/lunr.js')
 end
 
@@ -67,7 +68,9 @@ task :concat_css do
       data << File.read(file)
     })
   end
+  FileUtils.cp('build/advanced-search.css', 'demo/dist/advanced-search.css')
 end
+
 
 #task :minify_js do
 # out = JSMin.minify(File.open('build/advanced-search.js', 'r').read)

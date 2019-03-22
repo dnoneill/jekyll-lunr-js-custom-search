@@ -1,5 +1,5 @@
 function createSearch(values, origsearch_dict, sort, lunr_settings){
-  var idx = lunr.Index.load(JSON.parse(index))
+  var idx = liveidx ? liveidx : lunr.Index.load(index);
   lunr.tokenizer.separator = /[\s,.;:/?!()]+/;
   idx.pipeline.remove(lunr.stemmer)
   idx.pipeline.remove(lunr.stopWordFilter)
@@ -249,6 +249,7 @@ function loadsearchtemplate(settings){
         var facets_ident = settings && settings['facets'] ? settings['facets'] : "#facets";
         var pagination_ident = settings && settings['pagination'] ? settings['pagination'] : "#pagination";
         var results_ident = settings && settings['results'] ? settings['results'] : "#resultslist";
+        facet_html = facet_html != '' ? facet_html : '<div>No Facets</div>';
 		if ($(facets_ident)) {
         	$(facets_ident).html(facet_html)
         }
