@@ -142,28 +142,34 @@ function simpleTemplating(data, values, settings) {
 
 function loadsearchtemplate(settings){
 	var script_url = '';
+	var need_to_load = true;
 	var scripts = document.getElementsByTagName('script');
 	for (var ar=0; ar < scripts.length; ar++){
+		if(scripts[ar].src.indexOf('index.js') > -1){
+			need_to_load = false;
+		} 
 		if(scripts[ar].src.indexOf('advanced-search.js') > -1){
 			script_url = scripts[ar].src;
 		}
 	}
-	var leading_url = script_url.split(/\/(?=[a-zA-Z])/gm);
-	leading_url.pop()
-	var url = settings && settings['settingsurl'] ? settings['settingsurl'] : leading_url.join("/") + '/index.js';
-	var get_data = function () {
-	    var tmp = null;
-	    $.ajax({
-	        'async': false,
-	        'type': "GET",
-	        'dataType': "script",
-	        'url': url,
-	        'success': function (data) {
-	            tmp = data;
-	        }
-	    });
-	    return tmp;
-	}();
+	if (need_to_load == true) {
+		var leading_url = script_url.split(/\/(?=[a-zA-Z])/gm);
+		leading_url.pop()
+		var url = settings && settings['settingsurl'] ? settings['settingsurl'] : leading_url.join("/") + '/index.js';
+		var get_data = function () {
+	    	var tmp = null;
+	    	$.ajax({
+	        	'async': false,
+	        	'type': "GET",
+	        	'dataType': "script",
+	        	'url': url,
+	        	'success': function (data) {
+	            	tmp = data;
+	        	}
+	    	});
+	    	return tmp;
+		}();
+	}
 	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
     var query = window.location.search.substring(1);
