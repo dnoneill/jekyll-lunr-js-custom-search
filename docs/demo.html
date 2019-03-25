@@ -321,7 +321,8 @@
 <script>
 window.addEventListener("load", function(){
     //var dict = {facets: '#facets2', pagination: '#pagination2', "results": "all_results"}
-    loadsearchtemplate()
+    var dict = {settingsurl: "/jekyll-lunr-advanced-js-search/js/index.js"}
+    loadsearchtemplate(dict)
     $('#spinner').hide()
 });
 </script>
