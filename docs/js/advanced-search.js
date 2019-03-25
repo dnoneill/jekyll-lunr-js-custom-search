@@ -6505,7 +6505,7 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
         });
     });
 }();function createSearch(values, origsearch_dict, sort, lunr_settings){
-  var idx = lunr.Index.load(JSON.parse(index))
+  var idx = lunr.Index.load(JSON.parse(index));
   lunr.tokenizer.separator = /[\s,.;:/?!()]+/;
   idx.pipeline.remove(lunr.stemmer)
   idx.pipeline.remove(lunr.stopWordFilter)
@@ -6647,6 +6647,20 @@ function simpleTemplating(data, values, settings) {
 }
 
 function loadsearchtemplate(settings){
+	var url = settings && settings['settingsurl'] ? settings['settingsurl'] : '/js/index.js';
+	var get_data = function () {
+	    var tmp = null;
+	    $.ajax({
+	        'async': false,
+	        'type': "GET",
+	        'dataType': "script",
+	        'url': url,
+	        'success': function (data) {
+	            tmp = data;
+	        }
+	    });
+	    return tmp;
+	}();
 	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
     var query = window.location.search.substring(1);
@@ -6755,6 +6769,7 @@ function loadsearchtemplate(settings){
         var facets_ident = settings && settings['facets'] ? settings['facets'] : "#facets";
         var pagination_ident = settings && settings['pagination'] ? settings['pagination'] : "#pagination";
         var results_ident = settings && settings['results'] ? settings['results'] : "#resultslist";
+        facet_html = facet_html != '' ? facet_html : '<div>No Facets</div>';
 		if ($(facets_ident)) {
         	$(facets_ident).html(facet_html)
         }
