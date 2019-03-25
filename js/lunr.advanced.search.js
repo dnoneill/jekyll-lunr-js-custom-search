@@ -1,4 +1,5 @@
 function createSearch(values, origsearch_dict, sort, lunr_settings){
+	console.log(index)
   var idx = lunr.Index.load(index);
   lunr.tokenizer.separator = /[\s,.;:/?!()]+/;
   idx.pipeline.remove(lunr.stemmer)
@@ -141,6 +142,20 @@ function simpleTemplating(data, values, settings) {
 }
 
 function loadsearchtemplate(settings){
+	var url = settings && settings['settingsurl'] ? settings['settingsurl'] : location.origin + "/" +  _.compact(location.pathname.split("/"))[0] + '/js/index.js';
+	var get_data = function () {
+	    var tmp = null;
+	    $.ajax({
+	        'async': false,
+	        'type': "GET",
+	        'dataType': "script",
+	        'url': url,
+	        'success': function (data) {
+	            tmp = data;
+	        }
+	    });
+	    return tmp;
+	}();
 	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
     var query = window.location.search.substring(1);
