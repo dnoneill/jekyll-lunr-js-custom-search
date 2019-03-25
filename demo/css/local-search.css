@@ -13,3 +13,7 @@
 .main-content {
  max-width: none;
 }
+
+code {
+  word-wrap: break-word;
+}

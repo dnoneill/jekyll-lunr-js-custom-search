@@ -8,7 +8,7 @@
 
   <title>Add results rendering - jekyll-lunr-advanced-js-search</title>
   <link rel="stylesheet" href="/jekyll-lunr-advanced-js-search/assets/css/just-the-docs.css">
-
+  <link rel="stylesheet" href="/jekyll-lunr-advanced-js-search/css/local-search.css">
   
 
   
@@ -16,7 +16,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-
 <body>
 
   <div class="page-wrap">
@@ -177,6 +176,11 @@
 &lt;div id="spinner"&gt;&lt;i class="fa fa-spinner fa-spin"&gt;&lt;/i&gt;&lt;/div&gt;
 </code></pre></div></div>
 
+<p>The following can be added to increase speed on large indexes. Otherwise the JavaScript plugin assumes that the url for the index is the same path as the JavaScript script. If this problematic, when initiating the assumed url can be overridden (<a href="#with-overrides-below">information for overriding url</a>)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="{{site.baseurl}}/js/index.js"&gt;&lt;/script&gt;
+</code></pre></div></div>
+
 <p>The spinner div is not required but it provides a spinner.</p>
 
 <p>There are three required html items that have to be defined in order for the results, facets and pagination to render.</p>
@@ -216,6 +220,7 @@
 
 <p>The final step requires the search to be initialized on page load. Add the following code to the page. The example below also shows how to initialize and override default fields for results.</p>
 
+<h3 id="simple-initialization">Simple Initialization</h3>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
 window.addEventListener("load", function(){
     loadsearchtemplate()
@@ -224,7 +229,7 @@ window.addEventListener("load", function(){
 &lt;/script&gt;
 </code></pre></div></div>
 
-<p>With overrides (below)</p>
+<h3 id="with-overrides-below">With overrides (below)</h3>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
 window.addEventListener("load", function(){
     var dict = {facets: '#new_facet_field', pagination: '#paginationid', "results": ".results-class-override", settingsurl: "http://hostname.com/javascript/index.js"}

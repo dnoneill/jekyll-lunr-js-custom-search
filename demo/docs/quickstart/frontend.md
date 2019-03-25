@@ -14,6 +14,13 @@ Add the following to the same page as the search form.
 ```
 {% endraw %}
 
+The following can be added to increase speed on large indexes. Otherwise the JavaScript plugin assumes that the url for the index is the same path as the JavaScript script. If this problematic, when initiating the assumed url can be overridden ([information for overriding url](#with-overrides-below))
+{% raw %}
+```
+<script src="{{site.baseurl}}/js/index.js"></script>
+```
+{% endraw %}
+
 The spinner div is not required but it provides a spinner. 
 
 There are three required html items that have to be defined in order for the results, facets and pagination to render. 
@@ -54,6 +61,7 @@ Additionally, if you want any sort fields besides relevance or name, another opt
 
 The final step requires the search to be initialized on page load. Add the following code to the page. The example below also shows how to initialize and override default fields for results.
 
+### Simple Initialization
 ```
 <script>
 window.addEventListener("load", function(){
@@ -63,7 +71,7 @@ window.addEventListener("load", function(){
 </script>
 ```
 
-With overrides (below)
+### With overrides (below)
 ```
 <script>
 window.addEventListener("load", function(){
