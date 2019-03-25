@@ -6505,8 +6505,7 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
         });
     });
 }();function createSearch(values, origsearch_dict, sort, lunr_settings){
-	console.log(index)
-  var idx = lunr.Index.load(index);
+  var idx = typeof index == 'string' ? lunr.Index.load(index) : index;
   lunr.tokenizer.separator = /[\s,.;:/?!()]+/;
   idx.pipeline.remove(lunr.stemmer)
   idx.pipeline.remove(lunr.stopWordFilter)
@@ -6649,7 +6648,6 @@ function simpleTemplating(data, values, settings) {
 
 function loadsearchtemplate(settings){
 	var url = settings && settings['settingsurl'] ? settings['settingsurl'] : location.origin + "/" +  _.compact(location.pathname.split("/"))[0] + '/js/index.js';
-	console.log(url)
 	var get_data = function () {
 	    var tmp = null;
 	    $.ajax({
@@ -6663,7 +6661,6 @@ function loadsearchtemplate(settings){
 	    });
 	    return tmp;
 	}();
-	console.log(get_data)
 	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
     var query = window.location.search.substring(1);
