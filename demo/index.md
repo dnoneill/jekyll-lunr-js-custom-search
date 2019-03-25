@@ -9,3 +9,8 @@ Sites which are using this gem are:
 
 | --- | --- |
 | North Carolina Architects and Builders | [http://ncarchitects.lib.ncsu.edu](http://ncarchitects.lib.ncsu.edu/search?q=) |
+
+Sites using JavaScript plugin only
+
+| --- | --- |
+| Local IIIF Annotation Server | [https://dnoneill.github.io/annotate/](https://dnoneill.github.io/annotate/search?q=) |
