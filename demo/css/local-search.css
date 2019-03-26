@@ -17,3 +17,14 @@
 code {
   word-wrap: break-word;
 }
+
+.thumbnail {
+  height: 175px;
+}
+.thumbnail img {
+ height: 175px;
+}
+
+.searchResultMetadata {
+  display: inline;
+}

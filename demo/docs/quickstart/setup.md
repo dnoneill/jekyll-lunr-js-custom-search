@@ -118,6 +118,8 @@ The **displayfields** is a list of fields that will display in the results page.
 
 **headerfield** should only get instatiated once. **IT IS REQUIRED** The value is **true**. The **label** field does not apply.
 
+**headerimage** should be either a html link to the image or the url to the image. Both will work. It is not required. It will add a thumbnail image to the search results if the record has one. The value is **true**.
+
 **contentfield** (optional). By default the content field is a 100 words of the 'content' section of the Jekyll markdown. This can be overridden by instatiating the **contentfield** as **true**.
 
 The only required field is **field** which defines what field is being displayed. It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the **field** value. 
@@ -151,6 +153,9 @@ displayfields:
   - field: ethnicity
     plural: Ethnicities
     label: Ethnicity
+  - field: imagesrc
+    headerimage: true
+    highlight: false
 ```
 
 An excerpt field also get automatically generated. To hide the field add the following to the css:
@@ -185,6 +190,7 @@ lunr_settings:
   collections: [people]
   displayfields:
   - {field: preferredName, headerfield: true, highlight: false}
+  - {field: imagesrc, headerimage: true, highlight: false}
   - {field: variantNames, label: Variant Name}
   - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}

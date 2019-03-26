@@ -290,6 +290,8 @@ contributor:
 
 <p><strong>headerfield</strong> should only get instatiated once. <strong>IT IS REQUIRED</strong> The value is <strong>true</strong>. The <strong>label</strong> field does not apply.</p>
 
+<p><strong>headerimage</strong> should be either a html link to the image or the url to the image. Both will work. It is not required. It will add a thumbnail image to the search results if the record has one. The value is <strong>true</strong>.</p>
+
 <p><strong>contentfield</strong> (optional). By default the content field is a 100 words of the ‘content’ section of the Jekyll markdown. This can be overridden by instatiating the <strong>contentfield</strong> as <strong>true</strong>.</p>
 
 <p>The only required field is <strong>field</strong> which defines what field is being displayed. It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p>
@@ -322,6 +324,9 @@ contributor:
   - field: ethnicity
     plural: Ethnicities
     label: Ethnicity
+  - field: imagesrc
+    headerimage: true
+    highlight: false
 </code></pre></div></div>
 
 <p>An excerpt field also get automatically generated. To hide the field add the following to the css:</p>
@@ -352,6 +357,7 @@ contributor:
   collections: [people]
   displayfields:
   - {field: preferredName, headerfield: true, highlight: false}
+  - {field: imagesrc, headerimage: true, highlight: false}
   - {field: variantNames, label: Variant Name}
   - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}

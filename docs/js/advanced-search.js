@@ -6603,10 +6603,15 @@ function simpleTemplating(data, values, settings) {
   var html = '';
   var disp_settings = lunr_settings['displayfields']
   $.each(data, function(index, key){
+  	var exclude = ['headerimage', 'contentfield', 'headerfield']
     var header_field = disp_settings.filter(element => element['headerfield'] == true)[0]['field'];
+    var image_field = disp_settings.filter(element => element['headerimage'] == true);
     var content_field = disp_settings.filter(element => element['contentfield'] == true);
-    var dispfields = disp_settings.filter(element => element['headerfield'] != true && element['contentfield'] != true);
-    html += `<li id="result"><h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2>`
+    var dispfields = disp_settings.filter(element => !Object.keys(element).some(r=> exclude.includes(r)));
+    var image_data = image_field.length > 0 ? values[key][image_field[0]['field']] : '';
+    var image_link = image_data && image_data[0] == '<' ? image_data : `<img src="${image_data}">`
+    html += `<li id="result">${image_data ? `<div class="thumbnail">${image_link}</div>` : ``}
+    <h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2><div class="results_data">`
     if (dispfields && dispfields.length > 0) {
       html += `<table class="searchResultMetadata"><tbody>`
       for (var j = 0; j<dispfields.length; j++){
@@ -6636,40 +6641,50 @@ function simpleTemplating(data, values, settings) {
       html += `</tbody></table>`
     }
     var content = content_field.length > 0 ? values[key][content_field[0]['field']] : values[key]['content'];
+    content = content.replace(/<mark>/g,"&gt;mark&lt;").replace(/<\/mark>/g,"&gt;/mark&lt;").replace(/<(.|\n)*?>/g, "");
+    content = content.replace(/&gt;/g, "<").replace(/&lt;/g, ">").replace(/\r?\n|\r/g, " ").replace(/ {1,}/g, " ");
     var truncate = content_field.length > 0 ? parseInt(content_field[0]['truncate']) : 101;
+    var mark_index = values[key]['content'].indexOf("<mark>");
+	var content_data = mark_index > truncate ? content.split(" ").slice(mark_index, ) : content.split(" ");
     html += `<div class="excerpt">
-        ${content.indexOf("<mark>") > -1 ? `
-        ...${content.slice(values[key]['content'].indexOf("<mark>"), ).split(" ").slice(0,truncate).join(" ")}...` :
-        `${content.split(" ").splice(0, truncate).join(" ")}${content.split(" ").length > truncate ? `...` : `` }</div>`
-        }`
+        ${content_data.length > 0 ? `${mark_index > truncate ? `<span class="ellipses">...</span>` : ``}
+        ${content_data.slice(0,truncate).join(" ")}${content_data.length > truncate ? `<span class="ellipses">...</span>` : ``}` :
+        `` }`
+  html += `</div></li>`;
   });
   return html;
 }
 
 function loadsearchtemplate(settings){
 	var script_url = '';
+	var need_to_load = true;
 	var scripts = document.getElementsByTagName('script');
 	for (var ar=0; ar < scripts.length; ar++){
+		if(scripts[ar].src.indexOf('index.js') > -1){
+			need_to_load = false;
+		} 
 		if(scripts[ar].src.indexOf('advanced-search.js') > -1){
 			script_url = scripts[ar].src;
 		}
 	}
-	var leading_url = script_url.split(/\/(?=[a-zA-Z])/gm);
-	leading_url.pop()
-	var url = settings && settings['settingsurl'] ? settings['settingsurl'] : leading_url.join("/") + '/index.js';
-	var get_data = function () {
-	    var tmp = null;
-	    $.ajax({
-	        'async': false,
-	        'type': "GET",
-	        'dataType': "script",
-	        'url': url,
-	        'success': function (data) {
-	            tmp = data;
-	        }
-	    });
-	    return tmp;
-	}();
+	if (need_to_load == true) {
+		var leading_url = script_url.split(/\/(?=[a-zA-Z])/gm);
+		leading_url.pop()
+		var url = settings && settings['settingsurl'] ? settings['settingsurl'] : leading_url.join("/") + '/index.js';
+		var get_data = function () {
+	    	var tmp = null;
+	    	$.ajax({
+	        	'async': false,
+	        	'type': "GET",
+	        	'dataType': "script",
+	        	'url': url,
+	        	'success': function (data) {
+	            	tmp = data;
+	        	}
+	    	});
+	    	return tmp;
+		}();
+	}
 	view_facets = view_facets ? view_facets : 4;
     var site_url = window.location.origin + window.location.pathname;
     var query = window.location.search.substring(1);

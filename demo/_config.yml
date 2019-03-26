@@ -38,6 +38,7 @@ lunr_settings:
   collections: [people]
   displayfields:
   - {field: preferredName, headerfield: true, highlight: false}
+  - {field: imagesrc, headerimage: true, highlight: false}
   - {field: variantNames, label: Variant Name}
   - {field: occupation, joiner: '; ', label: Occupation, truncate: 2}
   - {field: born, label: Birth Year}
