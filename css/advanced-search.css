@@ -108,3 +108,32 @@ tbody {
   padding: 12px 0px 5px;
   margin: 0px;
 }
+
+.thumbnail div {
+  margin: 0px;
+  padding: 0px;
+}
+.thumbnail {
+  height: 50px;
+  float: left;
+}
+.thumbnail img {
+  height: 50px;
+  width: auto!important;
+  float: left;
+  padding-right: 10px;
+}
+
+#result h2 {
+  display: inline;
+}
+
+.searchResultMetadata {
+  margin-bottom: 1em; 
+  margin-top: 1em;
+}
+
+.results_data {
+  display: block;
+  padding-top: 1em;
+}
