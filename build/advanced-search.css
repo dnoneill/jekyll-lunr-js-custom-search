@@ -39,13 +39,15 @@ tbody {
 
 #sort_by {
   float: right;
-  margin-top: -2px;
-  label {
-    display: inline-block;
-    @include media-query($on-palm) {
-      display: none;
-    }
-  }
+  margin-top: -2px; 
+}
+#sort_by label {
+  display: inline-block; 
+}
+@media screen and (max-width: 600px) {
+  #sort_by label {
+    display: none; 
+  } 
 }
 
 #searchInfo {
