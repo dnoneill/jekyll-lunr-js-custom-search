@@ -2,10 +2,6 @@
 	content: "";
 }
 
-#result {
-  padding-right: 2em;
-}
-
 #result::after {
  background-image: radial-gradient(rgb(0, 69, 152), white)
 }
