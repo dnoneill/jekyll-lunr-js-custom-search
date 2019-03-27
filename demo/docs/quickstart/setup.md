@@ -182,7 +182,7 @@ lunr_settings:
 ```
 
 ## Full settings example
-An example of all these settings can be seen below. An example of it running is here: [https://dnoneill.github.io/jekyll-advancedsearch/search?q=&name=&ethnicity=](https://dnoneill.github.io/jekyll-advancedsearch/search?q=&name=&ethnicity=)
+An example of all these settings can be seen below. An example of it running is here: [https://dnoneill.github.io/jekyll-customsearch/search?q=&name=&ethnicity=](https://dnoneill.github.io/jekyll-customsearch/search?q=&name=&ethnicity=)
 
 ```
 lunr_settings:

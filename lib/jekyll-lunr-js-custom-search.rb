@@ -1,0 +1,3 @@
+require 'jekyll_lunr_js_custom_search/version'
+require 'jekyll_lunr_js_custom_search/indexer'
+require 'jekyll_lunr_js_custom_search/search_index_file'

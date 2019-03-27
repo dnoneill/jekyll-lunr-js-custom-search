@@ -161,7 +161,7 @@ function loadsearchtemplate(settings){
 		if(scripts[ar].src.indexOf('index.js') > -1){
 			need_to_load = false;
 		} 
-		if(scripts[ar].src.indexOf('advanced-search.js') > -1){
+		if(scripts[ar].src.indexOf('custom-search.js') > -1){
 			script_url = scripts[ar].src;
 		}
 	}

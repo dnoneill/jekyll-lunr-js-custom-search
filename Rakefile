@@ -27,8 +27,8 @@ end
 
 task :copy_jekyll_plugin do
   lunr_version = File.read("bower_components/lunr/VERSION").strip
-  open("build/jekyll_lunr_advanced_js_search.rb", "w") do |concat|
-    Dir.glob("lib/jekyll_lunr_advanced_js_search/*.rb") do |file|
+  open("build/jekyll_lunr_js_custom_search.rb", "w") do |concat|
+    Dir.glob("lib/jekyll_lunr_js_custom_search/*.rb") do |file|
       ruby = File.read(file).sub(/LUNR_VERSION = .*$/, "LUNR_VERSION = \"#{lunr_version}\"")
       concat.puts ruby
     end
@@ -42,17 +42,17 @@ task :concat_js do
     'bower_components/paginationjs/dist/pagination.min.js',
     'bower_components/lodash/dist/lodash.min.js',
     'bower_components/fontawesome/js/all.min.js',
-    'js/lunr.advanced.search.js'
+    'js/lunr.custom.search.js'
   ]
 
-  File.open('build/advanced-search.js', 'w') do |file|
+  File.open('build/custom-search.js', 'w') do |file|
     file.write(files.inject('') { |data, file|
       data << File.read(file)
     })
   end
 
   # Lunr is stored separately so we can use it for index generation
-  FileUtils.cp('build/advanced-search.js', 'demo/dist/advanced-search.js')
+  FileUtils.cp('build/custom-search.js', 'demo/dist/custom-search.js')
   FileUtils.cp('bower_components/lunr/lunr.js', 'build/lunr.js')
 end
 
@@ -60,19 +60,19 @@ task :concat_css do
   files = [
     'bower_components/paginationjs/dist/pagination.css',
     'bower_components/fontawesome/css/all.min.css',
-    'css/advanced-search.css'
+    'css/custom-search.css'
   ]
 
-  File.open('build/advanced-search.css', 'w') do |file|
+  File.open('build/custom-search.css', 'w') do |file|
     file.write(files.inject('') { |data, file|
       data << File.read(file)
     })
   end
-  FileUtils.cp('build/advanced-search.css', 'demo/dist/advanced-search.css')
+  FileUtils.cp('build/custom-search.css', 'demo/dist/custom-search.css')
 end
 
 
 #task :minify_js do
-# out = JSMin.minify(File.open('build/advanced-search.js', 'r').read)
-# File.open('build/advanced-search.min.js', 'w') {|f| f.write(out) }
+# out = JSMin.minify(File.open('build/custom-search.js', 'r').read)
+# File.open('build/custom-search.min.js', 'w') {|f| f.write(out) }
 #end

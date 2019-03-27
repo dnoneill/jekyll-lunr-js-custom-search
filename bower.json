@@ -6,11 +6,12 @@
     "Ben Smith <ben@10consulting.com>",
     "Niqui O'Neill"
   ],
-  "description": "Advanced search plugin for collections in Jekyll",
+  "description": "Custom search plugin for collections in Jekyll",
   "keywords": [
     "jekyll",
     "lunr",
     "search",
+    "customsearch",
     "advancedsearch"
   ],
   "license": "MIT",

@@ -1,13 +1,13 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'jekyll_lunr_advanced_js_search/version'
+require 'jekyll_lunr_js_custom_search/version'
 
 Gem::Specification.new do |s|
   s.name          = 'jekyll-lunr-js-custom-search'
   s.version       = Jekyll::LunrJsSearch::VERSION
   s.licenses      = ['MIT']
-  s.summary       = 'Advanced search plugin for collections in Jekyll'
-  s.description   = 'Use lunr.js to provide advanced search, using JavaScript in your browser, for your Jekyll static website.'
+  s.summary       = 'Custom search plugin for collections in Jekyll'
+  s.description   = 'Use lunr.js to provide custom search, using JavaScript in your browser, for your Jekyll static website.'
   s.authors       = ['Ben Smith', "Niqui O'Neill"]
   s.files         = Dir.glob("lib/**/*.rb") + Dir.glob("build/*.min.js")
   s.homepage      = 'https://github.com/dnoneill/jekyll-lunr-js-search'
