@@ -118,6 +118,7 @@ tbody {
 .thumbnail {
   height: 50px;
   float: left;
+  margin-bottom: 1em;
 }
 .thumbnail img {
   height: 50px;

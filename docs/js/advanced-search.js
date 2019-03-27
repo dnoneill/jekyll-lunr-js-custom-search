@@ -6603,7 +6603,7 @@ function simpleTemplating(data, values, settings) {
   var html = '';
   var disp_settings = lunr_settings['displayfields']
   $.each(data, function(index, key){
-  	var exclude = ['headerimage', 'contentfield', 'headerfield']
+    var exclude = ['headerimage', 'contentfield', 'headerfield']
     var header_field = disp_settings.filter(element => element['headerfield'] == true)[0]['field'];
     var image_field = disp_settings.filter(element => element['headerimage'] == true);
     var content_field = disp_settings.filter(element => element['contentfield'] == true);
@@ -6623,34 +6623,34 @@ function simpleTemplating(data, values, settings) {
           field_value = field_value.split(joiner).filter(element => element.includes("mark>")).join(joiner)
         } 
         if (dispfields[j]['truncate'] && field_value) {
-        	first_field_values = field_value.split(joiner).filter(element => element.includes("mark>"))
-        	field_value = _.uniq(first_field_values.concat(field_value.split(joiner)))
-        	field_value = field_value.length > dispfields[j]['truncate'] ? field_value.slice(0, dispfields[j]['truncate']).join(joiner) + '...' : field_value.join(joiner);
+          first_field_values = field_value.split(joiner).filter(element => element.includes("mark>"))
+          field_value = _.uniq(first_field_values.concat(field_value.split(joiner)))
+          field_value = field_value.length > dispfields[j]['truncate'] ? field_value.slice(0, dispfields[j]['truncate']).join(joiner) + '...' : field_value.join(joiner);
         }
         var plural = dispfields[j]['plural'] ? dispfields[j]['plural'] : dispfields[j]['label'] + 's';
         var label = field_value && field_value.toString().split(joiner).length > 1 ? plural : dispfields[j]['label'];
         html += `${field_value && display != -1 ? `
           <tr>
-          	${dispfields[j]['label'] ? `<td class="searchResultLeftColumn">${label}:</td>` : ``}
+            ${dispfields[j]['label'] ? `<td class="searchResultLeftColumn">${label}:</td>` : ``}
             <td class="searchResultRightColumn">
             ${field_value}
             </td>
           </tr>
         ` : ``}`
       }
-      html += `</tbody></table>`
+      html += `</tbody></table></div>`
     }
     var content = content_field.length > 0 ? values[key][content_field[0]['field']] : values[key]['content'];
     content = content.replace(/<mark>/g,"&gt;mark&lt;").replace(/<\/mark>/g,"&gt;/mark&lt;").replace(/<(.|\n)*?>/g, "");
     content = content.replace(/&gt;/g, "<").replace(/&lt;/g, ">").replace(/\r?\n|\r/g, " ").replace(/ {1,}/g, " ");
     var truncate = content_field.length > 0 ? parseInt(content_field[0]['truncate']) : 101;
     var mark_index = values[key]['content'].indexOf("<mark>");
-	var content_data = mark_index > truncate ? content.split(" ").slice(mark_index, ) : content.split(" ");
+  var content_data = mark_index > truncate ? content.split(" ").slice(mark_index, ) : content.split(" ");
     html += `<div class="excerpt">
         ${content_data.length > 0 ? `${mark_index > truncate ? `<span class="ellipses">...</span>` : ``}
         ${content_data.slice(0,truncate).join(" ")}${content_data.length > truncate ? `<span class="ellipses">...</span>` : ``}` :
         `` }`
-  html += `</div></li>`;
+  html += `</li>`;
   });
   return html;
 }
