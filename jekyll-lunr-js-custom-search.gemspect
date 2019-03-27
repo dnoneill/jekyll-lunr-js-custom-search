@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'jekyll_lunr_advanced_js_search/version'
 
 Gem::Specification.new do |s|
-  s.name          = 'jekyll-lunr-advanced-js-search'
+  s.name          = 'jekyll-lunr-js-custom-search'
   s.version       = Jekyll::LunrJsSearch::VERSION
   s.licenses      = ['MIT']
   s.summary       = 'Advanced search plugin for collections in Jekyll'

@@ -6,7 +6,7 @@ task :default => :build
 
 desc "Ensures all dependent JS libraries are installed and builds the gem."
 task :build_gem => :build do
-  exec("gem build jekyll-lunr-advanced-js-search.gemspec")
+  exec("gem build jekyll-lunr-js-custom-search.gemspec")
 end
 
 task :build => [

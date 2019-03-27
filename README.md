@@ -3,7 +3,7 @@
 Originally forked from [jekyll-lunr-js-search](https://github.com/slashdotdash/jekyll-lunr-js-search) and refactored for advanced search and customization for collections. This will also work with posts because they are classified as the collection 'posts'.
 
 ### Using gem
-Quickstart instructions are located here: [https://dnoneill.github.io/jekyll-lunr-advanced-js-search/quickstart](https://dnoneill.github.io/jekyll-lunr-advanced-js-search/quickstart)
+Quickstart instructions are located here: [https://dnoneill.github.io/jekyll-lunr-js-custom-search/quickstart](https://dnoneill.github.io/jekyll-lunr-js-custom-search/quickstart)
 
 ### 6. Alternate data directory
 
