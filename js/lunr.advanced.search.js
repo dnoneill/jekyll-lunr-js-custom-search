@@ -139,12 +139,16 @@ function simpleTemplating(data, values, settings) {
     content = content.replace(/&gt;/g, "<").replace(/&lt;/g, ">").replace(/\r?\n|\r/g, " ").replace(/ {1,}/g, " ");
     var truncate = content_field.length > 0 ? parseInt(content_field[0]['truncate']) : 101;
     var mark_index = values[key]['content'].indexOf("<mark>");
-  var content_data = mark_index > truncate ? content.split(" ").slice(mark_index, ) : content.split(" ");
+    var content_data = mark_index > truncate ? content.split(" ").slice(mark_index, ) : content.split(" ");
     html += `<div class="excerpt">
         ${content_data.length > 0 ? `${mark_index > truncate ? `<span class="ellipses">...</span>` : ``}
         ${content_data.slice(0,truncate).join(" ")}${content_data.length > truncate ? `<span class="ellipses">...</span>` : ``}` :
-        `` }`
-  html += `</li>`;
+        `` }</div>`
+    if (dispfields && dispfields.length > 0) {
+      html += `</li>`;
+    } else {
+      html += `</div></li>`;
+    }
   });
   return html;
 }
