@@ -16,6 +16,11 @@
 #result{
   list-style-type: none;
 }
+#result h2 {
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+}
 
 tbody {
    border: none;
