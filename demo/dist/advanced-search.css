@@ -150,3 +150,10 @@ tbody {
 .excerpt {
   display: inline-block;
 }
+
+#resultslist {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
