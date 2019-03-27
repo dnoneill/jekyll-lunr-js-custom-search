@@ -12,7 +12,7 @@ Choose to install as either a Ruby Gem, or by copying the pre-built plugin file 
 # Install as Ruby Gem
 1. Add gem to Gemfile
 ```
- gem "jekyll-lunr-js-custom-search", :git => "git://github.com/dnoneill/jekyll-lunr-js-search.git"
+ gem "jekyll-lunr-js-custom-search", :git => "git://github.com/dnoneill/jekyll-lunr-js-custom-search.git"
 ```
 
 2. Modify your Jekyll _config.yml file to include the Gem.
