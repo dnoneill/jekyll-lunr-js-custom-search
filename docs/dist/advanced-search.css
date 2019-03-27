@@ -20,6 +20,11 @@
 #result{
   list-style-type: none;
 }
+#result h2 {
+  display: flex;
+  padding: 0px;
+  margin: 0px;
+}
 
 tbody {
    border: none;
@@ -119,11 +124,13 @@ tbody {
   margin: 0px;
   padding: 0px;
 }
+
 .thumbnail {
   height: 50px;
   float: left;
   margin-bottom: 1em;
 }
+
 .thumbnail img {
   height: 50px;
   width: auto!important;
