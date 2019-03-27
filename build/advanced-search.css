@@ -140,6 +140,9 @@ tbody {
 }
 
 .results_data {
-  display: block;
-  padding-top: 1em;
+  display: grid;
+}
+
+.excerpt {
+  display: inline-flex;
 }
