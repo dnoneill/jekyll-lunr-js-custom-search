@@ -6,13 +6,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   
 
-  <title>_config.yml setup - jekyll-lunr-advanced-js-search</title>
-  <link rel="stylesheet" href="/jekyll-lunr-advanced-js-search/assets/css/just-the-docs.css">
-  <link rel="stylesheet" href="/jekyll-lunr-advanced-js-search/css/local-search.css">
+  <title>_config.yml setup - jekyll-lunr-js-custom-search</title>
+  <link rel="stylesheet" href="/jekyll-lunr-js-custom-search/assets/css/just-the-docs.css">
+  <link rel="stylesheet" href="/jekyll-lunr-js-custom-search/css/local-search.css">
   
 
   
-  <script type="text/javascript" src="/jekyll-lunr-advanced-js-search/assets/js/just-the-docs.js"></script>
+  <script type="text/javascript" src="/jekyll-lunr-js-custom-search/assets/js/just-the-docs.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -20,7 +20,7 @@
 
   <div class="page-wrap">
     <div class="side-bar">
-      <a href="/jekyll-lunr-advanced-js-search" class="site-title fs-6 lh-tight">jekyll-lunr-advanced-js-search</a>
+      <a href="/jekyll-lunr-js-custom-search" class="site-title fs-6 lh-tight">jekyll-lunr-js-custom-search</a>
       <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
       <div class="navigation main-nav js-main-nav">
         <nav role="navigation" aria-label="Main navigation">
@@ -31,7 +31,7 @@
         
           <li class="navigation-list-item active">
             
-            <a href="/jekyll-lunr-advanced-js-search/404.html" class="navigation-list-link"></a>
+            <a href="/jekyll-lunr-js-custom-search/404.html" class="navigation-list-link"></a>
             
           </li>
         
@@ -41,7 +41,7 @@
         
           <li class="navigation-list-item">
             
-            <a href="/jekyll-lunr-advanced-js-search/demo" class="navigation-list-link">Demo</a>
+            <a href="/jekyll-lunr-js-custom-search/demo" class="navigation-list-link">Demo</a>
             
           </li>
         
@@ -51,7 +51,7 @@
         
           <li class="navigation-list-item">
             
-            <a href="/jekyll-lunr-advanced-js-search/explore" class="navigation-list-link">Explore the data</a>
+            <a href="/jekyll-lunr-js-custom-search/explore" class="navigation-list-link">Explore the data</a>
             
           </li>
         
@@ -61,7 +61,7 @@
         
           <li class="navigation-list-item">
             
-            <a href="/jekyll-lunr-advanced-js-search/" class="navigation-list-link">Home</a>
+            <a href="/jekyll-lunr-js-custom-search/" class="navigation-list-link">Home</a>
             
           </li>
         
@@ -75,7 +75,7 @@
         
           <li class="navigation-list-item active">
             
-            <a href="/jekyll-lunr-advanced-js-search/quickstart" class="navigation-list-link">Quickstart</a>
+            <a href="/jekyll-lunr-js-custom-search/quickstart" class="navigation-list-link">Quickstart</a>
             
               
               <ul class="navigation-list-child-list ">
@@ -91,7 +91,7 @@
                   
                     <li class="navigation-list-item ">
                       
-                      <a href="/jekyll-lunr-advanced-js-search/docs/quickstart/installation.html" class="navigation-list-link">Install</a>
+                      <a href="/jekyll-lunr-js-custom-search/docs/quickstart/installation.html" class="navigation-list-link">Install</a>
                       
                     </li>
                   
@@ -101,7 +101,7 @@
                   
                     <li class="navigation-list-item  active">
                       
-                      <a href="/jekyll-lunr-advanced-js-search/docs/quickstart/setup.html" class="navigation-list-link active">_config.yml setup</a>
+                      <a href="/jekyll-lunr-js-custom-search/docs/quickstart/setup.html" class="navigation-list-link active">_config.yml setup</a>
                       
                     </li>
                   
@@ -109,7 +109,7 @@
                   
                     <li class="navigation-list-item ">
                       
-                      <a href="/jekyll-lunr-advanced-js-search/docs/quickstart/searchform.html" class="navigation-list-link">Create a Search Form</a>
+                      <a href="/jekyll-lunr-js-custom-search/docs/quickstart/searchform.html" class="navigation-list-link">Create a Search Form</a>
                       
                     </li>
                   
@@ -117,7 +117,7 @@
                   
                     <li class="navigation-list-item ">
                       
-                      <a href="/jekyll-lunr-advanced-js-search/docs/quickstart/frontend.html" class="navigation-list-link">Add results rendering</a>
+                      <a href="/jekyll-lunr-js-custom-search/docs/quickstart/frontend.html" class="navigation-list-link">Add results rendering</a>
                       
                     </li>
                   
@@ -161,7 +161,7 @@
             <nav class="breadcrumb-nav">
               <ol class="breadcrumb-nav-list">
                 
-                  <li class="breadcrumb-nav-list-item"><a href="/jekyll-lunr-advanced-js-search/quickstart">Quickstart</a></li>
+                  <li class="breadcrumb-nav-list-item"><a href="/jekyll-lunr-js-custom-search/quickstart">Quickstart</a></li>
                 
                 <li class="breadcrumb-nav-list-item"><span>_config.yml setup</span></li>
               </ol>
@@ -211,7 +211,7 @@
   <li><strong>searchfield</strong> is the field used in the search form. It should be one word.</li>
   <li><strong>boost</strong> which determines how important a match in lunr is. <a href="https://lunrjs.com/guides/searching.html#boosts">More information on boosts</a>).</li>
   <li><strong>jekyllfields</strong> is also always a list even if a single jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching <code class="highlighter-rouge">name</code> will match the query against the <code class="highlighter-rouge">preferredName</code> and the <code class="highlighter-rouge">variantNames</code> <a href="#full-settings-example">see full example</a></li>
-  <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field. (These are ethnicities, occupation, cities, and counties in the <a href="/jekyll-lunr-advanced-js-search/demo?q=&amp;name=&amp;ethnicity=">demo</a>)</li>
+  <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field. (These are ethnicities, occupation, cities, and counties in the <a href="/jekyll-lunr-js-custom-search/demo?q=&amp;name=&amp;ethnicity=">demo</a>)</li>
   <li><strong>widget (optional)</strong> type of cleaner for complex data. It can require more data based upon the type of widget. See <a href="#widgets-for-complex-fields">section below</a> for information on widgets.</li>
 </ul>
 
@@ -300,9 +300,9 @@ contributor:
 
 <p><strong>joiner</strong> will join multiple results with whatever is the field. By default it is <code class="highlighter-rouge">', '</code>.</p>
 
-<p><strong>conditional</strong> means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. <a href="/jekyll-lunr-advanced-js-search/demo?q=loa">Conditional example</a></p>
+<p><strong>conditional</strong> means the results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. <a href="/jekyll-lunr-js-custom-search/demo?q=loa">Conditional example</a></p>
 
-<p><strong>truncate</strong> will truncate a list of options at a number of results. If used for the <strong>contentfield</strong>it will truncate to the number of words. <a href="/jekyll-lunr-advanced-js-search/demo?q=">See occupation field for truncate example</a></p>
+<p><strong>truncate</strong> will truncate a list of options at a number of results. If used for the <strong>contentfield</strong>it will truncate to the number of words. <a href="/jekyll-lunr-js-custom-search/demo?q=">See occupation field for truncate example</a></p>
 
 <p><strong>highlight</strong> by default matches in results get highlighted. In order to override this section, set highlight to false.</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayfields:
@@ -350,7 +350,7 @@ contributor:
 </code></pre></div></div>
 
 <h2 id="full-settings-example">Full settings example</h2>
-<p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-advancedsearch/search?q=&amp;name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-advancedsearch/search?q=&amp;name=&amp;ethnicity=</a></p>
+<p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-customsearch/search?q=&amp;name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-customsearch/search?q=&amp;name=&amp;ethnicity=</a></p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   atozsortfield: preferredName
