@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en-us">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -183,6 +183,8 @@
   <li><a href="#display-fields" id="markdown-toc-display-fields">Display fields</a></li>
   <li><a href="#atozsortfield" id="markdown-toc-atozsortfield">atozsortfield</a></li>
   <li><a href="#fuzzysearchfields" id="markdown-toc-fuzzysearchfields">fuzzysearchfields</a></li>
+  <li><a href="#view_facets" id="markdown-toc-view_facets">view_facets</a></li>
+  <li><a href="#js_dir" id="markdown-toc-js_dir">js_dir</a></li>
   <li><a href="#full-settings-example" id="markdown-toc-full-settings-example">Full settings example</a></li>
 </ul>
 
@@ -349,6 +351,16 @@ contributor:
   fuzzysearchfields: [name]
 </code></pre></div></div>
 
+<h2 id="view_facets">view_facets</h2>
+<p><strong>view_facets</strong> should be a number field. This is an <strong>optional</strong> field, if it is not set it will revert to the <strong>default</strong> setting of 4. This determines how many facets are shown, if there are more facets then view_facets the remaining facets will be hidden but can be displayed with the “Show All” button that is automatically generated.</p>
+
+<h2 id="js_dir">js_dir</h2>
+<p>You can choose to store <code class="highlighter-rouge">index.js</code>, <code class="highlighter-rouge">custom-search.js</code> and <code class="highlighter-rouge">lunr.js</code> in a different directory like this:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+  js_dir: "javascript"
+</code></pre></div></div>
+
 <h2 id="full-settings-example">Full settings example</h2>
 <p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-customsearch/search?q=&amp;name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-customsearch/search?q=&amp;name=&amp;ethnicity=</a></p>
 
@@ -402,6 +414,7 @@ contributor:
     secondaryfield: contributorId
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
+  view_facets: 5
 </code></pre></div></div>
 
 
