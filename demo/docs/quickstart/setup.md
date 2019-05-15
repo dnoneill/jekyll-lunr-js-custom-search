@@ -181,6 +181,17 @@ lunr_settings:
   fuzzysearchfields: [name]
 ```
 
+## view_facets
+**view_facets** should be a number field. This is an **optional** field, if it is not set it will revert to the **default** setting of 4. This determines how many facets are shown, if there are more facets then view_facets the remaining facets will be hidden but can be displayed with the "Show All" button that is automatically generated.
+
+## js_dir
+You can choose to store `index.js`, `custom-search.js` and `lunr.js` in a different directory like this:
+
+```
+lunr_settings:
+  js_dir: "javascript"
+```
+
 ## Full settings example
 An example of all these settings can be seen below. An example of it running is here: [https://dnoneill.github.io/jekyll-customsearch/search?q=&name=&ethnicity=](https://dnoneill.github.io/jekyll-customsearch/search?q=&name=&ethnicity=)
 
@@ -235,4 +246,5 @@ lunr_settings:
     secondaryfield: contributorId
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
+  view_facets: 5
 ```

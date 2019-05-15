@@ -30,9 +30,6 @@ plugins:
   - jekyll-feed
   - jekyll-lunr-js-custom-search
 
-view_facets: 5
-
-  
 lunr_settings:
   atozsortfield: preferredName
   collections: [people]
@@ -83,6 +80,7 @@ lunr_settings:
     secondaryfield: contributorId
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
+  view_facets: 5
 
 collections:
     people:

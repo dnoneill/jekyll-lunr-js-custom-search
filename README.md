@@ -5,13 +5,6 @@ Originally forked from [jekyll-lunr-js-search](https://github.com/slashdotdash/j
 ### Using gem
 Quickstart instructions are located here: [https://dnoneill.github.io/jekyll-lunr-js-custom-search/quickstart](https://dnoneill.github.io/jekyll-lunr-js-custom-search/quickstart)
 
-### 6. Alternate data directory
-
-You can choose to store `index.js`, `custom-search.js` and `lunr.js` in a different directory like this:
-
-    lunr_search:
-      js_dir: "javascript"
-
 ### Development Requirements
 
 Install [Bundler](http://bundler.io/) and then run the following.
