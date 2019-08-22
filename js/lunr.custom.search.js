@@ -63,11 +63,20 @@ function createSearch(values, origsearch_dict, sort, lunr_settings){
     all_results[results[i].ref] = dictionary
   }
 
-  if (sort){
-  	var sort_field = sort == 'atoz' ? lunr_settings['atozsortfield'] : sort;
+ if (sort){
+    var ascdesc = 'asc'
+    if (sort.split('___').length > 1){
+      var split = sort.split('___');
+      sort = split[0]
+      ascdesc = split[1]
+    }   
+    var sort_field = sort == 'atoz' ? lunr_settings['atozsortfield'] : sort;
     var sorted = _.sortBy(Object.values(all_results), function(item) {
      return [String(item[sort_field]).normalize('NFD'), String(item[lunr_settings['atozsortfield']]).normalize('NFD')];
     })
+    if (ascdesc == 'desc'){
+      sorted = sorted.reverse();
+    }
     var sorted_dict = {}
     for (var j=0; j<sorted.length; j++){
       sorted_dict[sorted[j]['slug']] = sorted[j]
