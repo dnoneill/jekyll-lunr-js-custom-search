@@ -31,7 +31,9 @@ The results get dumped in the `search_results` and pagination gets dumped in `pa
 
 These preset tags can be overridden on initialization. The framework used in this website is below. 
 
-Additionally, if you want any sort fields besides relevance or name, another option field needs to be added. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields. It can also be set as a search field from the config settings. For best results make sure the sort field is not a list.
+Additionally, if you want any sort fields besides relevance or name, another option field needs to be added. Make sure the value option matches the jekyll field or search field in your config. This field does not have to be set in the config field, it just needs to exist in the jekyll fields. It can also be set as a search field from the config settings. For best results make sure the sort field is not a list. 
+
+You can also have reverse order sort. In order to do this add three underscores followed by `desc` to the field (`___desc`). See example below.
 
 ```
 <div id="header_info"></div>
@@ -46,7 +48,8 @@ Additionally, if you want any sort fields besides relevance or name, another opt
       <span id="sort_by" class="dropdownsort"><label for="sortSelect">Sort By:</label>
         <select id="sortSelect" name="sort" onchange="changeSort(event);">
           <option value="">Relevance</option>
-          <option value="atoz">Name</option>
+          <option value="atoz">Name (Asc)</option>
+          <option value="atoz___desc">Name (Desc)</option>
           <option value="born">Birth Year</option>
         </select>
       </span>
@@ -65,8 +68,8 @@ The final step requires the search to be initialized on page load. Add the follo
 ```
 <script>
 window.addEventListener("load", function(){
-    loadsearchtemplate()
-    $('#spinner').hide()
+    loadsearchtemplate();
+    $('#spinner').hide();
 });
 </script>
 ```
@@ -76,8 +79,8 @@ window.addEventListener("load", function(){
 <script>
 window.addEventListener("load", function(){
     var dict = {facets: '#new_facet_field', pagination: '#paginationid', "results": ".results-class-override", settingsurl: "http://hostname.com/javascript/index.js"}
-    loadsearchtemplate(dict)
-    $('#spinner').hide()
+    loadsearchtemplate(dict);
+    $('#spinner').hide();
 });
 </script>
 ```
