@@ -6732,9 +6732,11 @@ function loadsearchtemplate(settings){
       }
       
       values = createSearch(docs, pairs, sort_type, lunr_settings)
-      var current_page = localStorage['currentpage']
+      var current_page = localStorage['currentpage'] ? localStorage['currentpage'] : 1;
       var is_reload = localStorage['currenturl'] == window.location.href
-      localStorage.setItem('currenturl', window.location.href)
+      try {
+        localStorage.setItem('currenturl', window.location.href)
+      }
       var search_items = [].concat.apply([], Object.values(pairs))
       var search_values = search_items.length != 0 ? search_items.join(" : ") : "All Results"
 
@@ -6838,7 +6840,9 @@ function loadsearchtemplate(settings){
         showGoInput: true,
         showGoButton: true,
         callback: function(data, pagination) {
-            localStorage.setItem("currentpage", parseInt(pagination.pageNumber))
+            try {
+              localStorage.setItem("currentpage", parseInt(pagination.pageNumber))
+            }
             var from = pagination.pageSize * pagination.pageNumber - pagination.pageSize + 1
             var to = pagination.pageSize * pagination.pageNumber
             to = to > pagination.totalNumber ? pagination.totalNumber : to
@@ -6856,7 +6860,6 @@ function loadsearchtemplate(settings){
             $(pagination_ident).pagination('go', current_page)
         }
         $("#sort_by select option[value='" + sort_type + "']").prop('selected', true);
-        localStorage.setItem('sort_type', sort_type)
       } else {
         $(".search-control").css("display", "block").prepend("<div id='no_results'>No results found. Try a new search, or browse the collection.</div>")
       }
@@ -6868,8 +6871,8 @@ function loadsearchtemplate(settings){
 
 function changeSort(event) {
   var site_url = window.location.origin + window.location.pathname;
-  var sort_type = localStorage['sort_type']
-  var window_url = window.location.search.replace("&sort=" + sort_type, "")
+  const regex = /sort=[^&]+(&)?/gm;
+  var window_url = window.location.search.replace(regex, "")
   sort_type = $(event.target).find("option:selected").val()
   window.location =  site_url + window_url + "&sort=" + sort_type
 };
