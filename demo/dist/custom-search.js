@@ -6875,7 +6875,7 @@ function loadsearchtemplate(settings){
 
 function changeSort(event) {
   var site_url = window.location.origin + window.location.pathname;
-  const regex = /sort=[^&]+(&)?/gm;
+  const regex = /[?&]sort=[^&]+(&)?/gm;
   var window_url = window.location.search.replace(regex, "")
   sort_type = $(event.target).find("option:selected").val()
   window.location =  site_url + window_url + "&sort=" + sort_type
