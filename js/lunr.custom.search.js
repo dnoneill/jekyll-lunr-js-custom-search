@@ -230,7 +230,9 @@ function loadsearchtemplate(settings){
       var is_reload = localStorage['currenturl'] == window.location.href
       try {
         localStorage.setItem('currenturl', window.location.href)
-      }
+      } catch(err) {
+  		console.log(err)
+	  }
       var search_items = [].concat.apply([], Object.values(pairs))
       var search_values = search_items.length != 0 ? search_items.join(" : ") : "All Results"
 
@@ -336,7 +338,9 @@ function loadsearchtemplate(settings){
         callback: function(data, pagination) {
             try {
               localStorage.setItem("currentpage", parseInt(pagination.pageNumber))
-            }
+            } catch(err) {
+              console.log(err)
+	  		}
             var from = pagination.pageSize * pagination.pageNumber - pagination.pageSize + 1
             var to = pagination.pageSize * pagination.pageNumber
             to = to > pagination.totalNumber ? pagination.totalNumber : to
