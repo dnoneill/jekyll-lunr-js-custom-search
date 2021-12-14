@@ -113,8 +113,10 @@ function simpleTemplating(data, values, settings) {
     var dispfields = disp_settings.filter(element => !Object.keys(element).some(r=> exclude.includes(r)));
     var image_data = image_field.length > 0 ? values[key][image_field[0]['field']] : '';
     var image_link = image_data && image_data[0] == '<' ? image_data : `<img src="${image_data}">`
+    var url_field = disp_settings.filter(element => element['urlfield'] == true);
+    var url_link = url_field.length > 0 ? `${values[key][url_field[0]['field']]}` : `${baseurl ? baseurl : ""}${values[key].url}`
     html += `<li id="result">${image_data ? `<div class="thumbnail">${image_link}</div>` : ``}
-    <h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2><div class="results_data">`
+    <h2><a href="${url_link}">${values[key][header_field]}</a></h2><div class="results_data">`
     if (dispfields && dispfields.length > 0) {
       html += `<table class="searchResultMetadata"><tbody>`
       for (var j = 0; j<dispfields.length; j++){
