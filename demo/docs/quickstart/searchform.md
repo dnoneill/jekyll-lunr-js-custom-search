@@ -4,9 +4,10 @@ title: Create a Search Form
 parent: Quickstart
 nav_order: 3
 ---
-The only really important thing when creating the search form is to make sure the "name" field matches the "searchfield" in the fields in _config.yml file you would like to search against.
 
-An example of this form can be seen below. This is the code being used in the [demo]({{site.baseurl}}/demo)
+When creating the search form, make sure the "name" field matches the "searchfield" in the fields in _config.yml file you would like to search against.
+
+This search form example code is being used in the [demo]({{site.baseurl}}/demo):
 
 ```
 {% raw %}
