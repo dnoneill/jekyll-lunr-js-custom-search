@@ -28,7 +28,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: build site
         uses: actions/jekyll-build-pages@v1
-          - source: ./demo
-            destination: ./docs
+        with:
+          source: ./demo
+          destination: ./docs
             
             
