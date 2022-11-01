@@ -6619,8 +6619,10 @@ function simpleTemplating(data, values, settings) {
     var dispfields = disp_settings.filter(element => !Object.keys(element).some(r=> exclude.includes(r)));
     var image_data = image_field.length > 0 ? values[key][image_field[0]['field']] : '';
     var image_link = image_data && image_data[0] == '<' ? image_data : `<img src="${image_data}">`
+    var url_field = disp_settings.filter(element => element['urlfield'] == true);
+    var url_link = url_field.length > 0 ? `${values[key][url_field[0]['field']]}` : `${baseurl ? baseurl : ""}${values[key].url}`
     html += `<li id="result">${image_data ? `<div class="thumbnail">${image_link}</div>` : ``}
-    <h2><a href="${baseurl}${values[key].url}">${values[key][header_field]}</a></h2><div class="results_data">`
+    <h2><a href="${url_link}">${values[key][header_field]}</a></h2><div class="results_data">`
     if (dispfields && dispfields.length > 0) {
       html += `<table class="searchResultMetadata"><tbody>`
       for (var j = 0; j<dispfields.length; j++){
@@ -6654,7 +6656,10 @@ function simpleTemplating(data, values, settings) {
     content = content.replace(/&gt;/g, "<").replace(/&lt;/g, ">").replace(/\r?\n|\r/g, " ").replace(/ {1,}/g, " ");
     var truncate = content_field.length > 0 ? parseInt(content_field[0]['truncate']) : 101;
     var mark_index = values[key]['content'].indexOf("<mark>");
-    var content_data = mark_index > truncate ? content.split(" ").slice(mark_index, ) : content.split(" ");
+    if (content.length-mark_index < truncate) {
+      mark_index -= truncate;
+    }
+    var content_data = mark_index > truncate ? content.slice(mark_index, ).split(" ") : content.split(" ");
     html += `<div class="excerpt">
         ${content_data.length > 0 ? `${mark_index > truncate ? `<span class="ellipses">...</span>` : ``}
         ${content_data.slice(0,truncate).join(" ")}${content_data.length > truncate ? `<span class="ellipses">...</span>` : ``}` :
@@ -6732,9 +6737,13 @@ function loadsearchtemplate(settings){
       }
       
       values = createSearch(docs, pairs, sort_type, lunr_settings)
-      var current_page = localStorage['currentpage']
+      var current_page = localStorage['currentpage'] ? localStorage['currentpage'] : 1;
       var is_reload = localStorage['currenturl'] == window.location.href
-      localStorage.setItem('currenturl', window.location.href)
+      try {
+        localStorage.setItem('currenturl', window.location.href)
+      } catch(err) {
+  		console.log(err)
+	  }
       var search_items = [].concat.apply([], Object.values(pairs))
       var search_values = search_items.length != 0 ? search_items.join(" : ") : "All Results"
 
@@ -6838,7 +6847,11 @@ function loadsearchtemplate(settings){
         showGoInput: true,
         showGoButton: true,
         callback: function(data, pagination) {
-            localStorage.setItem("currentpage", parseInt(pagination.pageNumber))
+            try {
+              localStorage.setItem("currentpage", parseInt(pagination.pageNumber))
+            } catch(err) {
+              console.log(err)
+	  		}
             var from = pagination.pageSize * pagination.pageNumber - pagination.pageSize + 1
             var to = pagination.pageSize * pagination.pageNumber
             to = to > pagination.totalNumber ? pagination.totalNumber : to
@@ -6856,7 +6869,6 @@ function loadsearchtemplate(settings){
             $(pagination_ident).pagination('go', current_page)
         }
         $("#sort_by select option[value='" + sort_type + "']").prop('selected', true);
-        localStorage.setItem('sort_type', sort_type)
       } else {
         $(".search-control").css("display", "block").prepend("<div id='no_results'>No results found. Try a new search, or browse the collection.</div>")
       }
@@ -6868,8 +6880,9 @@ function loadsearchtemplate(settings){
 
 function changeSort(event) {
   var site_url = window.location.origin + window.location.pathname;
-  var sort_type = localStorage['sort_type']
-  var window_url = window.location.search.replace("&sort=" + sort_type, "")
+  const regex = /([?&]sort=?[^&]+)/gm;
+  var window_url = window.location.search.replace(regex, "")
+  console.log(window_url)
   sort_type = $(event.target).find("option:selected").val()
   window.location =  site_url + window_url + "&sort=" + sort_type
 };
