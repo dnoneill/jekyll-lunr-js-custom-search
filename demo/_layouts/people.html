@@ -4,7 +4,7 @@ layout: default
 
 <h1>{{page.preferredName}} ({{page.born}}-{{page.died}})</h1>
 
-<div id="occupation"><b>Occupation(s}: </b>{{page.occupation  | join: ", "}}</div>
+<div id="occupation"><b>Occupation(s): </b>{{page.occupation  | join: ", "}}</div>
 <div id="ethnicity"><b>Ethnicity:</b> {{page.ethnicity}}</div>
 <div id="worklocations">
 {% for worklocation in page.workLocations %}
