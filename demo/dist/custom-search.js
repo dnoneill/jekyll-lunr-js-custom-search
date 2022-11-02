@@ -6514,20 +6514,20 @@ An}();typeof define=="function"&&typeof define.amd=="object"&&define.amd?($n._=r
     search_dict[key.replace("facet_", "")] = origsearch_dict[key]
   }
   try {
-
     var results = idx.query(function (query) {
     for(var i in search_dict) {
+      var presence = search_dict[i].constructor.name == 'Array' ? lunr.Query.presence.OPTIONAL : lunr.Query.presence.REQUIRED;
       lunr.tokenizer(search_dict[i]).forEach(function(token) {
         if(lunr_settings['fuzzysearchfields'].includes(i)) {
-          query.term(lunr.tokenizer(token), {fields: [i], editDistance: 1, presence: lunr.Query.presence.REQUIRED})
+          query.term(lunr.tokenizer(token), {fields: [i], editDistance: 1, presence: presence})
         } else if (i == "query" || i == "q"){
           if (token.toString().length > 1){
-            query.term(lunr.tokenizer(token), {presence: lunr.Query.presence.REQUIRED, editDistance: 1})
+            query.term(lunr.tokenizer(token), {presence: presence, editDistance: 0})
           } else {
-            query.term(lunr.tokenizer(token), {presence: lunr.Query.presence.REQUIRED})
+            query.term(lunr.tokenizer(token), {presence: presence})
           }
         } else {
-          query.term(lunr.tokenizer(token), {fields: [i], presence: lunr.Query.presence.REQUIRED})
+          query.term(lunr.tokenizer(token), {fields: [i], presence: presence})
         }
       })
     }
