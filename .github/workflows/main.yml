@@ -22,7 +22,6 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       - run: sudo gem install jekyll
-      - run: cp .github/workflows/convert.py .
       - run: |
           cd demo
           jekyll build -d ../docs
