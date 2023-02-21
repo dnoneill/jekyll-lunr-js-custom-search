@@ -1,120 +1,44 @@
-<ul id="markdown-toc">
-  <li><a href="#collections" id="markdown-toc-collections">Collections</a></li>
-  <li><a href="#fields" id="markdown-toc-fields">Fields</a>    <ul>
-      <li><a href="#widgets-for-complex-fields" id="markdown-toc-widgets-for-complex-fields">Widgets for complex fields</a>        <ul>
-          <li><a href="#nested-widget" id="markdown-toc-nested-widget">Nested widget</a></li>
-          <li><a href="#flatten-widget" id="markdown-toc-flatten-widget">Flatten widget</a></li>
-          <li><a href="#relational-widget" id="markdown-toc-relational-widget">Relational widget</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#display-fields" id="markdown-toc-display-fields">Display fields</a></li>
-  <li><a href="#atozsortfield" id="markdown-toc-atozsortfield">atozsortfield</a></li>
-  <li><a href="#fuzzysearchfields" id="markdown-toc-fuzzysearchfields">fuzzysearchfields</a></li>
-  <li><a href="#view_facets" id="markdown-toc-view_facets">view_facets</a></li>
-  <li><a href="#js_dir" id="markdown-toc-js_dir">js_dir</a></li>
-  <li><a href="#full-settings-example" id="markdown-toc-full-settings-example">Full settings example</a></li>
-</ul>
-
-<p>If the collection is not <code class="highlighter-rouge">posts</code>, define the collection in the <code class="highlighter-rouge">_config.yml</code> file. The example below uses two collections:</p>
-<ul>
-  <li>people: the files are in a <code class="highlighter-rouge">_people</code> folder.</li>
-  <li>works:  the files are in the <code class="highlighter-rouge">_works</code> folder.</li>
-</ul>
-
-<p>It also sets a permalink for the path of all items in the folders relative to the collection’s directory</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
+<!DOCTYPE html> <html lang="en-US"> <head> <meta charset="UTF-8"> <meta http-equiv="X-UA-Compatible" content="IE=Edge"> <title>_config.yml setup - jekyll-lunr-js-custom-search</title> <link rel="stylesheet" href="/jekyll-lunr-js-custom-search/assets/css/just-the-docs-default.css"> <link rel="stylesheet" href="/jekyll-lunr-js-custom-search/css/local-search.css"> <script type="text/javascript" src="/jekyll-lunr-js-custom-search/assets/js/just-the-docs.js"></script> <meta name="viewport" content="width=device-width, initial-scale=1"> </head> <body> <a class="skip-to-main" href="#main-content">Skip to main content</a> <svg xmlns="http://www.w3.org/2000/svg" class="d-none"> <symbol id="svg-link" viewBox="0 0 24 24"> <title>Link</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link"> <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path> </svg> </symbol> <symbol id="svg-menu" viewBox="0 0 24 24"> <title>Menu</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"> <line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line> </svg> </symbol> <symbol id="svg-arrow-right" viewBox="0 0 24 24"> <title>Expand</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"> <polyline points="9 18 15 12 9 6"></polyline> </svg> </symbol> <!-- Feather. MIT License: https://github.com/feathericons/feather/blob/master/LICENSE --> <symbol id="svg-external-link" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"> <title id="svg-external-link-title">(external link)</title> <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line> </symbol> <symbol id="svg-doc" viewBox="0 0 24 24"> <title>Document</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"> <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline> </svg> </symbol> <symbol id="svg-search" viewBox="0 0 24 24"> <title>Search</title> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"> <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line> </svg> </symbol> <!-- Bootstrap Icons. MIT License: https://github.com/twbs/icons/blob/main/LICENSE.md --> <symbol id="svg-copy" viewBox="0 0 16 16"> <title>Copy</title> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16"> <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/> <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/> </svg> </symbol> <symbol id="svg-copied" viewBox="0 0 16 16"> <title>Copied</title> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-check-fill" viewBox="0 0 16 16"> <path d="M6.5 0A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3Zm3 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3Z"/> <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1A2.5 2.5 0 0 1 9.5 5h-3A2.5 2.5 0 0 1 4 2.5v-1Zm6.854 7.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708Z"/> </svg> </symbol> </svg> <div class="side-bar"> <div class="site-header"> <a href="/jekyll-lunr-js-custom-search/" class="site-title lh-tight"> jekyll-lunr-js-custom-search </a> <a href="#" id="menu-button" class="site-button"> <svg viewBox="0 0 24 24" class="icon"><use xlink:href="#svg-menu"></use></svg> </a> </div> <nav aria-label="Main" id="site-nav" class="site-nav"> <ul class="nav-list"><li class="nav-list-item active"><a href="#" class="nav-list-expander" aria-label="toggle links in Quickstart category"> <svg viewBox="0 0 24 24"><use xlink:href="#svg-arrow-right"></use></svg> </a><a href="/jekyll-lunr-js-custom-search/quickstart" class="nav-list-link">Quickstart</a><ul class="nav-list"><li class="nav-list-item "><a href="/jekyll-lunr-js-custom-search/docs/quickstart/installation.html" class="nav-list-link">Install</a></li><li class="nav-list-item active"><a href="/jekyll-lunr-js-custom-search/docs/quickstart/setup.html" class="nav-list-link active">_config.yml setup</a></li><li class="nav-list-item "><a href="/jekyll-lunr-js-custom-search/docs/quickstart/searchform.html" class="nav-list-link">Create a Search Form</a></li><li class="nav-list-item "><a href="/jekyll-lunr-js-custom-search/docs/quickstart/frontend.html" class="nav-list-link">Add results rendering</a></li></ul></li><li class="nav-list-item"><a href="/jekyll-lunr-js-custom-search/demo" class="nav-list-link">Demo</a></li><li class="nav-list-item"><a href="/jekyll-lunr-js-custom-search/explore" class="nav-list-link">Explore the data</a></li><li class="nav-list-item"><a href="/jekyll-lunr-js-custom-search/" class="nav-list-link">Home</a></li></ul> </nav> <footer class="site-footer"> This site uses <a href="https://github.com/just-the-docs/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll. </footer> </div> <div class="main" id="top"> <div id="main-header" class="main-header"> <div class="search"> <div class="search-input-wrap"> <input type="text" id="search-input" class="search-input" tabindex="0" placeholder="Search jekyll-lunr-js-custom-search" aria-label="Search jekyll-lunr-js-custom-search" autocomplete="off"> <label for="search-input" class="search-label"><svg viewBox="0 0 24 24" class="search-icon"><use xlink:href="#svg-search"></use></svg></label> </div> <div id="search-results" class="search-results"></div> </div> </div> <div id="main-content-wrap" class="main-content-wrap"> <nav aria-label="Breadcrumb" class="breadcrumb-nav"> <ol class="breadcrumb-nav-list"> <li class="breadcrumb-nav-list-item"><a href="/jekyll-lunr-js-custom-search/quickstart">Quickstart</a></li> <li class="breadcrumb-nav-list-item"><span>_config.yml setup</span></li> </ol> </nav> <div id="main-content" class="main-content" role="main"> <ul id="markdown-toc"> <li><a href="#collections" id="markdown-toc-collections">Collections</a></li> <li><a href="#fields" id="markdown-toc-fields">Fields</a> <ul> <li><a href="#widgets-for-complex-fields" id="markdown-toc-widgets-for-complex-fields">Widgets for complex fields</a> <ul> <li><a href="#nested-widget" id="markdown-toc-nested-widget">Nested widget</a></li> <li><a href="#flatten-widget" id="markdown-toc-flatten-widget">Flatten widget</a></li> <li><a href="#relational-widget" id="markdown-toc-relational-widget">Relational widget</a></li> </ul> </li> </ul> </li> <li><a href="#display-fields" id="markdown-toc-display-fields">Display fields</a></li> <li><a href="#atozsortfield" id="markdown-toc-atozsortfield">atozsortfield</a></li> <li><a href="#fuzzysearchfields" id="markdown-toc-fuzzysearchfields">fuzzysearchfields</a></li> <li><a href="#view_facets" id="markdown-toc-view_facets">view_facets</a></li> <li><a href="#js_dir" id="markdown-toc-js_dir">js_dir</a></li> <li><a href="#full-settings-example" id="markdown-toc-full-settings-example">Full settings example</a></li> </ul> <p>If the collection is not <code class="highlighter-rouge">posts</code>, define the collection in the <code class="highlighter-rouge">_config.yml</code> file. The example below uses two collections:</p> <ul> <li>people: the files are in a <code class="highlighter-rouge">_people</code> folder.</li> <li>works: the files are in the <code class="highlighter-rouge">_works</code> folder.</li> </ul> <p>It also sets a permalink for the path of all items in the folders relative to the collection’s directory</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>collections:
     people:
         output: true
         permalink: /people/:path
     works:
         output: true
         permalink: /works/:path
-</code></pre></div></div>
-
-<h2 id="collections">Collections</h2>
-<p>Setting up the lunr settings requires a good grasp on your data. In collections, you define which collections will be indexed. <strong>This must be a list even for a single collection.</strong></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <h2 id="collections"> <a href="#collections" class="anchor-heading" aria-labelledby="collections"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Collections </h2> <p>Setting up the lunr settings requires a good grasp on your data. In collections, you define which collections will be indexed. <strong>This must be a list even for a single collection.</strong></p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   collections: 
   - people
-</code></pre></div></div>
-
-<h2 id="fields">Fields</h2>
-<p>Fields defines the fields which get indexed. Each field entry has three required and two optional fields:</p>
-<ul>
-  <li><strong>searchfield</strong> is the field used in the search form. It should be one word.</li>
-  <li><strong>boost</strong> which determines how important a match in lunr is. <a href="https://lunrjs.com/guides/searching.html#boosts">Learn more about lunr boosts</a>.</li>
-  <li><strong>jekyllfields</strong> is also always a list even if a single Jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching <code class="highlighter-rouge">name</code> will match the query against the <code class="highlighter-rouge">preferredName</code> and the <code class="highlighter-rouge">variantNames</code> <a href="#full-settings-example">see full example</a></li>
-  <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field. (These are ethnicities, occupation, cities, and counties in the <a href="/jekyll-lunr-js-custom-search/demo?q=&amp;name=&amp;ethnicity=">demo</a>)</li>
-  <li><strong>widget (optional)</strong> type of cleaner for complex data. It can require more data based upon the type of widget. See <a href="#widgets-for-complex-fields">section below</a> for information on widgets.</li>
-</ul>
-
-<h3 id="widgets-for-complex-fields">Widgets for complex fields</h3>
-<p>There are additional fields called widgets for more complex data. They are not needed for Jekyll fields that are strings or lists of strings.</p>
-
-<h4 id="nested-widget">Nested widget</h4>
-<p>The <strong>nested</strong> widget takes a complex field. The example below is the most complex instance that will work with the nested widget.</p>
-
-<p>It would also work if wlCity was not in a list. It requires the field <strong>parentfield</strong>. In the example below the parent field would be “workLocations” and the jekyllfields would be wlCity and/or wlCounty.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workLocations:
+</code></pre></div></div> <h2 id="fields"> <a href="#fields" class="anchor-heading" aria-labelledby="fields"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Fields </h2> <p>Fields defines the fields which get indexed. Each field entry has three required and two optional fields:</p> <ul> <li><strong>searchfield</strong> is the field used in the search form. It should be one word.</li> <li><strong>boost</strong> which determines how important a match in lunr is. <a href="https://lunrjs.com/guides/searching.html#boosts">Learn more about lunr boosts</a>.</li> <li><strong>jekyllfields</strong> is also always a list even if a single Jekyll field. This is the field in the markdown file. It allows for multiple fields to be searched in a single search field. For example, searching <code class="highlighter-rouge">name</code> will match the query against the <code class="highlighter-rouge">preferredName</code> and the <code class="highlighter-rouge">variantNames</code> <a href="#full-settings-example">see full example</a></li> <li><strong>facetfield (optional)</strong> has a value of <strong>true</strong> if used. If set as true, it will create a facet in the search interface for the field. (These are ethnicities, occupation, cities, and counties in the <a href="/jekyll-lunr-js-custom-search/demo?q=&amp;name=&amp;ethnicity=">demo</a>)</li> <li><strong>widget (optional)</strong> type of cleaner for complex data. It can require more data based upon the type of widget. See <a href="#widgets-for-complex-fields">section below</a> for information on widgets.</li> </ul> <h3 id="widgets-for-complex-fields"> <a href="#widgets-for-complex-fields" class="anchor-heading" aria-labelledby="widgets-for-complex-fields"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Widgets for complex fields </h3> <p>There are additional fields called widgets for more complex data. They are not needed for Jekyll fields that are strings or lists of strings.</p> <h4 id="nested-widget"> <a href="#nested-widget" class="anchor-heading" aria-labelledby="nested-widget"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Nested widget </h4> <p>The <strong>nested</strong> widget takes a complex field. The example below is the most complex instance that will work with the nested widget.</p> <p>It would also work if wlCity was not in a list. It requires the field <strong>parentfield</strong>. In the example below the parent field would be “workLocations” and the jekyllfields would be wlCity and/or wlCounty.</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workLocations:
 - wlCity: Owego
   wlCountry: United States
 - wlCity: Washington D.C.
   wlCountry: United States
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   fields:
   - boost: 5
     jekyllfields: [wlCountry, wlCity]
     parentfield: workLocations
     searchfield: worklocations
     widget: nested
-</code></pre></div></div>
-
-<h4 id="flatten-widget">Flatten widget</h4>
-<p>The <strong>flatten</strong> widget takes a complex field like the one seen below. This will get the values in dictionary.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contributions:
+</code></pre></div></div> <h4 id="flatten-widget"> <a href="#flatten-widget" class="anchor-heading" aria-labelledby="flatten-widget"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Flatten widget </h4> <p>The <strong>flatten</strong> widget takes a complex field like the one seen below. This will get the values in dictionary.</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>contributions:
  authors:
  - Author 1
  - Author 2
  updates:
  - Content Updater 1
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   fields:
   - boost: 1
     jekyllfields: [contributions]
     searchfield: author
     widget: flatten
-</code></pre></div></div>
-
-<h4 id="relational-widget">Relational widget</h4>
-<p>The final widget is <strong>relational</strong> widget. This piggybacks on traditional database structures.</p>
-
-<p>It requires two other fields:</p>
-<ul>
-  <li><strong>collection</strong>: This defines the collection which has the relational data.</li>
-  <li><strong>matchfield</strong>: This is where the collection’s slug will be located.</li>
-</ul>
-
-<p>If that is nested a <strong>secondaryfield</strong> is available but not required. The example below shows the snippet of text targeted in a <strong>works</strong> file. The contributorId corresponds to the P000004.md file. The works file has a field named <code class="highlighter-rouge">contributor</code> which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>preferredName: Loa to Divine Narcissus
+</code></pre></div></div> <h4 id="relational-widget"> <a href="#relational-widget" class="anchor-heading" aria-labelledby="relational-widget"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Relational widget </h4> <p>The final widget is <strong>relational</strong> widget. This piggybacks on traditional database structures.</p> <p>It requires two other fields:</p> <ul> <li><strong>collection</strong>: This defines the collection which has the relational data.</li> <li><strong>matchfield</strong>: This is where the collection’s slug will be located.</li> </ul> <p>If that is nested a <strong>secondaryfield</strong> is available but not required. The example below shows the snippet of text targeted in a <strong>works</strong> file. The contributorId corresponds to the P000004.md file. The works file has a field named <code class="highlighter-rouge">contributor</code> which is a list and the slug is located in the contributorId field. If there is a match if will pull out the jekyll fields in the work field for indexing.</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>preferredName: Loa to Divine Narcissus
 variantName:
 - El Divino Narciso
 contributor:
 - contributorId: P000004
   contributorRole: Author
-</code></pre></div></div>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   - boost: 10
     collection: works
     jekyllfields: [preferredName, variantName]
@@ -122,43 +46,7 @@ contributor:
     searchfield: works
     secondaryfield: contributorId
     widget: relational
-</code></pre></div></div>
-
-<h2 id="display-fields">Display fields</h2>
-
-<p>The <strong>displayfields</strong> key defines a list of fields that will display in the results page. You can add multiple fields.</p>
-
-<ul>
-  <li>
-    <p><strong>field</strong>: REQUIRED. Defines what field is being displayed. It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p>
-  </li>
-  <li>
-    <p><strong>headerfield</strong>: REQUIRED. Should only get instantiated once. The value is <strong>true</strong>. The <strong>label</strong> field does not apply.</p>
-  </li>
-  <li>
-    <p><strong>headerimage</strong>: Optional. Adds a thumbnail image to the search results if the record has one. Either a HTML link to the image or the URL to the image. Both will work. The value is <strong>true</strong></p>
-  </li>
-  <li>
-    <p><strong>contentfield</strong> Optional. By default the content field is a 100 words of the ‘content’ section of the Jekyll markdown. This can be overwritten by setting the <strong>contentfield</strong> to <strong>true</strong>.</p>
-  </li>
-  <li>
-    <p><strong>label</strong>: Plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an <code class="highlighter-rouge">s</code> to the label. This can be overwritten with the <strong>plural</strong> field, in which you can define what the plural version of the label is.</p>
-  </li>
-  <li>
-    <p><strong>joiner</strong>: Joins multiple results with whatever is the field. By default it is <code class="highlighter-rouge">', '</code>.</p>
-  </li>
-  <li>
-    <p><strong>conditional</strong>: The results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. <a href="/jekyll-lunr-js-custom-search/demo?q=loa">Conditional example</a></p>
-  </li>
-  <li>
-    <p><strong>truncate</strong>: Truncates a list of options at a number of results. If used for the <strong>contentfield</strong> it will truncate to the number of words. <a href="/jekyll-lunr-js-custom-search/demo?q=">See occupation field for truncate example</a></p>
-  </li>
-  <li>
-    <p><strong>highlight</strong>: By default, matches in results get highlighted. In order to override this section, set highlight to false.</p>
-  </li>
-</ul>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayfields:
+</code></pre></div></div> <h2 id="display-fields"> <a href="#display-fields" class="anchor-heading" aria-labelledby="display-fields"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Display fields </h2> <p>The <strong>displayfields</strong> key defines a list of fields that will display in the results page. You can add multiple fields.</p> <ul> <li> <p><strong>field</strong>: REQUIRED. Defines what field is being displayed. It can be a Jekyll field or if a widget has been used on a search field, the search field can be used as the for the <strong>field</strong> value.</p> </li> <li> <p><strong>headerfield</strong>: REQUIRED. Should only get instantiated once. The value is <strong>true</strong>. The <strong>label</strong> field does not apply.</p> </li> <li> <p><strong>headerimage</strong>: Optional. Adds a thumbnail image to the search results if the record has one. Either a HTML link to the image or the URL to the image. Both will work. The value is <strong>true</strong></p> </li> <li> <p><strong>contentfield</strong> Optional. By default the content field is a 100 words of the ‘content’ section of the Jekyll markdown. This can be overwritten by setting the <strong>contentfield</strong> to <strong>true</strong>.</p> </li> <li> <p><strong>label</strong>: Plain text label which will display in the information table. This should be entered in the singular form. If the results are plural it will add an <code class="highlighter-rouge">s</code> to the label. This can be overwritten with the <strong>plural</strong> field, in which you can define what the plural version of the label is.</p> </li> <li> <p><strong>joiner</strong>: Joins multiple results with whatever is the field. By default it is <code class="highlighter-rouge">', '</code>.</p> </li> <li> <p><strong>conditional</strong>: The results will only appear if there is a match in that field, option is true. Additionally, for multiple results the results can be truncated in the table by a number. <a href="/jekyll-lunr-js-custom-search/demo?q=loa">Conditional example</a></p> </li> <li> <p><strong>truncate</strong>: Truncates a list of options at a number of results. If used for the <strong>contentfield</strong> it will truncate to the number of words. <a href="/jekyll-lunr-js-custom-search/demo?q=">See occupation field for truncate example</a></p> </li> <li> <p><strong>highlight</strong>: By default, matches in results get highlighted. In order to override this section, set highlight to false.</p> </li> </ul> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>displayfields:
   - field: preferredName
     headerfield: true
     highlight: false
@@ -180,42 +68,16 @@ contributor:
   - field: imagesrc
     headerimage: true
     highlight: false
-</code></pre></div></div>
-
-<p>An excerpt field also get automatically generated. To hide the field, add the following to the CSS:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.excerpt {
+</code></pre></div></div> <p>An excerpt field also get automatically generated. To hide the field, add the following to the CSS:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.excerpt {
   display: none
 }
-</code></pre></div></div>
-
-<h2 id="atozsortfield">atozsortfield</h2>
-<p><strong>atozsortfield</strong> is the field the sort by ‘name’ field sorts on. This will sort the field from atoz. If you want to add more options for sorting this will be the secondary field that will be sorted. For example, in this demo we added a sort by birth year. Élisabeth Sophie Chéron and Sor Juana Inés de la Cruz have the same birth year. To provide some structure they get sorted by birthyear and then their preferredName (the atozsortfield). This should be a single string field, not a list.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <h2 id="atozsortfield"> <a href="#atozsortfield" class="anchor-heading" aria-labelledby="atozsortfield"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> atozsortfield </h2> <p><strong>atozsortfield</strong> is the field the sort by ‘name’ field sorts on. This will sort the field from atoz. If you want to add more options for sorting this will be the secondary field that will be sorted. For example, in this demo we added a sort by birth year. Élisabeth Sophie Chéron and Sor Juana Inés de la Cruz have the same birth year. To provide some structure they get sorted by birthyear and then their preferredName (the atozsortfield). This should be a single string field, not a list.</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   atozsortfield: preferredName
-</code></pre></div></div>
-
-<h2 id="fuzzysearchfields">fuzzysearchfields</h2>
-<p><strong>fuzzysearchfields</strong> should be fields that have an input not a drop-down search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the <a href="https://lunrjs.com/guides/searching.html#fuzzy-matches">editDistance for lunr fuzzy-matches</a> to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. <strong>This must be a searchfield value from the fields settings</strong>.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <h2 id="fuzzysearchfields"> <a href="#fuzzysearchfields" class="anchor-heading" aria-labelledby="fuzzysearchfields"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> fuzzysearchfields </h2> <p><strong>fuzzysearchfields</strong> should be fields that have an input not a drop-down search field. This basically says any of these fields do not have to match exactly, otherwise . This sets the <a href="https://lunrjs.com/guides/searching.html#fuzzy-matches">editDistance for lunr fuzzy-matches</a> to 1. editDistance is also 1 for the query field. Otherwise the search will expect an exact match. An searchfields in this list will do a fuzzy match. <strong>This must be a searchfield value from the fields settings</strong>.</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   fuzzysearchfields: [name]
-</code></pre></div></div>
-
-<h2 id="view_facets">view_facets</h2>
-<p><strong>view_facets</strong> should be a number field. This is an <strong>optional</strong> field, if it is not set it will revert to the <strong>default</strong> setting of 4. This determines how many facets are shown, if there are more facets then view_facets the remaining facets will be hidden but can be displayed with the “Show All” button that is automatically generated.</p>
-
-<h2 id="js_dir">js_dir</h2>
-<p>You can store <code class="highlighter-rouge">index.js</code>, <code class="highlighter-rouge">custom-search.js</code> and <code class="highlighter-rouge">lunr.js</code> in a different directory like this:</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <h2 id="view_facets"> <a href="#view_facets" class="anchor-heading" aria-labelledby="view_facets"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> view_facets </h2> <p><strong>view_facets</strong> should be a number field. This is an <strong>optional</strong> field, if it is not set it will revert to the <strong>default</strong> setting of 4. This determines how many facets are shown, if there are more facets then view_facets the remaining facets will be hidden but can be displayed with the “Show All” button that is automatically generated.</p> <h2 id="js_dir"> <a href="#js_dir" class="anchor-heading" aria-labelledby="js_dir"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> js_dir </h2> <p>You can store <code class="highlighter-rouge">index.js</code>, <code class="highlighter-rouge">custom-search.js</code> and <code class="highlighter-rouge">lunr.js</code> in a different directory like this:</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   js_dir: "javascript"
-</code></pre></div></div>
-
-<h2 id="full-settings-example">Full settings example</h2>
-<p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-lunr-js-custom-search/demo?name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-lunr-js-custom-search/demo?name=&amp;ethnicity=</a></p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
+</code></pre></div></div> <h2 id="full-settings-example"> <a href="#full-settings-example" class="anchor-heading" aria-labelledby="full-settings-example"><svg viewBox="0 0 16 16" aria-hidden="true"><use xlink:href="#svg-link"></use></svg></a> Full settings example </h2> <p>An example of all these settings can be seen below. An example of it running is here: <a href="https://dnoneill.github.io/jekyll-lunr-js-custom-search/demo?name=&amp;ethnicity=">https://dnoneill.github.io/jekyll-lunr-js-custom-search/demo?name=&amp;ethnicity=</a></p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lunr_settings:
   atozsortfield: preferredName
   collections: [people]
   displayfields:
@@ -266,4 +128,4 @@ contributor:
     widget: relational
   fuzzysearchfields: [name, birthplace, residences, worklocations]
   view_facets: 5
-</code></pre></div></div>
+</code></pre></div></div> </div> </div> <div class="search-overlay"></div> </div> </body> </html>
