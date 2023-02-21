@@ -27,7 +27,6 @@ jobs:
           bundler-cache: true
       - run: |
           cd demo
-          ssh-add
           bundle install
           bundle exec jekyll build -d ../docs
       - name: commit files
