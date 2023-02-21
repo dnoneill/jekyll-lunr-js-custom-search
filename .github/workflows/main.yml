@@ -24,7 +24,8 @@ jobs:
       - run: sudo gem install jekyll
       - run: |
           cd demo
-          jekyll build -d ../docs
+          bundle install
+          bundle exec jekyll build -d ../docs
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
