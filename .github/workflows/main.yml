@@ -21,10 +21,15 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - run: sudo gem install jekyll
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6
+          bundler-cache: true
       - run: |
           cd demo
-          jekyll build -d ../docs
+          ssh-add
+          bundle install
+          bundle exec jekyll build -d ../docs
       - name: commit files
         run: |
           git config --local user.email "action@github.com"
