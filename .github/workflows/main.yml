@@ -20,7 +20,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with:
-          path: gh-pages
+          ref: gh-pages
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
