@@ -104,7 +104,9 @@ module Jekyll
                         doc['id'] = item['slug']
                         index_js << 'this.add(' << ::JSON.generate(doc, quirks_mode: true) << ');'
                         final_dict = item.to_hash
-                        final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item['content']).to_html).text.tr("\n"," ")
+                        if item['content']
+                            final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item['content']).to_html).text.tr("\n"," ")
+                        end
                         @docs[item["slug"]] = final_dict.merge(flat_data)
                         Jekyll.logger.debug "Lunr:", (item['title'] ? "#{item['title']} (#{item['url']})" : item['url'])
                     end

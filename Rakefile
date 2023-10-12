@@ -22,7 +22,7 @@ task :bower_update do
 end
 
 task :create_build_dir do
-  Dir.mkdir('build') unless Dir.exists?('build')
+  #Dir.mkdir('build') unless Dir.exists?('build')
 end
 
 task :copy_jekyll_plugin do
@@ -52,7 +52,6 @@ task :concat_js do
   end
 
   # Lunr is stored separately so we can use it for index generation
-  FileUtils.cp('build/custom-search.js', 'demo/dist/custom-search.js')
   FileUtils.cp('bower_components/lunr/lunr.js', 'build/lunr.js')
 end
 
@@ -68,7 +67,6 @@ task :concat_css do
       data << File.read(file)
     })
   end
-  FileUtils.cp('build/custom-search.css', 'demo/dist/custom-search.css')
 end
 
 
