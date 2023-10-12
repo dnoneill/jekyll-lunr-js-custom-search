@@ -20,6 +20,7 @@ module Jekyll
                     'css_dir' => 'css'
                 }
                 @lunr_config['fields'] = fields
+                @format = @config['format'] ? @config['format'] : 'js'
                 @js_dir = @lunr_config['js_dir']
                 @css_dir = @lunr_config['css_dir']
                 gem_lunr = File.join(File.dirname(__FILE__), "../../build/lunr.js")
@@ -87,8 +88,15 @@ module Jekyll
                                 if format_field != nil
                                     if doc[field["searchfield"]] == nil
                                         doc[field["searchfield"]] = format_field.strip()
-                                        else
+                                    else
                                         doc[field["searchfield"]] += " " + format_field.strip()
+                                    end
+                                end
+                                if jekyllfield != field["searchfield"] && format_field != nil
+                                    if item[field["searchfield"]] == nil
+                                        item[field["searchfield"]] = format_field.strip()
+                                    else
+                                        item[field["searchfield"]] += " " + format_field.strip()
                                     end
                                 end
                             end
@@ -96,7 +104,7 @@ module Jekyll
                         doc['id'] = item['slug']
                         index_js << 'this.add(' << ::JSON.generate(doc, quirks_mode: true) << ');'
                         final_dict = item.to_hash
-                        final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item.content).to_html).text.tr("\n"," ")
+                        final_dict['content'] = Nokogiri::HTML(Kramdown::Document.new(item['content']).to_html).text.tr("\n"," ")
                         @docs[item["slug"]] = final_dict.merge(flat_data)
                         Jekyll.logger.debug "Lunr:", (item['title'] ? "#{item['title']} (#{item['url']})" : item['url'])
                     end
@@ -104,12 +112,16 @@ module Jekyll
                 index_js << '});'
                 FileUtils.mkdir_p(File.join(site.dest, @js_dir))
                 FileUtils.mkdir_p(File.join(site.dest, @css_dir))
-                filename = File.join(@js_dir, 'index.js')
+                filename = File.join(@js_dir, "index.#{@format}")
                 
                 ctx = ExecJS.compile(index_js)
                 
                 index = ctx.eval('JSON.stringify(idx)')
-                total = "var docs = #{@docs.to_json}\nvar index = #{index.to_json}\nvar baseurl = #{@jekyllconfig['baseurl'].to_json}\nvar lunr_settings = #{@config.to_json}"
+                if @format == 'json'
+                    total = {"docs": @docs, "index": index, "baseurl": @jekyllconfig['baseurl'], "lunr_settings": @config }.to_json
+                else
+                    total = "var docs = #{@docs.to_json}\nvar index = #{index.to_json}\nvar baseurl = #{@jekyllconfig['baseurl'].to_json}\nvar lunr_settings = #{@config.to_json}"
+                end
                 filepath = File.join(site.dest, filename)
                 File.open(filepath, "w") { |f| f.write(total) }
                 Jekyll.logger.info "Lunr:", "Index ready (lunr.js v#{@lunr_version})"
@@ -156,7 +168,7 @@ module Jekyll
                 # deep copy pages and documents (all collections, including posts)
                 @config['collections'].each do |collection|
                     site.collections[collection].docs.each do |filedata|
-                        items.push(filedata)
+                        items.push(filedata.data)
                     end
                 end
                 {:items => items}
