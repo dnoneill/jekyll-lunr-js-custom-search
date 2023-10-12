@@ -1,0 +1,26 @@
+.page-content ul > li::before {
+	content: "";
+}
+
+#result::after {
+ background-image: radial-gradient(rgb(0, 69, 152), white)
+}
+
+.main-content {
+ max-width: none;
+}
+
+code {
+  word-wrap: break-word;
+}
+
+.thumbnail {
+  height: 175px;
+}
+.thumbnail img {
+ height: 175px;
+}
+
+.searchResultMetadata {
+  display: inline;
+}

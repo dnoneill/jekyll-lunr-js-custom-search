@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+<h1>{{page.preferredName}} ({{page.born}}-{{page.died}})</h1>
+
+<div id="occupation"><b>Occupation(s): </b>{{page.occupation  | join: ", "}}</div>
+<div id="ethnicity"><b>Ethnicity:</b> {{page.ethnicity}}</div>
+<div id="worklocations">
+{% for worklocation in page.workLocations %}
+<b>Work Locations:</b> <br>
+    {{worklocation.wlCity}}, {{worklocation.wlCountry}}<br>
+{% endfor %}
+</div>
+{% assign works_array = "" | split: ',' %}
+{% for item in site.works %}
+  {% for contributor in item.contributor %}
+    {% if contributor.contributorId contains page.slug %}
+
+      {% assign works_array = works_array | push: item %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% if works_array.size > 0 %}
+<b>Works:</b>
+{% for work in works_array %}
+<a href="{{site.baseurl}}{{work.url}}">{{work.preferredName}}</a>;
+{% endfor %}
+{% endif %}
+<p>
+{{page.content}}
+{% if page.contributions %}
+Written by: {{page.contributions.authors | join: ", "}}. Updated by: {{page.contributions.updates | join: ", "}}
+{% endif %}
+</p>
+
+
