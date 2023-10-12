@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - gh-pages
+      - main
     paths:
       - demo/**
 jobs:
@@ -28,7 +28,7 @@ jobs:
       - run: |
           git checkout gh-pages
           cd demo
-          bundle install
+          bundle update
           bundle exec jekyll build -d ../docs
       - name: commit files
         run: |
