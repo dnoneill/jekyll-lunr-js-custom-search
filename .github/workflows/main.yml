@@ -9,8 +9,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - demo/**
 jobs:
   # This workflow contains a single job called "build"
   build:
