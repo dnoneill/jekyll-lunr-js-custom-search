@@ -1,4 +1,4 @@
-name: change in website
+name: change website
 
 concurrency:
   group: ${{ github.ref }}
@@ -26,6 +26,7 @@ jobs:
           ruby-version: 2.6
           bundler-cache: true
       - run: |
+          ls -al
           cd demo
           bundle update
           bundle exec jekyll build -d ../docs
