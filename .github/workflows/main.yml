@@ -26,7 +26,7 @@ jobs:
           ruby-version: 2.6
           bundler-cache: true
       - run: |
-          ls -al
+          ls -al gh-pages/*
           cd demo
           bundle update
           bundle exec jekyll build -d ../docs
