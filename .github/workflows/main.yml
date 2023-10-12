@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - gh-pages
     paths:
       - demo/**
 jobs:
@@ -26,6 +26,7 @@ jobs:
           ruby-version: 2.6
           bundler-cache: true
       - run: |
+          git checkout gh-pages
           cd demo
           bundle install
           bundle exec jekyll build -d ../docs
@@ -37,10 +38,10 @@ jobs:
           git add docs
           git commit -m "update docs" -a || echo "No changes to commit"
       - name: pull
-        run: git pull origin main
+        run: git pull origin gh-pages
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main 
+          branch: gh-pages 
     
