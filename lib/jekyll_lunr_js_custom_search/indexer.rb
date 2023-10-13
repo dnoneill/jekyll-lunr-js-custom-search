@@ -174,7 +174,7 @@ module Jekyll
                 # deep copy pages and documents (all collections, including posts)
                 @config['collections'].each do |collection|
                     site.collections[collection].docs.each do |filedata|
-                        items.push(filedata.data)
+                        items.push(filedata)
                     end
                 end
                 {:items => items}
