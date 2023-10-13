@@ -122,7 +122,7 @@ module Jekyll
                 
                 ctx = ExecJS.compile(index_js)
                 
-                #index = ctx.eval('JSON.stringify(idx)')
+                index = ctx.eval('idx')
                 if @format == 'json'
                     total = {"docs": @docs, "index": index, "baseurl": @jekyllconfig['baseurl'], "lunr_settings": @config }.to_json
                 else
