@@ -92,17 +92,6 @@ module Jekyll
                                         doc[field["searchfield"]] += " " + format_field.strip()
                                     end
                                 end
-                                if jekyllfield != field["searchfield"] && format_field != nil
-                                    begin
-                                        if item[field["searchfield"]] == nil
-                                            item[field["searchfield"]] = format_field.strip()
-                                        else
-                                            item[field["searchfield"]] += " " + format_field.strip()
-                                        end
-                                    rescue => error
-                                        puts "Warning from building of index: #{error} for search field: #{field["searchfield"]}"
-                                    end
-                                end
                             end
                         end
                         doc['id'] = item['slug']
