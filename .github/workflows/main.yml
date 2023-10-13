@@ -28,7 +28,7 @@ jobs:
       - run: |
           ls -al
           cd demo
-          rm Gemfile.lock
+          ls -al
           bundle install
           bundle exec jekyll build -d ../docs
       - name: commit files
