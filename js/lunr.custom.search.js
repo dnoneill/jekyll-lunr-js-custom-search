@@ -1,5 +1,5 @@
 function createSearch(values, origsearch_dict, sort, lunr_settings){
-  var idx = lunr.Index.load(JSON.parse(index));
+  var idx = lunr.Index.load(index);
   lunr.tokenizer.separator = /[\s,.;:/?!()]+/;
   idx.pipeline.remove(lunr.stemmer)
   idx.pipeline.remove(lunr.stopWordFilter)
