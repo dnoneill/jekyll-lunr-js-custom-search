@@ -415,7 +415,7 @@ pre.highlight {
 html {
   line-height: 1.15;
   /* 1 */
-  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   /* 2 */ }
 
 /* Sections
@@ -459,7 +459,7 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace;
+  font-family: monospace;
   /* 1 */
   font-size: 1em;
   /* 2 */ }
@@ -498,7 +498,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace;
+  font-family: monospace;
   /* 1 */
   font-size: 1em;
   /* 2 */ }
@@ -579,7 +579,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button; }
+  appearance: button; }
 
 /**
  * Remove the inner border and padding in Firefox.
@@ -661,7 +661,7 @@ textarea {
  * 2. Correct the outline style in Safari.
  */
 [type="search"] {
-  -webkit-appearance: textfield;
+  appearance: textfield;
   /* 1 */
   outline-offset: -2px;
   /* 2 */ }
@@ -670,14 +670,14 @@ textarea {
  * Remove the inner padding in Chrome and Safari on macOS.
  */
 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none; }
+  appearance: none; }
 
 /**
  * 1. Correct the inability to style clickable types in iOS and Safari.
  * 2. Change font properties to `inherit` in Safari.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
+  appearance: button;
   /* 1 */
   font: inherit;
   /* 2 */ }
@@ -717,8 +717,9 @@ template {
   box-sizing: border-box; }
 
 html {
-  font-size: 0.875rem !important;
   scroll-behavior: smooth; }
+  html {
+    font-size: 0.875rem !important; }
   @media (min-width: 31.25rem) {
     html {
       font-size: 1rem !important; } }
@@ -820,21 +821,37 @@ blockquote {
     .side-bar {
       width: calc((100% - 66.5rem) / 2 + 16.5rem);
       min-width: 16.5rem; } }
+  @media (min-width: 50rem) {
+    .side-bar + .main {
+      margin-left: 15.5rem; } }
+  @media (min-width: 66.5rem) {
+    .side-bar + .main {
+      margin-left: Max(16.5rem, calc((100% - 66.5rem) / 2 + 16.5rem)); } }
+  .side-bar + .main .main-header {
+    display: none;
+    background-color: #27262b; }
+    @media (min-width: 50rem) {
+      .side-bar + .main .main-header {
+        display: flex;
+        background-color: #27262b; } }
+    .side-bar + .main .main-header.nav-open {
+      display: block; }
+      @media (min-width: 50rem) {
+        .side-bar + .main .main-header.nav-open {
+          display: flex; } }
 
-@media (min-width: 50rem) {
-  .main {
-    position: relative;
-    max-width: 50rem;
-    margin-left: 15.5rem; } }
-@media (min-width: 66.5rem) {
-  .main {
-    margin-left: Max(16.5rem, calc((100% - 66.5rem) / 2 + 16.5rem)); } }
+.main {
+  margin: auto; }
+  @media (min-width: 50rem) {
+    .main {
+      position: relative;
+      max-width: 50rem; } }
 
 .main-content-wrap {
-  padding-right: 1rem;
-  padding-left: 1rem;
   padding-top: 1rem;
-  padding-bottom: 1rem; }
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+  padding-left: 1rem; }
   @media (min-width: 50rem) {
     .main-content-wrap {
       padding-right: 2rem;
@@ -846,20 +863,12 @@ blockquote {
 
 .main-header {
   z-index: 0;
-  display: none;
-  background-color: #27262b; }
+  border-bottom: 1px solid #44434d; }
   @media (min-width: 50rem) {
     .main-header {
       display: flex;
       justify-content: space-between;
-      height: 3.75rem;
-      background-color: #27262b;
-      border-bottom: 1px solid #44434d; } }
-  .main-header.nav-open {
-    display: block; }
-    @media (min-width: 50rem) {
-      .main-header.nav-open {
-        display: flex; } }
+      height: 3.75rem; } }
 
 .site-nav,
 .site-header,
@@ -894,8 +903,6 @@ blockquote {
       border-bottom: 1px solid #44434d; } }
 
 .site-title {
-  padding-right: 1rem;
-  padding-left: 1rem;
   flex-grow: 1;
   display: flex;
   height: 100%;
@@ -903,11 +910,14 @@ blockquote {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
   color: #f5f6fa;
-  font-size: 1.125rem !important; }
+  padding-right: 1rem;
+  padding-left: 1rem; }
   @media (min-width: 50rem) {
     .site-title {
       padding-right: 2rem;
       padding-left: 2rem; } }
+  .site-title {
+    font-size: 1.125rem !important; }
   @media (min-width: 31.25rem) {
     .site-title {
       font-size: 1.5rem !important;
@@ -942,19 +952,20 @@ body {
       padding-bottom: 0; } }
 
 .site-footer {
-  padding-right: 1rem;
-  padding-left: 1rem;
   position: absolute;
   bottom: 0;
   left: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
   color: #959396;
-  font-size: 0.6875rem !important; }
+  padding-right: 1rem;
+  padding-left: 1rem; }
   @media (min-width: 50rem) {
     .site-footer {
       padding-right: 2rem;
       padding-left: 2rem; } }
+  .site-footer {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     .site-footer {
       font-size: 0.75rem !important; } }
@@ -997,8 +1008,9 @@ body {
         left: -1.6em;
         color: #959396;
         content: counter(step-counter);
-        counter-increment: step-counter;
-        font-size: 0.75rem !important; }
+        counter-increment: step-counter; }
+        .main-content ol > li::before {
+          font-size: 0.75rem !important; }
         @media (min-width: 31.25rem) {
           .main-content ol > li::before {
             font-size: 0.875rem !important; } }
@@ -1169,18 +1181,19 @@ body {
   margin-bottom: 0;
   list-style: none; }
   .nav-list .nav-list-item {
-    font-size: 0.875rem !important;
     position: relative;
     margin: 0; }
+    .nav-list .nav-list-item {
+      font-size: 0.875rem !important; }
     @media (min-width: 31.25rem) {
       .nav-list .nav-list-item {
         font-size: 1rem !important; } }
     @media (min-width: 50rem) {
       .nav-list .nav-list-item {
         font-size: 0.75rem !important; } }
-  @media (min-width: 50rem) and (min-width: 31.25rem) {
-    .nav-list .nav-list-item {
-      font-size: 0.875rem !important; } }
+@media (min-width: 50rem) and (min-width: 31.25rem) {
+  .nav-list .nav-list-item {
+    font-size: 0.875rem !important; } }
 
     .nav-list .nav-list-item .nav-list-link {
       display: block;
@@ -1241,8 +1254,9 @@ body {
   font-weight: 600;
   text-align: start;
   text-transform: uppercase;
-  border-bottom: 1px solid #44434d;
-  font-size: 0.6875rem !important; }
+  border-bottom: 1px solid #44434d; }
+  .nav-category {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     .nav-category {
       font-size: 0.75rem !important; } }
@@ -1265,8 +1279,9 @@ body {
 
 .aux-nav {
   height: 100%;
-  overflow-x: auto;
-  font-size: 0.6875rem !important; }
+  overflow-x: auto; }
+  .aux-nav {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     .aux-nav {
       font-size: 0.75rem !important; } }
@@ -1295,8 +1310,9 @@ body {
   list-style: none; }
 
 .breadcrumb-nav-list-item {
-  display: table-cell;
-  font-size: 0.6875rem !important; }
+  display: table-cell; }
+  .breadcrumb-nav-list-item {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     .breadcrumb-nav-list-item {
       font-size: 0.75rem !important; } }
@@ -1313,9 +1329,11 @@ body {
 
 h1,
 .text-alpha {
-  font-size: 2rem !important;
-  line-height: 1.25;
   font-weight: 300; }
+  h1,
+  .text-alpha {
+    font-size: 2rem !important;
+    line-height: 1.25; }
   @media (min-width: 31.25rem) {
     h1,
     .text-alpha {
@@ -1325,27 +1343,29 @@ h2,
 .text-beta,
 #toctitle {
   font-size: 1.125rem !important; }
-  @media (min-width: 31.25rem) {
-    h2,
-    .text-beta,
-    #toctitle {
-      font-size: 1.5rem !important;
-      line-height: 1.25; } }
+@media (min-width: 31.25rem) {
+  h2,
+  .text-beta,
+  #toctitle {
+    font-size: 1.5rem !important;
+    line-height: 1.25; } }
 
 h3,
 .text-gamma {
   font-size: 1rem !important; }
-  @media (min-width: 31.25rem) {
-    h3,
-    .text-gamma {
-      font-size: 1.125rem !important; } }
+@media (min-width: 31.25rem) {
+  h3,
+  .text-gamma {
+    font-size: 1.125rem !important; } }
 
 h4,
 .text-delta {
-  font-size: 0.6875rem !important;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em; }
+  h4,
+  .text-delta {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     h4,
     .text-delta {
@@ -1357,24 +1377,24 @@ h4 code {
 h5,
 .text-epsilon {
   font-size: 0.75rem !important; }
-  @media (min-width: 31.25rem) {
-    h5,
-    .text-epsilon {
-      font-size: 0.875rem !important; } }
+@media (min-width: 31.25rem) {
+  h5,
+  .text-epsilon {
+    font-size: 0.875rem !important; } }
 
 h6,
 .text-zeta {
   font-size: 0.6875rem !important; }
-  @media (min-width: 31.25rem) {
-    h6,
-    .text-zeta {
-      font-size: 0.75rem !important; } }
+@media (min-width: 31.25rem) {
+  h6,
+  .text-zeta {
+    font-size: 0.75rem !important; } }
 
 .text-small {
   font-size: 0.6875rem !important; }
-  @media (min-width: 31.25rem) {
-    .text-small {
-      font-size: 0.75rem !important; } }
+@media (min-width: 31.25rem) {
+  .text-small {
+    font-size: 0.75rem !important; } }
 
 .text-mono {
   font-family: "SFMono-Regular", menlo, consolas, monospace !important; }
@@ -1398,8 +1418,10 @@ h6,
   text-transform: uppercase;
   vertical-align: middle;
   background-color: #2869e6;
-  font-size: 0.6875rem !important;
   border-radius: 12px; }
+  .label:not(g),
+  .label-blue:not(g) {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     .label:not(g),
     .label-blue:not(g) {
@@ -1641,17 +1663,18 @@ h6,
 .search-results-list {
   padding-left: 0;
   margin-bottom: 0.25rem;
-  list-style: none;
-  font-size: 0.875rem !important; }
+  list-style: none; }
+  .search-results-list {
+    font-size: 0.875rem !important; }
   @media (min-width: 31.25rem) {
     .search-results-list {
       font-size: 1rem !important; } }
   @media (min-width: 50rem) {
     .search-results-list {
       font-size: 0.75rem !important; } }
-  @media (min-width: 50rem) and (min-width: 31.25rem) {
-    .search-results-list {
-      font-size: 0.875rem !important; } }
+@media (min-width: 50rem) and (min-width: 31.25rem) {
+  .search-results-list {
+    font-size: 0.875rem !important; } }
 
 .search-results-list-item {
   padding: 0;
@@ -1679,17 +1702,18 @@ h6,
   align-items: center;
   word-wrap: break-word; }
   .search-result-doc.search-result-doc-parent {
-    opacity: 0.5;
-    font-size: 0.75rem !important; }
+    opacity: 0.5; }
+    .search-result-doc.search-result-doc-parent {
+      font-size: 0.75rem !important; }
     @media (min-width: 31.25rem) {
       .search-result-doc.search-result-doc-parent {
         font-size: 0.875rem !important; } }
     @media (min-width: 50rem) {
       .search-result-doc.search-result-doc-parent {
         font-size: 0.6875rem !important; } }
-  @media (min-width: 50rem) and (min-width: 31.25rem) {
-    .search-result-doc.search-result-doc-parent {
-      font-size: 0.75rem !important; } }
+@media (min-width: 50rem) and (min-width: 31.25rem) {
+  .search-result-doc.search-result-doc-parent {
+    font-size: 0.75rem !important; } }
 
   .search-result-doc .search-result-icon {
     width: 1rem;
@@ -1710,8 +1734,9 @@ h6,
   overflow: hidden;
   color: #959396;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 0.5625rem !important; }
+  white-space: nowrap; }
+  .search-result-rel-url {
+    font-size: 0.5625rem !important; }
   @media (min-width: 31.25rem) {
     .search-result-rel-url {
       font-size: 0.625rem !important; } }
@@ -1725,8 +1750,9 @@ h6,
   color: #959396;
   word-wrap: break-word;
   border-left: 1px solid;
-  border-left-color: #44434d;
-  font-size: 0.6875rem !important; }
+  border-left-color: #44434d; }
+  .search-result-previews {
+    font-size: 0.6875rem !important; }
   @media (min-width: 31.25rem) {
     .search-result-previews {
       font-size: 0.75rem !important; } }
@@ -1745,8 +1771,9 @@ h6,
   font-weight: bold; }
 
 .search-no-result {
-  padding: 0.5rem 0.75rem;
-  font-size: 0.75rem !important; }
+  padding: 0.5rem 0.75rem; }
+  .search-no-result {
+    font-size: 0.75rem !important; }
   @media (min-width: 31.25rem) {
     .search-no-result {
       font-size: 0.875rem !important; } }
@@ -1832,12 +1859,14 @@ table {
 
 th,
 td {
-  font-size: 0.75rem !important;
   min-width: 7.5rem;
   padding: 0.5rem 0.75rem;
   background-color: #302d36;
   border-bottom: 1px solid rgba(68, 67, 77, 0.5);
   border-left: 1px solid #44434d; }
+  th,
+  td {
+    font-size: 0.75rem !important; }
   @media (min-width: 31.25rem) {
     th,
     td {
@@ -1947,11 +1976,13 @@ figure.highlight :not(pre) > code {
   box-shadow: none; }
   .highlight .table-wrapper td,
   .highlight .table-wrapper pre {
-    font-size: 0.6875rem !important;
     min-width: 0;
     padding: 0;
     background-color: #31343f;
     border: 0; }
+    .highlight .table-wrapper td,
+    .highlight .table-wrapper pre {
+      font-size: 0.6875rem !important; }
     @media (min-width: 31.25rem) {
       .highlight .table-wrapper td,
       .highlight .table-wrapper pre {
@@ -3052,68 +3083,68 @@ pre.highlight {
 
 .fs-1 {
   font-size: 0.5625rem !important; }
-  @media (min-width: 31.25rem) {
-    .fs-1 {
-      font-size: 0.625rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-1 {
+    font-size: 0.625rem !important; } }
 
 .fs-2 {
   font-size: 0.6875rem !important; }
-  @media (min-width: 31.25rem) {
-    .fs-2 {
-      font-size: 0.75rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-2 {
+    font-size: 0.75rem !important; } }
 
 .fs-3 {
   font-size: 0.75rem !important; }
-  @media (min-width: 31.25rem) {
-    .fs-3 {
-      font-size: 0.875rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-3 {
+    font-size: 0.875rem !important; } }
 
 .fs-4 {
   font-size: 0.875rem !important; }
-  @media (min-width: 31.25rem) {
-    .fs-4 {
-      font-size: 1rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-4 {
+    font-size: 1rem !important; } }
 
 .fs-5 {
   font-size: 1rem !important; }
-  @media (min-width: 31.25rem) {
-    .fs-5 {
-      font-size: 1.125rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-5 {
+    font-size: 1.125rem !important; } }
 
 .fs-6 {
   font-size: 1.125rem !important; }
-  @media (min-width: 31.25rem) {
-    .fs-6 {
-      font-size: 1.5rem !important;
-      line-height: 1.25; } }
+@media (min-width: 31.25rem) {
+  .fs-6 {
+    font-size: 1.5rem !important;
+    line-height: 1.25; } }
 
 .fs-7 {
   font-size: 1.5rem !important;
   line-height: 1.25; }
-  @media (min-width: 31.25rem) {
-    .fs-7 {
-      font-size: 2rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-7 {
+    font-size: 2rem !important; } }
 
 .fs-8 {
   font-size: 2rem !important;
   line-height: 1.25; }
-  @media (min-width: 31.25rem) {
-    .fs-8 {
-      font-size: 2.25rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-8 {
+    font-size: 2.25rem !important; } }
 
 .fs-9 {
   font-size: 2.25rem !important;
   line-height: 1.25; }
-  @media (min-width: 31.25rem) {
-    .fs-9 {
-      font-size: 2.625rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-9 {
+    font-size: 2.625rem !important; } }
 
 .fs-10 {
   font-size: 2.625rem !important;
   line-height: 1.25; }
-  @media (min-width: 31.25rem) {
-    .fs-10 {
-      font-size: 3rem !important; } }
+@media (min-width: 31.25rem) {
+  .fs-10 {
+    font-size: 3rem !important; } }
 
 .fw-300 {
   font-weight: 300 !important; }
