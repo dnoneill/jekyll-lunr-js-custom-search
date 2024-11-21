@@ -8,8 +8,17 @@ Add the following to the same page as the search form.
 
 {% raw %}
 ```
-<script src="{{site.baseurl}}/dist/custom-search.js"></script>
-<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/dist/custom-search.css">
+<script src="{{site.baseurl}}/js/custom-search.js"></script>
+<link rel="stylesheet" type="text/css" href="{{site.baseurl}}/css/custom-search.css">
+<div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
+```
+{% endraw %}
+
+Or from the repo
+{% raw %}
+```
+<script src="https://dnoneill.github.io/jekyll-lunr-js-custom-search/dist/custom-search.js"></script>
+<link rel="stylesheet" type="text/css" href="https://dnoneill.github.io/jekyll-lunr-js-custom-search/dist/custom-search.css">
 <div id="spinner"><i class="fa fa-spinner fa-spin"></i></div>
 ```
 {% endraw %}
