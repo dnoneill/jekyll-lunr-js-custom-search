@@ -5,6 +5,10 @@ Originally forked from [jekyll-lunr-js-search](https://github.com/slashdotdash/j
 ### Using gem
 Quickstart instructions are located here: [https://dnoneill.github.io/jekyll-lunr-js-custom-search/quickstart](https://dnoneill.github.io/jekyll-lunr-js-custom-search/quickstart)
 
+### Demo
+There is a demo of this gem running: https://dnoneill.github.io/jekyll-lunr-js-custom-search/demo
+The Jekyll code for the demo is located here: https://github.com/dnoneill/jekyll-lunr-js-custom-search/tree/gh-pages/demo
+
 ### Development Requirements
 
 Install [Bundler](http://bundler.io/) and then run the following.
